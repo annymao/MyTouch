@@ -31,7 +31,31 @@ class ScrollTrial: Trial {
         }
     }
     
+    /*required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }*/
+    enum StructKeysA: String, CodingKey {
+        case isHorizontal,initialOffset,targetOffsetUpperBound,targetOffsetLowerBound,endDraggingOffset,endScrollingOffset
+    }
+    override func encode(to encoder: Encoder) throws {
+        
+        var container =  encoder.container(keyedBy: StructKeysA.self)
+        try container.encode(isHorizontal, forKey: .isHorizontal)
+        try container.encode(initialOffset, forKey: .initialOffset)
+        try container.encode(targetOffsetUpperBound, forKey: .targetOffsetUpperBound)
+        try container.encode(targetOffsetLowerBound, forKey: .targetOffsetLowerBound)
+        try container.encode(endDraggingOffset, forKey: .endDraggingOffset)
+        try container.encode(endScrollingOffset, forKey: .endScrollingOffset)
+        try super.encode(to: encoder)
+    }
     required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StructKeysA.self)
+        self.isHorizontal = try container.decode(Bool.self, forKey: .isHorizontal)
+        self.initialOffset = try container.decode(CGPoint.self, forKey: .initialOffset)
+        self.targetOffsetUpperBound = try container.decode(CGPoint.self, forKey: .targetOffsetUpperBound)
+        self.targetOffsetLowerBound = try container.decode(CGPoint.self, forKey: .targetOffsetLowerBound)
+        self.endDraggingOffset = try container.decode(CGPoint.self, forKey: .endDraggingOffset)
+        self.endScrollingOffset = try container.decode(CGPoint.self, forKey: .endScrollingOffset)
         try super.init(from: decoder)
     }
 }

@@ -10,7 +10,7 @@ target 'MyTouch' do
 
   # Pods for MyTouch
   pod 'Alamofire'
-  pod 'ResearchKit', :git => 'git@github.com:PersonalTouchProjects/ResearchKit.git', :branch => 'mytouch'
+  pod 'ResearchKit', :git => 'http://github.com/PersonalTouchProjects/ResearchKit.git', :branch => 'mytouch'
   pod 'LicensesViewController', '~> 0.7.0'
 
 end

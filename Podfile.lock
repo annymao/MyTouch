@@ -6,7 +6,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - LicensesViewController (~> 0.7.0)
-  - "ResearchKit (from `git@github.com:PersonalTouchProjects/ResearchKit.git`, branch `mytouch`)"
+  - ResearchKit (from `http://github.com/PersonalTouchProjects/ResearchKit.git`, branch `mytouch`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -16,18 +16,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   ResearchKit:
     :branch: mytouch
-    :git: "git@github.com:PersonalTouchProjects/ResearchKit.git"
+    :git: http://github.com/PersonalTouchProjects/ResearchKit.git
 
 CHECKOUT OPTIONS:
   ResearchKit:
-    :commit: 12b2df63b4c243b3c5fc5e44e4de2aa7101c0296
-    :git: "git@github.com:PersonalTouchProjects/ResearchKit.git"
+    :commit: fa14bb2e6b48e9757fa2e8eae72376aa0c899d7d
+    :git: http://github.com/PersonalTouchProjects/ResearchKit.git
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   LicensesViewController: 2f7bba13b3cec7516d4990e41df297720fdbaaab
   ResearchKit: 0133d483eb85d977c96e5dbbf2a234ac7bd43545
 
-PODFILE CHECKSUM: 3339fdbfd9110a6143d44a078a96015da2901a5c
+PODFILE CHECKSUM: d7e6e5e681be732f39e53853edf0145b6768e05f
 
-COCOAPODS: 1.7.0
+COCOAPODS: 1.7.5

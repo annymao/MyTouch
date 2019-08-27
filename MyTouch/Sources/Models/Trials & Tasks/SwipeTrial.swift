@@ -26,7 +26,27 @@ class SwipeTrial: Trial {
         }
     }
     
+    /*required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }*/
+    enum StructKeysA: String, CodingKey {
+        case targetDirection,resultDirection,success
+    }
+    override func encode(to encoder: Encoder) throws {
+        
+        var container =  encoder.container(keyedBy: StructKeysA.self)
+        try container.encode(targetDirection, forKey: .targetDirection)
+        try container.encode(resultDirection, forKey: .resultDirection)
+        try container.encode(success, forKey: .success)
+        try super.encode(to: encoder)
+    }
     required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StructKeysA.self)
+        self.targetDirection = try container.decode(Direction.self, forKey: .targetDirection)
+        if let dir = try container.decodeIfPresent(Direction.self, forKey: .resultDirection){
+            self.resultDirection = dir
+        }
+        self.success = try container.decode(Bool.self, forKey: .success)
         try super.init(from: decoder)
     }
 }

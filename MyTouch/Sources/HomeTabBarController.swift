@@ -75,7 +75,7 @@ class HomeTabBarController: UITabBarController {
     private let client = APIClient()
     
     func reloadSessions(completion: (() -> Void)? = nil) {
-        
+        print("Reload")
         client.loadSessions { (sessions, error) in
             
             self.isSessionsLoaded = true
@@ -368,8 +368,32 @@ class HomeTabBarController: UITabBarController {
                 session.rotation = RotationTask(result: result)
             }
             
-            
+            /*do {
+                // Save session as local cache
+                try session.save()
+                taskViewController.dismiss(animated: true) {
+                    self.reloadSessions()
+                }
+                
+            } catch {
+                
+                // error occured when saving session, present error and DO NOT dismiss task view controller
+                let alertController = UIAlertController(
+                    title: NSLocalizedString("ERROR2", comment: ""),
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(
+                    title: NSLocalizedString("OK", comment: ""),
+                    style: .default,
+                    handler: nil)
+                )
+                
+                // present error message, DO NOT dismiss task view controller
+                taskViewController.present(alertController, animated: true, completion: nil)
+            }*/
             // upload it to the server
+            
             uploadSession(session) { uploaded, error in
                 
                 // if success, save and reload
@@ -385,7 +409,7 @@ class HomeTabBarController: UITabBarController {
                 else if let error = error {
                     
                     let alertController = UIAlertController(
-                        title: NSLocalizedString("ERROR", comment: ""),
+                        title: NSLocalizedString("Finish", comment: ""),
                         message: error.localizedDescription,
                         preferredStyle: .alert
                     )
@@ -403,7 +427,7 @@ class HomeTabBarController: UITabBarController {
                             
                             // error occured when saving session, present error and DO NOT dismiss task view controller
                             let alertController = UIAlertController(
-                                title: NSLocalizedString("ERROR", comment: ""),
+                                title: NSLocalizedString("ERROR2", comment: ""),
                                 message: error.localizedDescription,
                                 preferredStyle: .alert
                             )

@@ -22,7 +22,23 @@ class LongPressTrial: Trial {
         }
     }
     
+    /*required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }*/
+    enum StructKeysA: String, CodingKey {
+        case targetFrame,success
+    }
+    override func encode(to encoder: Encoder) throws {
+        
+        var container =  encoder.container(keyedBy: StructKeysA.self)
+        try container.encode(targetFrame, forKey: .targetFrame)
+        try container.encode(success, forKey: .success)
+        try super.encode(to: encoder)
+    }
     required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StructKeysA.self)
+        self.targetFrame = try container.decode(CGRect.self, forKey: .targetFrame)
+        self.success = try container.decode(Bool.self, forKey: .success)
         try super.init(from: decoder)
     }
 }

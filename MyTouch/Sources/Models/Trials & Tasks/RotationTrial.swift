@@ -22,7 +22,23 @@ class RotationTrial: Trial {
         }
     }
     
+    /*required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }*/
+    enum StructKeysA: String, CodingKey {
+        case targetRotation,resultRotation
+    }
+    override func encode(to encoder: Encoder) throws {
+        
+        var container =  encoder.container(keyedBy: StructKeysA.self)
+        try container.encode(targetRotation, forKey: .targetRotation)
+        try container.encode(resultRotation, forKey: .resultRotation)
+        try super.encode(to: encoder)
+    }
     required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StructKeysA.self)
+        self.targetRotation = try container.decode(CGFloat.self, forKey: .targetRotation)
+        self.resultRotation = try container.decode(CGFloat.self, forKey: .resultRotation)
         try super.init(from: decoder)
     }
 }

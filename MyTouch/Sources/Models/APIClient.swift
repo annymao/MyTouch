@@ -85,7 +85,6 @@ class APIClient {
             }
             
             let data = try encoder.encode(session)
-            
             Alamofire.upload(data, to: "\(host)/sessions", headers: headers)
             .responseJSON { res in
                 
