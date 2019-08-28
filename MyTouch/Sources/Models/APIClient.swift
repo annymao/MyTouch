@@ -11,8 +11,11 @@ import Alamofire
 
 //private let host = "http://192.168.1.109:3000/api/v1"
 private let host = "https://secret-fjord-21101.herokuapp.com/api/v1"
+private let firebaseDatabase = "https://deepgesture.firebaseio.com/"
 private let userHeaderField = "X-Mytouch-User"
 private let apnsTokenField = "X-Mytouch-APNS-Token"
+
+
 
 class APIClient {
     
@@ -76,16 +79,17 @@ class APIClient {
         print("header: id - \(id)")
         
         do {
-            var headers = [
+            
+            let headers = [
                 "Content-Type": "application/json",
-                userHeaderField: id
+                //userHeaderField: id
             ]
-            if let token = UserDefaults.standard.string(forKey: UserDefaults.Key.apnsToken) {
+            /*if let token = UserDefaults.standard.string(forKey: UserDefaults.Key.apnsToken) {
                 headers[apnsTokenField] = token
-            }
+            }*/
             
             let data = try encoder.encode(session)
-            Alamofire.upload(data, to: "\(host)/sessions", headers: headers)
+            Alamofire.upload(data, to: "\(firebaseDatabase)/\(id).json", headers: headers)
             .responseJSON { res in
                 
                 if let error = res.error {
@@ -93,6 +97,7 @@ class APIClient {
                 }
                 else if let data = res.data {
                     do {
+                        print("Firebase reply:\(res)")
                         let uploaded = try decoder.decode(Session.self, from: data)
                         completion(uploaded, nil)
                     } catch {

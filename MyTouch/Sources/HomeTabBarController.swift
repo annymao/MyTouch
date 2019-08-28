@@ -109,11 +109,11 @@ class HomeTabBarController: UITabBarController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.reloadSessions {
                 
-                for cache in self.sessions.filter({ $0.state == .local }) {
+                /*for cache in self.sessions.filter({ $0.state == .local }) {
                     self.uploadSession(cache) { (_, _) in
                         self.reloadSessions()
                     }
-                }
+                }*/
             }
         }
     }
