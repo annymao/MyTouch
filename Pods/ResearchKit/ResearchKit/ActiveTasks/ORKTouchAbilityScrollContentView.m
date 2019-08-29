@@ -255,12 +255,26 @@ UICollectionViewDelegate
         CGFloat width = CGRectGetWidth(self.collectionView.bounds) / self.visibleItems;
         //CGFloat offsetX = width * ((self.numberOfItems / 2) - 2.5);
         CGFloat offsetX = width * ((self.initialItem-7)+0.5);
+        
         CGFloat offsetY = self.collectionView.contentOffset.y;
         self.initialOffset = CGPointMake(offsetX, offsetY);
         self.targetOffset = CGPointMake(offsetX + indexDiff * width, offsetY);
-        
+
+
     } else {
-        CGPoint p = [self.collectionView convertPoint:self.collectionView.contentOffset toView:self.window];
+        CGPoint p;
+        p = [self.superview convertPoint:CGPointZero toView:self.window];
+        /*if(UIScreen.mainScreen.bounds.size.width>UIScreen.mainScreen.bounds.size.height){
+            CGPoint t = CGPointMake(self.frame.origin.y, self.frame.origin.x);
+            p = [self.superview convertPoint:t toView:self.window];
+
+        }
+        else{
+            p = [self.superview convertPoint:self.frame.origin toView:self.window];
+        }*/
+        printf("(%f %f)",self.frame.origin.x,self.frame.origin.y);
+        printf("(%f %f)",UIScreen.mainScreen.bounds.size.width,UIScreen.mainScreen.bounds.size.height);
+        printf("(%f %f)",self.window.frame.origin.x,self.window.frame.origin.y);
         CGFloat height = CGRectGetHeight(self.collectionView.bounds) / self.visibleItems;
         CGFloat offsetX = self.collectionView.contentOffset.x;
         //CGFloat offsetY = height * ((self.numberOfItems / 2) - 2.5);
@@ -268,7 +282,7 @@ UICollectionViewDelegate
         CGFloat offsetY = height * ((self.initialItem-7)+0.5);
         if(p.y>0)
             offsetY+=p.y;
-        printf("%f",p.y);
+        printf("%f\n",p.y);
         self.initialOffset = CGPointMake(offsetX, offsetY);
         self.targetOffset = CGPointMake(offsetX, offsetY + indexDiff * height);
     }
