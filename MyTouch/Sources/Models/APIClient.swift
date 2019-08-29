@@ -85,27 +85,27 @@ class APIClient {
                 //userHeaderField: id
             ]
             /*if let token = UserDefaults.standard.string(forKey: UserDefaults.Key.apnsToken) {
-                headers[apnsTokenField] = token
-            }*/
+             headers[apnsTokenField] = token
+             }*/
             
             let data = try encoder.encode(session)
             Alamofire.upload(data, to: "\(firebaseDatabase)/\(id).json", headers: headers)
-            .responseJSON { res in
-                
-                if let error = res.error {
-                    completion(nil, error)
-                }
-                else if let data = res.data {
-                    do {
-                        print("Firebase reply:\(res)")
-                        let uploaded = try decoder.decode(Session.self, from: data)
-                        completion(uploaded, nil)
-                    } catch {
+                .responseJSON { res in
+                    
+                    if let error = res.error {
                         completion(nil, error)
                     }
-                } else {
-                    completion(nil, nil)
-                }
+                    else if let data = res.data {
+                        do {
+                            print("Firebase reply:\(res)")
+                            let uploaded = try decoder.decode(Session.self, from: data)
+                            completion(uploaded, nil)
+                        } catch {
+                            completion(nil, error)
+                        }
+                    } else {
+                        completion(nil, nil)
+                    }
             }
         }
         catch {

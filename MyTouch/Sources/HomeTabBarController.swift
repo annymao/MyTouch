@@ -109,7 +109,7 @@ class HomeTabBarController: UITabBarController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.reloadSessions {
                 
-                /*for cache in self.sessions.filter({ $0.state == .local }) {
+               /* for cache in self.sessions.filter({ $0.state == .local }) {
                     self.uploadSession(cache) { (_, _) in
                         self.reloadSessions()
                     }
@@ -410,7 +410,7 @@ class HomeTabBarController: UITabBarController {
                     
                     let alertController = UIAlertController(
                         title: NSLocalizedString("Finish", comment: ""),
-                        message: error.localizedDescription,
+                        message: "Thank you!",
                         preferredStyle: .alert
                     )
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { action in
