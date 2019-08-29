@@ -191,7 +191,7 @@
         self.targetSize = [self.dataSource targetSizeInLongPressContentView:self];
     } else {
         //TODO: change size
-        self.targetSize = CGSizeMake(30, 30);
+        self.targetSize = CGSizeMake(29, 29);
     }
     
     [self setNeedsUpdateConstraints];
