@@ -151,7 +151,7 @@ extension SessionDetailViewController: UITableViewDataSource {
             if let session = session {
                 cell.session = session
             }
-            cell.button.addTarget(self, action: #selector(handleAccomodationButton(sender:)), for: .touchUpInside)
+            /*cell.button.addTarget(self, action: #selector(handleAccomodationButton(sender:)), for: .touchUpInside)*/
             cell.layoutItemViews()
             return cell
         case 1:

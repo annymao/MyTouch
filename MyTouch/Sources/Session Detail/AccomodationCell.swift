@@ -12,12 +12,12 @@ class AccomodationCell: MyTouchBaseCell {
     
     var session: Session?
     
-    let button = UIButton()
+    //let button = UIButton()
     
     private let titleLabel = UILabel()
     private let itemViewStack = UIStackView()
     
-    private var buttonConstraints: [NSLayoutConstraint] = []
+    //private var buttonConstraints: [NSLayoutConstraint] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,19 +29,19 @@ class AccomodationCell: MyTouchBaseCell {
         itemViewStack.alignment = .fill
         itemViewStack.spacing = 0.0
         
-        button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
+        /*button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
         button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
-        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)*/
         
         containerView.addSubview(titleLabel)
         containerView.addSubview(itemViewStack)
-        containerView.addSubview(button)
+        //containerView.addSubview(button)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         itemViewStack.translatesAutoresizingMaskIntoConstraints = false
-        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: containerView.topAnchor, multiplier: 2.0),
@@ -54,13 +54,13 @@ class AccomodationCell: MyTouchBaseCell {
             containerView.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: itemViewStack.bottomAnchor, multiplier: 2.0),
         ])
         
-        buttonConstraints = [
+        /*buttonConstraints = [
             button.topAnchor.constraint(equalToSystemSpacingBelow: itemViewStack.bottomAnchor, multiplier: 2.0),
             button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             button.bottomAnchor.constraint(equalToSystemSpacingAbove: containerView.bottomAnchor, multiplier: 2.0)
         ]
         
-        NSLayoutConstraint.activate(buttonConstraints)
+        NSLayoutConstraint.activate(buttonConstraints)*/
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -78,27 +78,27 @@ class AccomodationCell: MyTouchBaseCell {
 
         switch session.state {
         case .analyzing:
-            button.isHidden = true
+            //button.isHidden = true
             itemViewStack.insertArrangedSubview(analyzingView(), at: 0)
-            NSLayoutConstraint.deactivate(buttonConstraints)
+            //NSLayoutConstraint.deactivate(buttonConstraints)
             
         case .local:
-            button.isHidden = false
-            button.setTitle(NSLocalizedString("BUTTON_UPLOAD", comment: ""), for: .normal)
+            //button.isHidden = false
+            //button.setTitle(NSLocalizedString("BUTTON_UPLOAD", comment: ""), for: .normal)
             itemViewStack.insertArrangedSubview(localSessionView(), at: 0)
-            NSLayoutConstraint.activate(buttonConstraints)
+            //NSLayoutConstraint.activate(buttonConstraints)
             
         case .error:
-            button.isHidden = false
-            button.setTitle(NSLocalizedString("BUTTON_TEST_AGAIN", comment: ""), for: .normal)
+            //button.isHidden = false
+            //button.setTitle(NSLocalizedString("BUTTON_TEST_AGAIN", comment: ""), for: .normal)
             itemViewStack.insertArrangedSubview(errorView(), at: 0)
-            NSLayoutConstraint.activate(buttonConstraints)
+            //NSLayoutConstraint.activate(buttonConstraints)
             
         case .completed:
-            button.isHidden = false
-            button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
+            //button.isHidden = false
+            //button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
             itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
-            NSLayoutConstraint.activate(buttonConstraints)
+            //NSLayoutConstraint.activate(buttonConstraints)
         }
         
     }
