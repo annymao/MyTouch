@@ -129,27 +129,28 @@
 }
 
 #pragma mark - ORKTouchAbilityTapStepViewController
-
+//ANNY-NOTE: Change colmun 3->5
+//ANNY-NOTE: define the number of tap trial here
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
     
     if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 3;
+        return 5;
     }
 }
-
+//ANNY-NOTE: Change row 3->7 
 - (NSUInteger)numberOfRowsForTraitCollection:(UITraitCollection *)traitCollection {
     
     if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 3;
+        return 7;
     }
 }
-
+// ANNY-NOTE: Detemined the points to tap
 - (NSMutableArray<NSValue *> *)targetPointsForTraitCollection:(UITraitCollection *)traitCollection {
     
     NSUInteger columns = [self numberOfColumnsForTraitCollection:self.traitCollection];
@@ -162,7 +163,8 @@
             [points addObject:[NSValue valueWithCGPoint:point]];
         }
     }
-    
+
+
     NSUInteger count = [points count];
     for (NSUInteger i = 0; i < count; i++) {
         NSUInteger nElements = count - i;
@@ -204,7 +206,7 @@
     [self.targetPointsQueue removeLastObject];
     
     // Calculate current progress and display using progress view.
-    
+    //ANNY-NOTE Calculate total number
     NSUInteger total = [self numberOfColumnsForTraitCollection:self.traitCollection] * [self numberOfRowsForTraitCollection:self.traitCollection];
     NSUInteger done = total - self.targetPointsQueue.count;
     CGFloat progress = (CGFloat)done/(CGFloat)total;

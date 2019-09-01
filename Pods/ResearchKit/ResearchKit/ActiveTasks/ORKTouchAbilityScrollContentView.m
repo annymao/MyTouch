@@ -325,7 +325,7 @@ UICollectionViewDelegate
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         label.tag = 10000;
     }
-    // CHANGE THE COLOR HERE!!!! --- BY ANNY
+    // ANNY-NOTE: Change the scroll color here
     // Remember to clean the build folder before build
     
     //UILabel *label = (UILabel *)[cell.contentView viewWithTag:10000];

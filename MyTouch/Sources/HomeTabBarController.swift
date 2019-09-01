@@ -359,14 +359,14 @@ class HomeTabBarController: UITabBarController {
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityVerticalScroll")?.result(forIdentifier: "touchAbilityVerticalScroll") as? ORKTouchAbilityScrollResult {
                 session.verticalScroll = ScrollTask(result: result)
             }
-            
-            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityPinch")?.result(forIdentifier: "touchAbilityPinch") as? ORKTouchAbilityPinchResult {
+            //ANNY-NOTE: remove the result of pinch and rotation
+            /*if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityPinch")?.result(forIdentifier: "touchAbilityPinch") as? ORKTouchAbilityPinchResult {
                 session.pinch = PinchTask(result: result)
-            }
+            }*/
             
-            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityRotation")?.result(forIdentifier: "touchAbilityrotation") as? ORKTouchAbilityRotationResult {
+            /*if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityRotation")?.result(forIdentifier: "touchAbilityrotation") as? ORKTouchAbilityRotationResult {
                 session.rotation = RotationTask(result: result)
-            }
+            }*/
             
             /*do {
                 // Save session as local cache
@@ -696,9 +696,10 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     
     return OrderedTask(identifier: "survey", steps: steps)
 }
-
+//ANNY-NOTE: remove pinch and rotation
+//ANNY-NOTE: Define which task to do here
 private func activityTask() -> ORKOrderedTask {
-    return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap, .longPress, .swipe, .verticalScroll, .horizontalScroll, .pinch, .rotation], options: [])
+    return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap, .longPress, .swipe, .verticalScroll, .horizontalScroll], options: [])
 }
 
 private let consentID = UUID()
