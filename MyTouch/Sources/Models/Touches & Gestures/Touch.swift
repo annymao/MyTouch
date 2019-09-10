@@ -29,7 +29,7 @@ extension Touch {
             }
         }
     }
-    
+
     enum TouchType: String, Codable {
         case direct // A direct touch from a finger (on a screen)
         case indirect // An indirect touch (not a screen)
@@ -123,7 +123,9 @@ class Touch: Codable {
     // This happens e.g. for azimuth/altitude values when entering from the edges
     var estimatedPropertiesExpectingUpdates: Touch.Properties
     
-    
+    var accX: Double?;
+    var accY: Double?;
+    var accZ: Double?;
     init(touch: ORKTouchAbilityTouch) {
         self.timestamp               = touch.timestamp
         self.phase                   = Phase(phase: touch.phase)
@@ -142,7 +144,9 @@ class Touch: Codable {
         self.estimationUpdateIndex   = touch.estimationUpdateIndex?.doubleValue
         self.estimatedProperties     = Properties.convert(from: touch.estimatedProperties)
         self.estimatedPropertiesExpectingUpdates = Properties.convert(from: touch.estimatedPropertiesExpectingUpdates)
-        
+        self.accX = touch.accX
+        self.accY = touch.accY
+        self.accZ = touch.accZ
         //MARK: - write acceleration
     }
 }

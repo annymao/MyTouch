@@ -31,7 +31,7 @@
 
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 #import "ORKHelpers_Internal.h"
-
+#import <CoreMotion/CoreMotion.h>
 #pragma mark - ORKTouchAbilityGestureRecoginzerEvent
 
 @interface ORKTouchAbilityGestureRecoginzerEvent ()
@@ -42,6 +42,8 @@
 @property (nonatomic, assign) CGPoint locationInWindow;
 @property (nonatomic, assign) NSUInteger numberOfTouches;
 @property (nonatomic, copy) NSDictionary<NSNumber *, NSValue *> *locationInWindowOfTouchAtIndex;
+@property (nonatomic, strong) CMMotionManager *motionManager;
+@property (nonatomic, strong) NSOperationQueue *accQueue;
 
 @end
 
@@ -72,7 +74,7 @@
     }
     return self;
 }
-
+//ANNY-NOTE: Event here
 - (instancetype)initWithGestureRecognizer:(UIGestureRecognizer *)recognizer {
     self = [super init];
     if (self) {
@@ -93,6 +95,7 @@
             self.locationInWindowOfTouchAtIndex = [dict copy];
         }
     }
+
     return self;
 }
 

@@ -31,7 +31,7 @@
 
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
-
+#import <CoreMotion/CoreMotion.h>
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -50,6 +50,9 @@ ORK_CLASS_AVAILABLE
  
  @code ORKTouchAbilityTouch.timestamp = UITouch.timestamp + [NSDate dateWithTimeIntervalSinceNow:-[[NSProcessInfo processInfo] systemUptime]].timeIntervalSince1970;
  */
+@property(nonatomic, readonly) double accX;
+@property(nonatomic, readonly) double accY;
+@property(nonatomic, readonly) double accZ;
 @property(nonatomic, readonly) NSTimeInterval timestamp;
 @property(nonatomic, readonly) UITouchPhase phase;
 @property(nonatomic, readonly) NSUInteger tapCount;
@@ -118,7 +121,7 @@ ORK_CLASS_AVAILABLE
  @param touch The `UITouch` object it reflects.
  @return An `ORKTouchAbilityTouch` object.
  */
-- (instancetype)initWithUITouch:(UITouch *)touch;
+- (instancetype)initWithUITouch:(UITouch *)touch withCM:(CMMotionManager *)_motionManager;
 
 @end
 

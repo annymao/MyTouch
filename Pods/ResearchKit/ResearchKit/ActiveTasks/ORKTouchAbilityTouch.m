@@ -54,9 +54,17 @@
 @property(nonatomic, assign) CGVector azimuthUnitVectorInWindow;
 @property(nonatomic, assign) CGFloat altitudeAngle;
 
+
 @property(nonatomic, copy) NSNumber * _Nullable estimationUpdateIndex;
 @property(nonatomic, assign) UITouchProperties estimatedProperties;
 @property(nonatomic, assign) UITouchProperties estimatedPropertiesExpectingUpdates;
+
+//ANNY-NOTE: Core Motion
+@property(nonatomic, assign) double accX;
+@property(nonatomic, assign) double accY;
+@property(nonatomic, assign) double accZ;
+
+
 
 @end
 
@@ -140,10 +148,13 @@
     touch.estimationUpdateIndex = [self.estimationUpdateIndex copy];
     touch.estimatedProperties = self.estimatedProperties;
     touch.estimatedPropertiesExpectingUpdates = self.estimatedPropertiesExpectingUpdates;
+    touch.accX = self.accX;
+    touch.accY = self.accY;
+    touch.accZ = self.accZ;
     return touch;
 }
 
-- (instancetype)initWithUITouch:(UITouch *)touch {
+- (instancetype)initWithUITouch:(UITouch *)touch withCM:(CMMotionManager *)_motionManager{
     self = [super init];
     if (self) {
         self.timestamp = touch.timestamp + [NSDate dateWithTimeIntervalSinceNow:-[[NSProcessInfo processInfo] systemUptime]].timeIntervalSince1970;
@@ -164,6 +175,14 @@
         self.estimationUpdateIndex = touch.estimationUpdateIndex;
         self.estimatedProperties = touch.estimatedProperties;
         self.estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates;
+        //ANNY-NOTE: Acceleration in touch
+        if(_motionManager.accelerometerAvailable){
+            CMAcceleration acceleration = _motionManager.accelerometerData.acceleration;
+            NSLog(@"accel x: %f, y: %f, z: %f", acceleration.x, acceleration.y, acceleration.z);
+            self.accX = acceleration.x;
+            self.accY = acceleration.y;
+            self.accZ = acceleration.z;
+        }
     }
     return self;
 }

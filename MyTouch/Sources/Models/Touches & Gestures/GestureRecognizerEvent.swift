@@ -56,6 +56,8 @@ class GestureRecognizerEvent: Codable {
     
     var locationOfTouchAtIndex: [UInt: CGPoint]
     
+
+    //ANNY-NOTE: Event
     init(event: ORKTouchAbilityGestureRecoginzerEvent) {
         self.type              = .unknown
         self.timestamp         = event.timestamp
@@ -65,6 +67,7 @@ class GestureRecognizerEvent: Codable {
         self.numberOfTouches   = event.numberOfTouches
         self.locationOfTouchAtIndex = event.locationInWindowOfTouchAtIndex.mapValues({ $0.cgPointValue }) as! [UInt : CGPoint]
         
+
         //MARK: - Write here for the acceleration
     }
 }

@@ -122,20 +122,21 @@
     
     
     //ANNY-NOTE: add CMmotion acceleration for tap
-    self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval  = 1.0/10.0; // Update at 10Hz
-    printf("Accelerometer\n");
-    if(self.motionManager.accelerometerAvailable){
-        printf("hi\n");
-        NSLog(@"Accelerometer avaliable");
-        self.accQueue= [NSOperationQueue currentQueue];
-        [self.motionManager startAccelerometerUpdatesToQueue:self.accQueue
-                                            withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-                                                CMAcceleration acc = accelerometerData.acceleration;
-                                                printf("%f %f %f\n",acc.x,acc.y,acc.z );
-                                            }];
-    }
-    printf("end of accelerometer\n");
+//    self.motionManager = [[CMMotionManager alloc] init];
+//    self.motionManager.accelerometerUpdateInterval  = 1.0/60.0; // Update at 10Hz
+//    printf("Accelerometer\n");
+//    if(self.motionManager.accelerometerAvailable){
+//        printf("hi\n");
+//        NSLog(@"Accelerometer avaliable");
+//        self.accQueue= [NSOperationQueue currentQueue];
+//        [self.motionManager startAccelerometerUpdates];
+//        /*[self.motionManager startAccelerometerUpdatesToQueue:self.accQueue
+//                                            withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+//                                                CMAcceleration acc = accelerometerData.acceleration;
+//                                                printf("%f %f %f\n",acc.x,acc.y,acc.z );
+//                                            }];*/
+//    }
+//    printf("end of accelerometer\n");
     
 }
 
@@ -223,7 +224,8 @@
 }
 
 - (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
-    
+//    CMAcceleration acceleration = self.motionManager.accelerometerData.acceleration;
+//    NSLog(@"accel x: %f, y: %f, z: %f", acceleration.x, acceleration.y, acceleration.z);
     [self.targetPointsQueue removeLastObject];
     
     // Calculate current progress and display using progress view.

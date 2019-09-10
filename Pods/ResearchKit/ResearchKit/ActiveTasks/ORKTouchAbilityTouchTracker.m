@@ -33,10 +33,11 @@
 #import "ORKTouchAbilityTouch.h"
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityTrack_Internal.h"
-
+#import <CoreMotion/CoreMotion.h>
 
 @interface ORKTouchAbilityTouchTracker ()
 @property (nonatomic, assign, getter=hasBegun) BOOL begun;
+@property (nonatomic, strong) CMMotionManager *motionManager;
 @end
 
 
@@ -62,6 +63,11 @@
     if (self = [super init]) {
         self.tracking = NO;
         self.cancelsTouchesInView = NO;
+        self.motionManager = [[CMMotionManager alloc] init];
+        if(self.motionManager.accelerometerAvailable){
+            self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
+            [self.motionManager startAccelerometerUpdates];
+        }
     }
     return self;
 }
@@ -117,9 +123,10 @@
     }
     
     for (UITouch *touch in touches) {
-        
+        printf("touches\n");
+
         ORKTouchAbilityTrack *track = [[ORKTouchAbilityTrack alloc] init];
-        track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:touch]];
+        track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:touch withCM:self.motionManager]];
         
         [self.tracks addObject:track];
     }
@@ -178,7 +185,7 @@
         NSMutableArray<ORKTouchAbilityTouch *> *translatedTouches = [NSMutableArray new];
         
         for (UITouch *coalescedTouch in coalescedTouches) {
-            [translatedTouches addObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:coalescedTouch]];
+            [translatedTouches addObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:coalescedTouch withCM:self.motionManager]];
         }
         
         
