@@ -56,6 +56,8 @@
 "SURVEY_SYMPTOMS_TITLE" = "症狀";
 "SURVEY_SYMPTOMS_QUESTION" = "您有下列何種症狀？（可複選）";
 "SURVEY_COMPLETION_TEXT" = "您已經填寫完基本資料";
+"SURVEY_ID_TITLE" = "使用者編號";
+"SURVEY_SITUATION_TITLE" = "狀態";
 
 "GENDER_MALE" = "男性";
 "GENDER_FEMALE" = "女性";

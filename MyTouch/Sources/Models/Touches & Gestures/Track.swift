@@ -15,5 +15,6 @@ class Track: Codable {
     
     init(track: ORKTouchAbilityTrack) {
         self.touches = track.touches.map { Touch(touch: $0) }
+        // MARK: - Start the acceleration's call
     }
 }

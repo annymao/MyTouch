@@ -46,7 +46,7 @@ struct Subject: Codable {
         case none
     }
     
-    var id: String = UUID().uuidString
+    var id: Int = 1111//String = UUID().uuidString
     var name: String = "John Doe"
     var birthYear: Int = 1991
     var gender: Gender = .other

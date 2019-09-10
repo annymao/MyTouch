@@ -64,6 +64,8 @@ class GestureRecognizerEvent: Codable {
         self.location          = event.locationInWindow
         self.numberOfTouches   = event.numberOfTouches
         self.locationOfTouchAtIndex = event.locationInWindowOfTouchAtIndex.mapValues({ $0.cgPointValue }) as! [UInt : CGPoint]
+        
+        //MARK: - Write here for the acceleration
     }
 }
 

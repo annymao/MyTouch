@@ -128,7 +128,7 @@
 #pragma mark - ORKTouchAbilityLongPressStepViewController
 
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
-    return 5;
+    return 4;
 }
 
 - (NSUInteger)numberOfRowsForTraitCollection:(UITraitCollection *)traitCollection {

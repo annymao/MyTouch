@@ -46,7 +46,7 @@
 #import "ORKNavigableOrderedTask.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
-
+#import <CoreMotion/CoreMotion.h>
 
 @interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityContentViewDelegate>
 
@@ -56,6 +56,10 @@
 
 // UI
 @property (nonatomic, strong) ORKTouchAbilityTapContentView *trialView;
+
+//ANNY-NOTE: Core Motion
+@property (nonatomic, strong) CMMotionManager *motionManager;
+@property (nonatomic, strong) NSOperationQueue *accQueue;
 
 @end
 
@@ -105,7 +109,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.trials = [NSMutableArray new];
     self.targetPointsQueue = [self targetPointsForTraitCollection:self.traitCollection];
     
@@ -116,6 +119,24 @@
     self.activeStepView.activeCustomView = self.trialView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
+    
+    
+    //ANNY-NOTE: add CMmotion acceleration for tap
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval  = 1.0/10.0; // Update at 10Hz
+    printf("Accelerometer\n");
+    if(self.motionManager.accelerometerAvailable){
+        printf("hi\n");
+        NSLog(@"Accelerometer avaliable");
+        self.accQueue= [NSOperationQueue currentQueue];
+        [self.motionManager startAccelerometerUpdatesToQueue:self.accQueue
+                                            withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+                                                CMAcceleration acc = accelerometerData.acceleration;
+                                                printf("%f %f %f\n",acc.x,acc.y,acc.z );
+                                            }];
+    }
+    printf("end of accelerometer\n");
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -129,7 +150,7 @@
 }
 
 #pragma mark - ORKTouchAbilityTapStepViewController
-//ANNY-NOTE: Change colmun 3->5
+//ANNY-NOTE: Change colmun 3->4
 //ANNY-NOTE: define the number of tap trial here
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
     
@@ -137,7 +158,7 @@
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 5;
+        return 4;
     }
 }
 //ANNY-NOTE: Change row 3->7 

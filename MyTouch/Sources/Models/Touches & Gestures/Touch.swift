@@ -142,5 +142,7 @@ class Touch: Codable {
         self.estimationUpdateIndex   = touch.estimationUpdateIndex?.doubleValue
         self.estimatedProperties     = Properties.convert(from: touch.estimatedProperties)
         self.estimatedPropertiesExpectingUpdates = Properties.convert(from: touch.estimatedPropertiesExpectingUpdates)
+        
+        //MARK: - write acceleration
     }
 }

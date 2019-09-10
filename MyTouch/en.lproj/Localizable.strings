@@ -56,6 +56,9 @@
 "SURVEY_SYMPTOMS_TITLE" = "Symptoms";
 "SURVEY_SYMPTOMS_QUESTION" = "Do you have any following symptoms (multiple choice) ";
 "SURVEY_COMPLETION_TEXT" = "You have completed basic information";
+"SURVEY_ID_TITLE" = "User ID";
+"SURVEY_SITUATION_TITLE" = "Situation";
+
 
 "GENDER_MALE" = "Male";
 "GENDER_FEMALE" = "Female";

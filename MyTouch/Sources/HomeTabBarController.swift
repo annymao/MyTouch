@@ -83,7 +83,7 @@ class HomeTabBarController: UITabBarController {
             // save sessions in storage
             sessions?.forEach {
                 do {
-                    try $0.save()
+                    try $0.save() 
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -102,7 +102,7 @@ class HomeTabBarController: UITabBarController {
     }
     
     func uploadSession(_ session: Session, completion: @escaping (Session?, Error?) -> Void) {
-        client.uploadSession(session, completion: completion)
+        client.uploadSession(session,completion: completion)
     }
     
     func uploadCachedSessions() {
@@ -263,6 +263,9 @@ class HomeTabBarController: UITabBarController {
             
             if let birthResult = taskViewController.result.stepResult(forStepIdentifier: "birth")?.result(forIdentifier: "birth") as? ORKNumericQuestionResult {
                 subject.birthYear = birthResult.numericAnswer!.intValue
+            }
+            if let idResult = taskViewController.result.stepResult(forStepIdentifier: "id")?.result(forIdentifier: "id") as? ORKNumericQuestionResult {
+                subject.id = idResult.numericAnswer!.intValue
             }
             
             if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "name")?.result(forIdentifier: "name") as? ORKTextQuestionResult {
@@ -582,18 +585,27 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     instructionStep.text = NSLocalizedString("SURVEY_INSTRUCTION_TEXT", comment: "")
     steps += [instructionStep]
     
+    // ANNY-NOTE: ID
+    let idFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
+    idFormat.minimum = NSNumber(value: 0)
+    idFormat.maximum = NSNumber(value: 10000)
+    steps.append(ORKQuestionStep(
+        identifier: "id",
+        title: NSLocalizedString("SURVEY_ID_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_ID_TITLE", comment: ""),
+        answer: idFormat)
+    )
     
-    /* skipping name
     // name
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
     steps.append(ORKQuestionStep(
         identifier: "name",
-        title: NSLocalizedString("SURVEY_NAME_TITLE", comment: ""),
-        question: NSLocalizedString("SURVEY_NAME_QUESTION", comment: ""),
+        title: NSLocalizedString("SURVEY_SITUATION_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_SITUATION_TITLE", comment: ""),
         answer: nameAnswerFormat)
     )
-    */
+
     
     
     // birth year
@@ -708,7 +720,7 @@ private let surveyID = UUID()
 
 private let activityID = UUID()
 
-
+private var filename = ""
 // MARK: - Private OrderedTask for skipping steps
 
 private class OrderedTask: ORKOrderedTask {

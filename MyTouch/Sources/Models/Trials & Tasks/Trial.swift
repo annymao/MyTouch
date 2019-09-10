@@ -23,6 +23,7 @@ class Trial: Codable {
         self.startDate = trial.startDate
         self.endDate = trial.endDate
         self.tracks = trial.tracks.map({ Track(track: $0) })
+
         
         self.events = trial.gestureRecognizerEvents.map { event in
             if let event = event as? ORKTouchAbilityTapGestureRecoginzerEvent {
