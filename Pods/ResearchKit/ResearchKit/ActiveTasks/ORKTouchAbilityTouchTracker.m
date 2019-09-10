@@ -63,11 +63,7 @@
     if (self = [super init]) {
         self.tracking = NO;
         self.cancelsTouchesInView = NO;
-        self.motionManager = [[CMMotionManager alloc] init];
-        if(self.motionManager.accelerometerAvailable){
-            self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
-            [self.motionManager startAccelerometerUpdates];
-        }
+        
     }
     return self;
 }
@@ -94,11 +90,19 @@
 - (void)startTracking {
     [self resetTracks];
     self.tracking = YES;
+    //ANNY-NOTE: init motion Manager
+    self.motionManager = [[CMMotionManager alloc] init];
+    if(self.motionManager.accelerometerAvailable){
+        self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
+        [self.motionManager startAccelerometerUpdates];
+    }
 }
 
 - (void)stopTracking {
     self.begun = NO;
     self.tracking = NO;
+    [_motionManager stopAccelerometerUpdates];
+
 }
 
 - (void)resetTracks {
@@ -126,6 +130,7 @@
         printf("touches\n");
 
         ORKTouchAbilityTrack *track = [[ORKTouchAbilityTrack alloc] init];
+        //ANNY-NOTE: send motionManager to Touch
         track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:touch withCM:self.motionManager]];
         
         [self.tracks addObject:track];
@@ -185,6 +190,7 @@
         NSMutableArray<ORKTouchAbilityTouch *> *translatedTouches = [NSMutableArray new];
         
         for (UITouch *coalescedTouch in coalescedTouches) {
+            //ANNY-NOTE: send motionManager to Touch
             [translatedTouches addObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:coalescedTouch withCM:self.motionManager]];
         }
         
