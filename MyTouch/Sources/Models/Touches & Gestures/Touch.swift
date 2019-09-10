@@ -126,6 +126,9 @@ class Touch: Codable {
     var accX: Double?;
     var accY: Double?;
     var accZ: Double?;
+    var gyroX: Double?;
+    var gyroY: Double?;
+    var gyroZ: Double?;
     init(touch: ORKTouchAbilityTouch) {
         self.timestamp               = touch.timestamp
         self.phase                   = Phase(phase: touch.phase)
@@ -147,6 +150,9 @@ class Touch: Codable {
         self.accX = touch.accX
         self.accY = touch.accY
         self.accZ = touch.accZ
+        self.gyroX = touch.gyroX
+        self.gyroY = touch.gyroY
+        self.gyroZ = touch.gyroZ 
         //MARK: - write acceleration
     }
 }

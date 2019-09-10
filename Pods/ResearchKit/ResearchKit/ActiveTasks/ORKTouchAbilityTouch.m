@@ -63,7 +63,9 @@
 @property(nonatomic, assign) double accX;
 @property(nonatomic, assign) double accY;
 @property(nonatomic, assign) double accZ;
-
+@property(nonatomic, assign) double gyroX;
+@property(nonatomic, assign) double gyroY;
+@property(nonatomic, assign) double gyroZ;
 
 
 @end
@@ -182,6 +184,14 @@
             self.accX = acceleration.x;
             self.accY = acceleration.y;
             self.accZ = acceleration.z;
+        }
+        if(_motionManager.gyroAvailable){
+        
+            CMRotationRate rotationRate = _motionManager.gyroData.rotationRate;
+            NSLog(@"gyro x: %f, y: %f, z: %f", rotationRate.x, rotationRate.y, rotationRate.z);
+            self.gyroX = rotationRate.x;
+            self.gyroY = rotationRate.y;
+            self.gyroZ = rotationRate.z;
         }
     }
     return self;

@@ -53,6 +53,10 @@ ORK_CLASS_AVAILABLE
 @property(nonatomic, readonly) double accX;
 @property(nonatomic, readonly) double accY;
 @property(nonatomic, readonly) double accZ;
+@property(nonatomic, readonly) double gyroX;
+@property(nonatomic, readonly) double gyroY;
+@property(nonatomic, readonly) double gyroZ;
+
 @property(nonatomic, readonly) NSTimeInterval timestamp;
 @property(nonatomic, readonly) UITouchPhase phase;
 @property(nonatomic, readonly) NSUInteger tapCount;

@@ -67,7 +67,6 @@
     }
     return self;
 }
-
 - (instancetype)initWithTarget:(id)target action:(SEL)action {
     if (self = [super initWithTarget:target action:action]) {
         self.tracking = NO;
@@ -91,17 +90,23 @@
     [self resetTracks];
     self.tracking = YES;
     //ANNY-NOTE: init motion Manager
+    
     self.motionManager = [[CMMotionManager alloc] init];
     if(self.motionManager.accelerometerAvailable){
         self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
+        self.motionManager.gyroUpdateInterval = 1.0/10.0;
         [self.motionManager startAccelerometerUpdates];
+        [self.motionManager startGyroUpdates];
     }
 }
 
 - (void)stopTracking {
     self.begun = NO;
     self.tracking = NO;
-    [_motionManager stopAccelerometerUpdates];
+    
+    [self.motionManager stopAccelerometerUpdates];
+    [self.motionManager stopGyroUpdates];
+    
 
 }
 
