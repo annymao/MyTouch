@@ -53,6 +53,10 @@
 		65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */; };
 		65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */; };
 		65FC45A920F3A13300B2A7CF /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A820F3A13300B2A7CF /* Subject.swift */; };
+		991E1789232E1D1C00D56E47 /* GyroScopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E1788232E1D1C00D56E47 /* GyroScopeData.swift */; };
+		991E178B232E244700D56E47 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E178A232E244700D56E47 /* AccelerometerData.swift */; };
+		991E178D232E249000D56E47 /* DeviceMotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E178C232E249000D56E47 /* DeviceMotionData.swift */; };
+		991E178F232E259600D56E47 /* MotionActivityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E178E232E259600D56E47 /* MotionActivityData.swift */; };
 		9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +115,10 @@
 		65FC45A820F3A13300B2A7CF /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.release.xcconfig"; sourceTree = "<group>"; };
+		991E1788232E1D1C00D56E47 /* GyroScopeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroScopeData.swift; sourceTree = "<group>"; };
+		991E178A232E244700D56E47 /* AccelerometerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerData.swift; sourceTree = "<group>"; };
+		991E178C232E249000D56E47 /* DeviceMotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionData.swift; sourceTree = "<group>"; };
+		991E178E232E259600D56E47 /* MotionActivityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionActivityData.swift; sourceTree = "<group>"; };
 		A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -234,6 +242,10 @@
 				65FC45A820F3A13300B2A7CF /* Subject.swift */,
 				6504DA652209A55B006649D6 /* Session.swift */,
 				6504DA672209A8E7006649D6 /* sessionsSample.json */,
+				991E1788232E1D1C00D56E47 /* GyroScopeData.swift */,
+				991E178A232E244700D56E47 /* AccelerometerData.swift */,
+				991E178C232E249000D56E47 /* DeviceMotionData.swift */,
+				991E178E232E259600D56E47 /* MotionActivityData.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -442,6 +454,7 @@
 				656F6A9F223108CE0009F3E3 /* SubjectSummaryViewController.swift in Sources */,
 				65B1A2DC222C199E00AEC151 /* StateView.swift in Sources */,
 				65E15537220219FE00731C41 /* NSLayoutAnchor+HCI.swift in Sources */,
+				991E178B232E244700D56E47 /* AccelerometerData.swift in Sources */,
 				651D90EB21EF26DF00110588 /* HomeTabBarController.swift in Sources */,
 				6548A9FF20E6655500B7C73F /* Touch.swift in Sources */,
 				65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */,
@@ -452,6 +465,8 @@
 				651D90F621EF54E200110588 /* AccomodationCell.swift in Sources */,
 				651D90F421EF532400110588 /* SessionDetailViewController.swift in Sources */,
 				650918FF2223B95E00304789 /* Utilities.swift in Sources */,
+				991E178F232E259600D56E47 /* MotionActivityData.swift in Sources */,
+				991E1789232E1D1C00D56E47 /* GyroScopeData.swift in Sources */,
 				65E1553522020BD600731C41 /* MyTouchBaseCell.swift in Sources */,
 				65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */,
 				65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */,
@@ -463,6 +478,7 @@
 				6548AA2D20E7A84000B7C73F /* Track.swift in Sources */,
 				659BAA502212A9EE00E45D5F /* APIClient.swift in Sources */,
 				651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */,
+				991E178D232E249000D56E47 /* DeviceMotionData.swift in Sources */,
 				651D90EF21EF424500110588 /* SessionListCell.swift in Sources */,
 				6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */,
 				6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */,

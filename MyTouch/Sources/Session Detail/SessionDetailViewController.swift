@@ -176,7 +176,7 @@ extension SessionDetailViewController: UITableViewDataSource {
             // TODO: symptoms
             if let subject = session?.subject {
                 cell.items = [
-                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_NAME", comment: ""), text: subject.name),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_SITUATION", comment: ""), text: subject.situation),
                     SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: ""), text: "\(subject.birthYear)"),
                     SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_GENDER", comment: ""), text: subject.gender.localizedString),
                     SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: ""), text: subject.dominantHand.localizedString),

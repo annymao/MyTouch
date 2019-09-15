@@ -23,7 +23,12 @@ extension Notification.Name {
 class HomeTabBarController: UITabBarController {
 
     // MARK: - UIViewController
-    
+    let motionManager = CMMotionManager()
+    let activityManager = CMMotionActivityManager()
+    var gyroAllTimeData = [GyroScopeData]()
+    var accAllTimeData = [AccelerometerData]()
+    var motionAllTimeData = [DeviceMotionData]()
+    var activityAllTimeData = [MotionActivityData]()
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         // Display in landscape mode in iPad and in protrait mode on other devices (currently iPhone only).
         switch UIDevice.current.userInterfaceIdiom {
@@ -46,6 +51,9 @@ class HomeTabBarController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willTerminateNotification, object: nil)
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -206,7 +214,76 @@ class HomeTabBarController: UITabBarController {
     private func presentActivity(with session: Session) {
         
         self.currentSession = session
+        //Core Motion Manager
+        self.motionAllTimeData.removeAll()
+        print(self.motionAllTimeData.count)
+        if (motionManager.isDeviceMotionAvailable) {
+            motionManager.deviceMotionUpdateInterval = 1.0/60.0;
+            motionManager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: { (deviceData: CMDeviceMotion?, NSError) -> Void in
+                let rotation = deviceData!.rotationRate
+                let userAcc = deviceData!.userAcceleration
+                self.motionAllTimeData.append(DeviceMotionData(timestamp: deviceData!.timestamp, rotate: rotation, userAcc: userAcc))
+                if (NSError != nil){
+                    print("\(String(describing: NSError))")
+                }
+            })
+        }
+        else{
+            print("No device motion available")
+        }
+
+        self.accAllTimeData.removeAll()
+        print(self.accAllTimeData.count)
+        if (motionManager.isAccelerometerAvailable) {
+            motionManager.accelerometerUpdateInterval = 1.0/60.0;
+            motionManager.startAccelerometerUpdates(to: OperationQueue.main, withHandler: { (accData: CMAccelerometerData?, NSError) -> Void in
+                let acc = accData!.acceleration
+                let x = acc.x
+                let y = acc.y
+                let z = acc.z
+                self.accAllTimeData.append(AccelerometerData(timestamp: accData!.timestamp, x: x, y: y, z: z))
+                if (NSError != nil){
+                    print("\(String(describing: NSError))")
+                }
+            })
+        }
+        else{
+            print("No accelerometer available")
+        }
         
+        self.gyroAllTimeData.removeAll()
+        print(self.gyroAllTimeData.count)
+        if (motionManager.isGyroAvailable) {
+            print("startGyroData\n")
+            motionManager.gyroUpdateInterval = 1.0/60.0
+            motionManager.startGyroUpdates(to: OperationQueue.main, withHandler: { (gyroData: CMGyroData?, NSError) -> Void in
+                let rotation = gyroData!.rotationRate
+                let x = rotation.x
+                let y = rotation.y
+                let z = rotation.z
+                self.gyroAllTimeData.append(GyroScopeData(timestamp: gyroData!.timestamp, x: x, y: y, z: z))
+                if (NSError != nil){
+                    print("\(String(describing: NSError))")
+                }
+            })
+        } else {
+            print("No gyro available")
+        }
+        self.activityAllTimeData.removeAll()
+        print(activityAllTimeData.count)
+        if(CMMotionActivityManager.isActivityAvailable()){
+            
+            print("start Activity Data\n")
+            activityManager.startActivityUpdates(to: OperationQueue.main, withHandler: { activityData in
+                let tmpData = MotionActivityData(motionActivity: activityData!)
+                self.activityAllTimeData.append(tmpData)
+                print(tmpData.activity)
+
+            })
+        }
+        else{
+            print("No activity available")
+        }
         let taskViewController = ORKTaskViewController(task: activityTask(), taskRun: activityID)
         taskViewController.delegate = self
         
@@ -268,8 +345,8 @@ class HomeTabBarController: UITabBarController {
                 subject.id = idResult.numericAnswer!.intValue
             }
             
-            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "name")?.result(forIdentifier: "name") as? ORKTextQuestionResult {
-                subject.name = nameResult.textAnswer!
+            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "situation")?.result(forIdentifier: "situation") as? ORKTextQuestionResult {
+                subject.situation = nameResult.textAnswer!
             }
             
             if let genderResult = taskViewController.result.stepResult(forStepIdentifier: "gender")?.result(forIdentifier: "gender") as? ORKChoiceQuestionResult {
@@ -362,40 +439,14 @@ class HomeTabBarController: UITabBarController {
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityVerticalScroll")?.result(forIdentifier: "touchAbilityVerticalScroll") as? ORKTouchAbilityScrollResult {
                 session.verticalScroll = ScrollTask(result: result)
             }
-            //ANNY-NOTE: remove the result of pinch and rotation
-            /*if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityPinch")?.result(forIdentifier: "touchAbilityPinch") as? ORKTouchAbilityPinchResult {
-                session.pinch = PinchTask(result: result)
-            }*/
-            
-            /*if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityRotation")?.result(forIdentifier: "touchAbilityrotation") as? ORKTouchAbilityRotationResult {
-                session.rotation = RotationTask(result: result)
-            }*/
-            
-            /*do {
-                // Save session as local cache
-                try session.save()
-                taskViewController.dismiss(animated: true) {
-                    self.reloadSessions()
-                }
-                
-            } catch {
-                
-                // error occured when saving session, present error and DO NOT dismiss task view controller
-                let alertController = UIAlertController(
-                    title: NSLocalizedString("ERROR2", comment: ""),
-                    message: error.localizedDescription,
-                    preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(
-                    title: NSLocalizedString("OK", comment: ""),
-                    style: .default,
-                    handler: nil)
-                )
-                
-                // present error message, DO NOT dismiss task view controller
-                taskViewController.present(alertController, animated: true, completion: nil)
-            }*/
-            // upload it to the server
+            self.motionManager.stopGyroUpdates()
+            self.motionManager.stopDeviceMotionUpdates()
+            self.motionManager.stopAccelerometerUpdates()
+            self.activityManager.stopActivityUpdates()
+            session.gyroData = self.gyroAllTimeData
+            session.accData = self.accAllTimeData
+            session.motionData = self.motionAllTimeData
+            session.activityData = self.activityAllTimeData
             
             uploadSession(session) { uploaded, error in
                 
@@ -457,6 +508,14 @@ class HomeTabBarController: UITabBarController {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let confirm = UIAlertAction(title: NSLocalizedString("END", comment: ""), style: .destructive) { _ in
                 self.currentSession = nil
+                self.motionManager.stopGyroUpdates()
+                self.motionManager.stopDeviceMotionUpdates()
+                self.motionManager.stopAccelerometerUpdates()
+                self.activityManager.stopActivityUpdates()
+                self.gyroAllTimeData.removeAll()
+                self.accAllTimeData.removeAll()
+                self.motionAllTimeData.removeAll()
+                self.activityAllTimeData.removeAll()
                 taskViewController.dismiss(animated: true, completion: nil)
             }
             let cancel = UIAlertAction(title: NSLocalizedString("CONTINUE_EXAM", comment: ""), style: .default, handler: nil)
@@ -468,6 +527,14 @@ class HomeTabBarController: UITabBarController {
             
         default:
             currentSession = nil
+            self.motionManager.stopGyroUpdates()
+            self.motionManager.stopDeviceMotionUpdates()
+            self.motionManager.stopAccelerometerUpdates()
+            self.activityManager.stopActivityUpdates()
+            self.gyroAllTimeData.removeAll()
+            self.accAllTimeData.removeAll()
+            self.motionAllTimeData.removeAll()
+            self.activityAllTimeData.removeAll()
             taskViewController.dismiss(animated: true, completion: nil)
             
         }
@@ -596,11 +663,11 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         answer: idFormat)
     )
     
-    // name
+    // name -> situation
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
     steps.append(ORKQuestionStep(
-        identifier: "name",
+        identifier: "situation",
         title: NSLocalizedString("SURVEY_SITUATION_TITLE", comment: ""),
         question: NSLocalizedString("SURVEY_SITUATION_TITLE", comment: ""),
         answer: nameAnswerFormat)

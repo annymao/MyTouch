@@ -47,7 +47,7 @@ struct Subject: Codable {
     }
     
     var id: Int = 1111//String = UUID().uuidString
-    var name: String = "John Doe"
+    var situation: String = "John Doe"
     var birthYear: Int = 1991
     var gender: Gender = .other
     var dominantHand: DominantHand = .none

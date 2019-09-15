@@ -178,21 +178,21 @@
         self.estimatedProperties = touch.estimatedProperties;
         self.estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates;
         //ANNY-NOTE: Acceleration in touch
-        if(_motionManager.accelerometerAvailable){
-            CMAcceleration acceleration = _motionManager.accelerometerData.acceleration;
-            NSLog(@"accel x: %f, y: %f, z: %f", acceleration.x, acceleration.y, acceleration.z);
-            self.accX = acceleration.x;
-            self.accY = acceleration.y;
-            self.accZ = acceleration.z;
-        }
-        if(_motionManager.gyroAvailable){
-        
-            CMRotationRate rotationRate = _motionManager.gyroData.rotationRate;
-            NSLog(@"gyro x: %f, y: %f, z: %f", rotationRate.x, rotationRate.y, rotationRate.z);
-            self.gyroX = rotationRate.x;
-            self.gyroY = rotationRate.y;
-            self.gyroZ = rotationRate.z;
-        }
+//        if(_motionManager.accelerometerAvailable){
+//            CMAcceleration acceleration = _motionManager.accelerometerData.acceleration;
+//            NSLog(@"accel x: %f, y: %f, z: %f", acceleration.x, acceleration.y, acceleration.z);
+//            self.accX = acceleration.x;
+//            self.accY = acceleration.y;
+//            self.accZ = acceleration.z;
+//        }
+//        if(_motionManager.gyroAvailable){
+//
+//            CMRotationRate rotationRate = _motionManager.gyroData.rotationRate;
+//            NSLog(@"gyro x: %f, y: %f, z: %f", rotationRate.x, rotationRate.y, rotationRate.z);
+//            self.gyroX = rotationRate.x;
+//            self.gyroY = rotationRate.y;
+//            self.gyroZ = rotationRate.z;
+//        }
     }
     return self;
 }

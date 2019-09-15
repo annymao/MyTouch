@@ -92,20 +92,20 @@
     //ANNY-NOTE: init motion Manager
     
     self.motionManager = [[CMMotionManager alloc] init];
-    if(self.motionManager.accelerometerAvailable){
-        self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
-        self.motionManager.gyroUpdateInterval = 1.0/10.0;
-        [self.motionManager startAccelerometerUpdates];
-        [self.motionManager startGyroUpdates];
-    }
+//    if(self.motionManager.accelerometerAvailable){
+//        self.motionManager.accelerometerUpdateInterval = 1.0/10.0;
+//        self.motionManager.gyroUpdateInterval = 1.0/10.0;
+//        [self.motionManager startAccelerometerUpdates];
+//        [self.motionManager startGyroUpdates];
+//    }
 }
 
 - (void)stopTracking {
     self.begun = NO;
     self.tracking = NO;
     
-    [self.motionManager stopAccelerometerUpdates];
-    [self.motionManager stopGyroUpdates];
+//    [self.motionManager stopAccelerometerUpdates];
+//    [self.motionManager stopGyroUpdates];
     
 
 }

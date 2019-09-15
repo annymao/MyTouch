@@ -18,7 +18,7 @@ class SubjectSummaryViewController: UIViewController {
         self.subject = subject
         self.callback = callback
         self.subjectParsed = [
-            // (NSLocalizedString("SUBJECT_INFO_NAME", comment: ""), subject.name),
+            (NSLocalizedString("SUBJECT_INFO_SITUATION", comment: ""), subject.situation),
             (NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: ""), "\(subject.birthYear)"),
             (NSLocalizedString("SUBJECT_INFO_GENDER", comment: ""), subject.gender.localizedString),
             (NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: ""), subject.dominantHand.localizedString),

@@ -86,6 +86,10 @@ struct Session: Codable {
     var pinch: Task<PinchTrial>?
     
     var rotation: Task<RotationTrial>?
+    var gyroData = [GyroScopeData]()
+    var accData = [AccelerometerData]()
+    var motionData = [DeviceMotionData]()
+    var activityData = [MotionActivityData]()
     
     init(deviceInfo: DeviceInfo, subject: Subject) {
         self.deviceInfo = deviceInfo

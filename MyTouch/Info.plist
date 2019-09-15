@@ -40,6 +40,8 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>media</string>
+	<key>NSMotionUsageDescription</key>
+	<string></string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

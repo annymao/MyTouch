@@ -159,7 +159,7 @@
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 4;
+        return 2;
     }
 }
 //ANNY-NOTE: Change row 3->7 
@@ -169,7 +169,7 @@
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 7;
+        return 2;
     }
 }
 // ANNY-NOTE: Detemined the points to tap

@@ -147,12 +147,12 @@ class Touch: Codable {
         self.estimationUpdateIndex   = touch.estimationUpdateIndex?.doubleValue
         self.estimatedProperties     = Properties.convert(from: touch.estimatedProperties)
         self.estimatedPropertiesExpectingUpdates = Properties.convert(from: touch.estimatedPropertiesExpectingUpdates)
-        self.accX = touch.accX
-        self.accY = touch.accY
-        self.accZ = touch.accZ
-        self.gyroX = touch.gyroX
-        self.gyroY = touch.gyroY
-        self.gyroZ = touch.gyroZ 
+//        self.accX = touch.accX
+//        self.accY = touch.accY
+//        self.accZ = touch.accZ
+//        self.gyroX = touch.gyroX
+//        self.gyroY = touch.gyroY
+//        self.gyroZ = touch.gyroZ 
         //MARK: - write acceleration
     }
 }
