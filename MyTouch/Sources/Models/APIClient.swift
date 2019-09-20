@@ -11,7 +11,7 @@ import Alamofire
 
 //private let host = "http://192.168.1.109:3000/api/v1"
 private let host = "https://secret-fjord-21101.herokuapp.com/api/v1"
-private let firebaseDatabase = "https://deepgesture.firebaseio.com/"
+private let apiEntryPoint = "https://deepgesture.eze-ntu.info"
 private let userHeaderField = "X-Mytouch-User"
 private let apnsTokenField = "X-Mytouch-APNS-Token"
 
@@ -52,7 +52,7 @@ class APIClient {
         
         let headers = [userHeaderField: id]
         
-        Alamofire.request("\(host)/sessions", headers: headers).responseJSON { res in
+        Alamofire.request("\(apiEntryPoint)/experiment/\(id)", headers: headers).responseJSON { res in
             
             if let error = res.error {
                 completion(nil, error)
@@ -89,7 +89,7 @@ class APIClient {
              }*/
             
             let data = try encoder.encode(session)
-            Alamofire.upload(data, to: "\(firebaseDatabase)/\(id).json", headers: headers)
+            Alamofire.upload(data, to: "\(apiEntryPoint)/experiment", headers: headers)
                 .responseJSON { res in
                     
                     if let error = res.error {
@@ -97,7 +97,7 @@ class APIClient {
                     }
                     else if let data = res.data {
                         do {
-                            print("Firebase reply:\(res)")
+                            print("API response:\(res)")
                             let uploaded = try decoder.decode(Session.self, from: data)
                             completion(uploaded, nil)
                         } catch {

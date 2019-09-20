@@ -649,13 +649,13 @@
 				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8HPQJ7PU9A;
+				DEVELOPMENT_TEAM = AXH8RY2Y89;
 				INFOPLIST_FILE = MyTouch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QQQ.qwqe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.QQQ.qwq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -671,13 +671,13 @@
 				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8HPQJ7PU9A;
+				DEVELOPMENT_TEAM = AXH8RY2Y89;
 				INFOPLIST_FILE = MyTouch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QQQ.qwqe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.QQQ.qwq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
