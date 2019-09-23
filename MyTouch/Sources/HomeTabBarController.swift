@@ -89,17 +89,17 @@ class HomeTabBarController: UITabBarController {
             self.isSessionsLoaded = true
             
             // save sessions in storage
-            sessions?.forEach {
-                do {
-                    try $0.save() 
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            
+//            sessions?.forEach {
+//                do {
+//                    try $0.save()
+//                } catch {
+//                    print(error.localizedDescription)
+//                }
+//            }
+//
             // sort sessions by date, newest on top
             self.sessions = Session.locals().sorted { $0.start > $1.start }
-            self.error = error
+            //self.error = error
             
             // notify everyone that sessions are loadeds
             let notification = Notification(name: .sessionsDidLoad, object: self, userInfo: nil)
@@ -455,7 +455,7 @@ class HomeTabBarController: UITabBarController {
                     
                     try? uploaded.save()
                     taskViewController.dismiss(animated: true) {
-                        self.reloadSessions()
+                        //self.reloadSessions()
                     }
                 }
                 
@@ -474,7 +474,7 @@ class HomeTabBarController: UITabBarController {
                             // Save session as local cache
                             try session.save()
                             taskViewController.dismiss(animated: true) {
-                                self.reloadSessions()
+                                //self.reloadSessions()
                             }
                             
                         } catch {

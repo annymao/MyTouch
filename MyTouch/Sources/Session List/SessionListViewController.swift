@@ -160,7 +160,7 @@ class SessionListViewController: UIViewController {
     }
     
     @objc private func handleRefreshControl(sender: UIRefreshControl) {
-        homeTabBarController.reloadSessions()
+        //homeTabBarController.reloadSessions()
     }
 
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
