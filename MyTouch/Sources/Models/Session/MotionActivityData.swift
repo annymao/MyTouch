@@ -13,6 +13,7 @@ struct MotionActivityData: Codable {
     
     var timestamp: TimeInterval
     var activity: String
+    var confidence: String
     
     init(motionActivity:CMMotionActivity) {
         if(motionActivity.walking){
@@ -34,5 +35,16 @@ struct MotionActivityData: Codable {
         }
         let date = Date()
         self.timestamp = motionActivity.timestamp + date.timeIntervalSince1970 - ProcessInfo.processInfo.systemUptime
+        switch motionActivity.confidence.rawValue {
+        case 0:
+            self.confidence = "low"
+        case 1:
+            self.confidence = "medium"
+        case 2:
+            self.confidence = "high"
+        default:
+            self.confidence = "None"
+        }
+        
     }
 } 
