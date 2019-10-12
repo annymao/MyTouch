@@ -165,6 +165,8 @@ class HomeTabBarController: UITabBarController {
     func presentConsent() {
         let taskViewController = ORKTaskViewController(task: consentTask(), taskRun: consentID)
         taskViewController.delegate = self
+        taskViewController.modalPresentationStyle = .fullScreen
+        taskViewController.view.backgroundColor = .white
         present(taskViewController, animated: true, completion: nil)
     }
     
@@ -193,6 +195,8 @@ class HomeTabBarController: UITabBarController {
                     else {
                         let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
                         taskViewController.delegate = self
+                        taskViewController.modalPresentationStyle = .fullScreen
+                        taskViewController.view.backgroundColor = .white
                         self.present(taskViewController, animated: true, completion: nil)
                     }
                 }
@@ -207,6 +211,8 @@ class HomeTabBarController: UITabBarController {
         else {
             let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
             taskViewController.delegate = self
+            taskViewController.modalPresentationStyle = .fullScreen
+            taskViewController.view.backgroundColor = .white
             present(taskViewController, animated: true, completion: nil)
         }
     }
@@ -286,7 +292,8 @@ class HomeTabBarController: UITabBarController {
         }
         let taskViewController = ORKTaskViewController(task: activityTask(), taskRun: activityID)
         taskViewController.delegate = self
-        
+        taskViewController.modalPresentationStyle = .fullScreen
+        taskViewController.view.backgroundColor = .white
         present(taskViewController, animated: true) {
             self.currentSession?.start = Date()
         }
