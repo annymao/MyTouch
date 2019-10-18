@@ -42,6 +42,10 @@ class SubjectSummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         view.backgroundColor = UIColor.white
         
         titleLabel.text = NSLocalizedString("SUBJECT_INFO_TITLE", comment: "")

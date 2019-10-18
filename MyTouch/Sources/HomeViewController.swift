@@ -110,6 +110,9 @@ class HomeViewController: SessionDetailViewController {
                 let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                 
                 alertController.addAction(action)
+                if #available(iOS 13.0, *) {
+                    alertController.overrideUserInterfaceStyle = .light
+                }
                 present(alertController, animated: true, completion: nil)
             }
         }

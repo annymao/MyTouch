@@ -16,6 +16,10 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         navigationItem.title = NSLocalizedString("NAVIGATION_TITLE_ABOUT", comment: "")
         
         view.backgroundColor = UIColor.white

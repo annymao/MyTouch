@@ -21,6 +21,10 @@ class SettingsStepByStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         view.backgroundColor = UIColor.white
         
         titleLabel.text = NSLocalizedString("SETTING_INSTRUCTION_TITLE", comment: "")

@@ -17,6 +17,10 @@ class HomeNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         navigationBar.isTranslucent = false
         navigationBar.shadowImage = UIImage()
         navigationBar.barTintColor = UIColor(hex: 0x00b894)
