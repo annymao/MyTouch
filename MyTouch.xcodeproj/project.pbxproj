@@ -649,7 +649,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VANANTZ629;
+				DEVELOPMENT_TEAM = 8HPQJ7PU9A;
 				INFOPLIST_FILE = MyTouch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,7 +671,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BM9Q5M9F87;
+				DEVELOPMENT_TEAM = 8HPQJ7PU9A;
 				INFOPLIST_FILE = MyTouch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

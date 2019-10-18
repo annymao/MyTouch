@@ -77,7 +77,6 @@ class StateView: UIView {
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
         
-        
         containerView.addSubview(imageView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(textLabel)
@@ -94,14 +93,14 @@ class StateView: UIView {
             imageView.heightAnchor.constraint(equalToConstant: 200),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),
             titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: containerView.leadingAnchor, multiplier: 1.0),
             titleLabel.trailingAnchor.constraint(equalToSystemSpacingBefore: containerView.trailingAnchor, multiplier: 1.0),
             
             textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             textLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
             textLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -15),
-            
+
             button.topAnchor.constraint(greaterThanOrEqualTo: textLabel.bottomAnchor),
             button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30),

@@ -46,10 +46,6 @@ class SessionDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
-
         view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         
         backgroundView.backgroundColor = UIColor(hex: 0x00b894)
@@ -133,9 +129,6 @@ class SessionDetailViewController: UIViewController {
         let viewController = SettingsStepByStepViewController()
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
-        if #available(iOS 13.0, *) {
-            viewController.overrideUserInterfaceStyle = .light
-        }
         present(viewController, animated: true, completion: nil)
     }
 }

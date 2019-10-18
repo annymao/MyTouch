@@ -52,9 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
-        if (window?.rootViewController as? HomeTabBarController) != nil {
+        if let vc = window?.rootViewController as? HomeTabBarController {
             //vc.reloadSessions()
         }
         completionHandler(.noData)
     }
 }
+
