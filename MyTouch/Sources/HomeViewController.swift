@@ -15,6 +15,10 @@ class HomeViewController: SessionDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         
         navigationItem.title = NSLocalizedString("NAVIGATION_TITLE_HOME", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -108,6 +112,9 @@ class HomeViewController: SessionDetailViewController {
                 let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                 
                 alertController.addAction(action)
+                if #available(iOS 13.0, *) {
+                    alertController.overrideUserInterfaceStyle = .light
+                }
                 present(alertController, animated: true, completion: nil)
             }
         }

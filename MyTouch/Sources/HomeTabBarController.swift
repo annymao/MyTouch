@@ -42,6 +42,10 @@ class HomeTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+
         // Set up tab bar appearance.
         tabBar.isTranslucent = false
         tabBar.tintColor = UIColor(hex: 0x00b894)
@@ -167,6 +171,9 @@ class HomeTabBarController: UITabBarController {
         taskViewController.delegate = self
         taskViewController.modalPresentationStyle = .fullScreen
         taskViewController.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            taskViewController.overrideUserInterfaceStyle = .light
+        }
         present(taskViewController, animated: true, completion: nil)
     }
     
@@ -197,6 +204,9 @@ class HomeTabBarController: UITabBarController {
                         taskViewController.delegate = self
                         taskViewController.modalPresentationStyle = .fullScreen
                         taskViewController.view.backgroundColor = .white
+                        if #available(iOS 13.0, *) {
+                            taskViewController.overrideUserInterfaceStyle = .light
+                        }
                         self.present(taskViewController, animated: true, completion: nil)
                     }
                 }
@@ -213,6 +223,9 @@ class HomeTabBarController: UITabBarController {
             taskViewController.delegate = self
             taskViewController.modalPresentationStyle = .fullScreen
             taskViewController.view.backgroundColor = .white
+            if #available(iOS 13.0, *) {
+                taskViewController.overrideUserInterfaceStyle = .light
+            }
             present(taskViewController, animated: true, completion: nil)
         }
     }
@@ -294,6 +307,9 @@ class HomeTabBarController: UITabBarController {
         taskViewController.delegate = self
         taskViewController.modalPresentationStyle = .fullScreen
         taskViewController.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            taskViewController.overrideUserInterfaceStyle = .light
+        }
         present(taskViewController, animated: true) {
             self.currentSession?.start = Date()
         }
@@ -314,6 +330,9 @@ class HomeTabBarController: UITabBarController {
             let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
             
             alertController.addAction(action)
+            if #available(iOS 13.0, *) {
+                alertController.overrideUserInterfaceStyle = .light
+            }
             taskViewController.present(alertController, animated: true, completion: nil)
         }
     }
@@ -499,6 +518,9 @@ class HomeTabBarController: UITabBarController {
                             )
                             
                             // present error message, DO NOT dismiss task view controller
+                            if #available(iOS 13.0, *) {
+                                alertController.overrideUserInterfaceStyle = .light
+                            }
                             taskViewController.present(alertController, animated: true, completion: nil)
                         }
                     })
@@ -529,7 +551,9 @@ class HomeTabBarController: UITabBarController {
             
             alertController.addAction(confirm)
             alertController.addAction(cancel)
-            
+            if #available(iOS 13.0, *) {
+                alertController.overrideUserInterfaceStyle = .light
+            }
             taskViewController.present(alertController, animated: true, completion: nil)
             
         default:
