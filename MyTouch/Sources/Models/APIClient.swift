@@ -55,20 +55,7 @@ class APIClient {
         Alamofire.request("\(apiEntryPoint)/experiment/\(id)", headers: headers).responseJSON { res in
             if let error = res.error {
                 completion(nil, error)
-            }
-            else if let data = res.data {
-                
-                do {
-                    let sessions = try decoder.decode([Session].self, from: data)
-                    completion(sessions, nil)
-                    print("hi\n")
-                }
-                catch {
-                    completion(nil, error)
-                    print(error.localizedDescription)
-                }
-            }
-            else {
+            } else {
                 completion(nil, nil)
             }
         }
