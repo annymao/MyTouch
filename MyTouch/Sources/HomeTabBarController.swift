@@ -814,7 +814,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     
     return OrderedTask(identifier: "survey", steps: steps)
 }
-//ANNY-NOTE: remove pinch and rotation
+//ANNY-NOTE: remove pinch and rotation, (NEW UPDATE 11/15) removed longPress and swipe
 //ANNY-NOTE: Define which task to do here
 private func activityTask() -> ORKOrderedTask {
     return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap, .longPress, .swipe, .verticalScroll, .horizontalScroll], options: [])

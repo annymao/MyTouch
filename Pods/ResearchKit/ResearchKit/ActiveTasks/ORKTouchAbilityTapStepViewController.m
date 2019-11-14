@@ -151,7 +151,7 @@
 }
 
 #pragma mark - ORKTouchAbilityTapStepViewController
-//ANNY-NOTE: Change colmun 3->4
+//ANNY-NOTE: (NEW UPDATE 11/15) Change colmun 8 -> 5
 //ANNY-NOTE: define the number of tap trial here
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
     
@@ -159,17 +159,17 @@
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 8;
+        return 5;
     }
 }
-//ANNY-NOTE: Change row 3->7 
+//ANNY-NOTE: (NEW UPDATE 11/15) Change row 15 -> 7
 - (NSUInteger)numberOfRowsForTraitCollection:(UITraitCollection *)traitCollection {
     
     if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
         traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
         return 5;
     } else {
-        return 15;
+        return 7;
     }
 }
 // ANNY-NOTE: Detemined the points to tap

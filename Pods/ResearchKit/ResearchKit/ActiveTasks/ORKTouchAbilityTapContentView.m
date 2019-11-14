@@ -44,6 +44,7 @@
 @property (nonatomic, assign) CGSize targetSize;
 
 @property (nonatomic, strong) UIView *targetView;
+@property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 
 @property (nonatomic, copy) NSArray *targetConstraints;
@@ -62,6 +63,16 @@
     return _targetView;
 }
 
+- (CALayer *)imageLayer {
+    if(!_imageLayer) {
+        _imageLayer = [[CALayer alloc] init];
+        UIImage *image = [UIImage imageNamed:@"image_target"];
+        _imageLayer.frame = _targetView.bounds;
+        _imageLayer.contents = (id) image.CGImage;
+    }
+    return _imageLayer;
+}
+
 - (UITapGestureRecognizer *)tapGestureRecognizer {
     if (!_tapGestureRecognizer) {
         _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
@@ -75,14 +86,17 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.targetView.backgroundColor = self.tintColor;
+
         self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
-        
         [self.contentView addSubview:self.targetView];
         
         self.tapGestureRecognizer.enabled = NO;
         [self.contentView addGestureRecognizer:self.tapGestureRecognizer];
+
+        // SYENNY: (NEW UPDATE 11/15) Added image_target on the targetView in initialization
+        self.imageLayer.frame = self.targetView.bounds;
+        [self.targetView.layer addSublayer:self.imageLayer];
     }
     return self;
 }
@@ -90,6 +104,8 @@
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     self.targetView.backgroundColor = self.tintColor;
+    self.imageLayer.frame = self.targetView.bounds;
+    [self.targetView.layer addSublayer:self.imageLayer];
 }
 
 - (void)updateConstraints {
@@ -193,7 +209,10 @@
         //TODO: change size
         self.targetSize = CGSizeMake(29, 29);
     }
-    
+
+    // SYENNY: (NEW UPDATE 11/15) Added image_target on the targetView after reloading data
+    self.imageLayer.frame = self.targetView.bounds;
+    [self.targetView.layer addSublayer:self.imageLayer];
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
