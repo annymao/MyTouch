@@ -56,13 +56,6 @@
 
 #pragma mark - Properties
 
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
-    }
-    return _targetView;
-}
-
 - (CALayer *)imageLayer {
     if(!_imageLayer) {
         _imageLayer = [[CALayer alloc] init];
@@ -71,6 +64,13 @@
         _imageLayer.contents = (id) image.CGImage;
     }
     return _imageLayer;
+}
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
 }
 
 - (UITapGestureRecognizer *)tapGestureRecognizer {
@@ -93,11 +93,11 @@
         
         self.tapGestureRecognizer.enabled = NO;
         [self.contentView addGestureRecognizer:self.tapGestureRecognizer];
-
-        // SYENNY: (NEW UPDATE 11/15) Added image_target on the targetView in initialization
-        self.imageLayer.frame = self.targetView.bounds;
-        [self.targetView.layer addSublayer:self.imageLayer];
     }
+
+    // SYENNY: (NEW UPDATE 11/15) Added image_target on the targetView in initialization
+    self.imageLayer.frame = self.targetView.bounds;
+    [self.targetView.layer addSublayer:self.imageLayer];
     return self;
 }
 

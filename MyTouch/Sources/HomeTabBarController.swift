@@ -448,13 +448,18 @@ class HomeTabBarController: UITabBarController {
         case .completed:
             
             session.end = Date()
-            
+
+            // SYENNY: (NEW UPDATE 11/15) add a delay for 5 seconds before running the task (tap, horizontal scroll, vertical scroll)
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityTap")?.result(forIdentifier: "touchAbilityTap") as? ORKTouchAbilityTapResult {
-                session.tap = TapTask(result: result)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
+                    session.tap = TapTask(result: result)
+                }
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityLongPress")?.result(forIdentifier: "touchAbilityLongPress") as? ORKTouchAbilityLongPressResult {
-                session.longPress = LongPressTask(result: result)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
+                    session.longPress = LongPressTask(result: result)
+                }
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilitySwipe")?.result(forIdentifier: "touchAbilitySwipe") as? ORKTouchAbilitySwipeResult {
@@ -462,11 +467,15 @@ class HomeTabBarController: UITabBarController {
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityHorizontalScroll")?.result(forIdentifier: "touchAbilityHorizontalScroll") as? ORKTouchAbilityScrollResult {
-                session.horizontalScroll = ScrollTask(result: result)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
+                    session.horizontalScroll = ScrollTask(result: result)
+                }
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityVerticalScroll")?.result(forIdentifier: "touchAbilityVerticalScroll") as? ORKTouchAbilityScrollResult {
-                session.verticalScroll = ScrollTask(result: result)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
+                    session.verticalScroll = ScrollTask(result: result)
+                }
             }
             self.motionManager.stopGyroUpdates()
             self.motionManager.stopDeviceMotionUpdates()
