@@ -313,9 +313,11 @@ class HomeTabBarController: UITabBarController {
         if #available(iOS 13.0, *) {
             taskViewController.overrideUserInterfaceStyle = .light
         }
+
         present(taskViewController, animated: true) {
             self.currentSession?.start = Date()
         }
+
     }
     
     private func consentDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
@@ -451,15 +453,11 @@ class HomeTabBarController: UITabBarController {
 
             // SYENNY: (NEW UPDATE 11/15) add a delay for 5 seconds before running the task (tap, horizontal scroll, vertical scroll)
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityTap")?.result(forIdentifier: "touchAbilityTap") as? ORKTouchAbilityTapResult {
-                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
-                    session.tap = TapTask(result: result)
-                }
+                session.tap = TapTask(result: result)
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityLongPress")?.result(forIdentifier: "touchAbilityLongPress") as? ORKTouchAbilityLongPressResult {
-                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
-                    session.longPress = LongPressTask(result: result)
-                }
+                session.longPress = LongPressTask(result: result)
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilitySwipe")?.result(forIdentifier: "touchAbilitySwipe") as? ORKTouchAbilitySwipeResult {
@@ -467,15 +465,11 @@ class HomeTabBarController: UITabBarController {
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityHorizontalScroll")?.result(forIdentifier: "touchAbilityHorizontalScroll") as? ORKTouchAbilityScrollResult {
-                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
-                    session.horizontalScroll = ScrollTask(result: result)
-                }
+                session.horizontalScroll = ScrollTask(result: result)
             }
             
             if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityVerticalScroll")?.result(forIdentifier: "touchAbilityVerticalScroll") as? ORKTouchAbilityScrollResult {
-                DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
-                    session.verticalScroll = ScrollTask(result: result)
-                }
+                session.verticalScroll = ScrollTask(result: result)
             }
             self.motionManager.stopGyroUpdates()
             self.motionManager.stopDeviceMotionUpdates()
