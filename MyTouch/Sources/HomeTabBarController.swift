@@ -199,7 +199,7 @@ class HomeTabBarController: UITabBarController {
                         page.modalPresentationStyle = .fullScreen
                         self.present(page, animated: true, completion: nil)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
-                            self.dismiss(animated: true, completion: nil)
+                            page.dismiss(animated: true, completion: nil)
                             self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
                         }
                     }
@@ -322,9 +322,6 @@ class HomeTabBarController: UITabBarController {
 
         present(taskViewController, animated: true) {
             self.currentSession?.start = Date()
-            let page = AdditionalPageViewController()
-            page.modalPresentationStyle = .fullScreen
-            self.present(page, animated: true, completion: nil)
         }
 
     }
@@ -369,7 +366,7 @@ class HomeTabBarController: UITabBarController {
                         page.modalPresentationStyle = .fullScreen
                         self.present(page, animated: true, completion: nil)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
-                            self.dismiss(animated: true, completion: nil)
+                            page.dismiss(animated: true, completion: nil)
                             self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
                         }
 
@@ -447,7 +444,13 @@ class HomeTabBarController: UITabBarController {
             // End of generate subject
             
             taskViewController.dismiss(animated: true) {
-                self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                let page = AdditionalPageViewController()
+                page.modalPresentationStyle = .fullScreen
+                self.present(page, animated: true, completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                    page.dismiss(animated: true, completion: nil)
+                    self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                }
             }
             
         default:
@@ -504,6 +507,12 @@ class HomeTabBarController: UITabBarController {
                     try? uploaded.save()
                     taskViewController.dismiss(animated: true) {
                         //self.reloadSessions()
+                        let page = AdditionalPageViewController()
+                        page.modalPresentationStyle = .fullScreen
+                        self.present(page, animated: true, completion: nil)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                            page.dismiss(animated: true, completion: nil)
+                        }
                     }
                 }
                 
@@ -523,6 +532,12 @@ class HomeTabBarController: UITabBarController {
                             try session.save()
                             taskViewController.dismiss(animated: true) {
                                 //self.reloadSessions()
+                                let page = AdditionalPageViewController()
+                                page.modalPresentationStyle = .fullScreen
+                                self.present(page, animated: true, completion: nil)
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                                    page.dismiss(animated: true, completion: nil)
+                                }
                             }
                             
                         } catch {
