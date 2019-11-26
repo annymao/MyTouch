@@ -195,7 +195,13 @@ class HomeTabBarController: UITabBarController {
                     
                     // if should auto fill in, present activity flow with that subject
                     if autoFillIn {
-                        self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                        let page = AdditionalPageViewController()
+                        page.modalPresentationStyle = .fullScreen
+                        self.present(page, animated: true, completion: nil)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                            self.dismiss(animated: true, completion: nil)
+                            self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                        }
                     }
                     
                     // else, present subject survey
@@ -316,6 +322,9 @@ class HomeTabBarController: UITabBarController {
 
         present(taskViewController, animated: true) {
             self.currentSession?.start = Date()
+            let page = AdditionalPageViewController()
+            page.modalPresentationStyle = .fullScreen
+            self.present(page, animated: true, completion: nil)
         }
 
     }
@@ -356,7 +365,14 @@ class HomeTabBarController: UITabBarController {
                 do {
                     let subject = try APIClient.decoder.decode(Subject.self, from: data!)
                     taskViewController.dismiss(animated: true) {
-                        self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                        let page = AdditionalPageViewController()
+                        page.modalPresentationStyle = .fullScreen
+                        self.present(page, animated: true, completion: nil)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                            self.dismiss(animated: true, completion: nil)
+                            self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                        }
+
                     }
                 } catch {
                     print(error)
