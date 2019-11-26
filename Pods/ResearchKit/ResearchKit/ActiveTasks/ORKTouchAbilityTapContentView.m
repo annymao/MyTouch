@@ -86,7 +86,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.targetView.backgroundColor = self.tintColor;
+        self.targetView.backgroundColor = UIColor.clearColor;
 
         self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:self.targetView];
@@ -103,7 +103,7 @@
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    self.targetView.backgroundColor = self.tintColor;
+    self.targetView.backgroundColor = UIColor.clearColor;
     self.imageLayer.frame = self.targetView.bounds;
     [self.targetView.layer addSublayer:self.imageLayer];
 }
@@ -207,7 +207,7 @@
         self.targetSize = [self.dataSource targetSizeInTapContentView:self];
     } else {
         //TODO: change size
-        self.targetSize = CGSizeMake(29, 29);
+        self.targetSize = CGSizeMake(50, 50);
     }
 
     // SYENNY: (NEW UPDATE 11/15) Added image_target on the targetView after reloading data
