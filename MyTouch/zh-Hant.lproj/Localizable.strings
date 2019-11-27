@@ -144,3 +144,5 @@
 
 "LOCAL_SESSIONS_NOTIFICATION_TITLE" = "您有測驗資料還尚未上傳";
 "LOCAL_SESSIONS_NOTIFICATION_BODY" = "資料上傳到雲端伺服器之前不會被分析處理。";
+
+"PLEASE_WAIT_5_SECONDS" = "開始前請先等候五秒。";

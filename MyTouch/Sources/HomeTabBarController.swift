@@ -198,7 +198,7 @@ class HomeTabBarController: UITabBarController {
                         let page = AdditionalPageViewController()
                         page.modalPresentationStyle = .fullScreen
                         self.present(page, animated: true, completion: nil)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8.0) {
                             page.dismiss(animated: true, completion: nil)
                             self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
                         }
@@ -365,7 +365,7 @@ class HomeTabBarController: UITabBarController {
                         let page = AdditionalPageViewController()
                         page.modalPresentationStyle = .fullScreen
                         self.present(page, animated: true, completion: nil)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8.0) {
                             page.dismiss(animated: true, completion: nil)
                             self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
                         }
@@ -447,7 +447,7 @@ class HomeTabBarController: UITabBarController {
                 let page = AdditionalPageViewController()
                 page.modalPresentationStyle = .fullScreen
                 self.present(page, animated: true, completion: nil)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8.0) {
                     page.dismiss(animated: true, completion: nil)
                     self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
                 }
@@ -510,7 +510,7 @@ class HomeTabBarController: UITabBarController {
                         let page = AdditionalPageViewController()
                         page.modalPresentationStyle = .fullScreen
                         self.present(page, animated: true, completion: nil)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8.0) {
                             page.dismiss(animated: true, completion: nil)
                         }
                     }
@@ -535,7 +535,7 @@ class HomeTabBarController: UITabBarController {
                                 let page = AdditionalPageViewController()
                                 page.modalPresentationStyle = .fullScreen
                                 self.present(page, animated: true, completion: nil)
-                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8.0) {
                                     page.dismiss(animated: true, completion: nil)
                                 }
                             }

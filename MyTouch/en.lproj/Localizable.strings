@@ -145,3 +145,5 @@
 
 "LOCAL_SESSIONS_NOTIFICATION_TITLE" = "You have testing data not uploaded";
 "LOCAL_SESSIONS_NOTIFICATION_BODY" = "Your data will not be processed before your data is uploaded to cloud server";
+
+"PLEASE_WAIT_5_SECONDS" = "Please hold still for 5 seconds.";
