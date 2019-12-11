@@ -59,6 +59,37 @@
 "SURVEY_ID_TITLE" = "使用者編號";
 "SURVEY_SITUATION_TITLE" = "狀態";
 
+"SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE" = "一般健康資訊調查";
+"SURVEY_CONCENTRATION_DIFFICULTY_QUESTION" = "你時常感到難以專心或記不住事情嗎？";
+"SURVEY_ANXIETY_QUESTION" = "你曾經感到焦慮或緊張嗎？";
+"SURVEY_HEARING_DIFFICULTY_QUESTION" = "你是否有聽力上的困難(即使使用輔助聽力的工具)？";
+"SURVEY_COMMUNICATION_DIFFICULTY_QUESTION" = "與他人對話時，你有溝通理解上的問題嗎？";
+"SURVEY_ARMS_MOVEMENTS_DIFFICULTY_QUESTION" = "用手臂提起兩公升的水對你來說是有困難的嗎？";
+"SURVEY_HANDS_MOVEMENTS_DIFFICULTY_QUESTION" = "用手（指）撿起小物件對你來說是困難的嗎？（例如：鉛筆、水瓶、按鈕、開關櫥櫃）";
+"SURVEY_WALKING_DIFFICULTY_QUESTION" = "走路或爬樓梯對你來說是困難的嗎？";
+"SURVEY_MEDICAL_DIAGNOSIS_QUESTION" = "您目前的醫療情況為何？";
+"SURVEY_MEDICAL_DIAGNOSIS_YES_QUESTION" = "請描述您的醫療狀況";
+"SURVEY_MEDICATION_QUESTION" = "您現在有在服用藥物嗎？";
+"SURVEY_MEDICATION_YES_QUESTION" = "請描述您的服藥狀況";
+
+"SURVEY_FATIGUE_TITLE" = "疲勞";
+"SURVEY_PAST_THREE_MONTHS_CONDITION_QUESTION" = "過去三個月，你多常感到疲憊？?";
+"SURVEY_LAST_TIME_FEEL_TIRED_QUESTION" = "你最近一次感受的疲憊的時候，持續了多長的時間？";
+"SURVEY_LAST_TIME_LEVEL_OF_TIREDNESS_QUESTION" = "你最近一次感受到疲憊的程度為何？";
+"SURVEY_RIGHT_NOW_LEVEL_OF_TIREDNESS_QUESTION" = "你現在的疲勞程度為何？";
+
+"SURVEY_MOBILE_DEVICE_USE_TITLE" = "行動裝置使用情況";
+"SURVEY_MOBILE_DEVICE_USE_QUESTION" = "你擁有一台行動裝置嗎？(如：手機、平板電腦)";
+"SURVEY_MOBILE_DEVICE_USE_TYPE_QUESTION" = "你有下列哪些行動裝置";
+"SURVEY_MOBILE_DEVICE_BRAND_QUESTION" = "你有下列哪些「智慧型手機」？";
+"SURVEY_MOBILE_DEVICE_TABLET_QUESTION" = "你有下列哪些「平板電腦」";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_QUESTION" = "你最常使用哪種行動裝置？";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_QUESTION" = "你最常使用你的裝置進行下列哪種用途？";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_FREQUENCY_QUESTION" = "你多常使用你的裝置？";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_EASINESS_QUESTION" = "對你來說使用裝置上的困難程度為何？";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_ENHANCEMENT_QUESTION" = "你曾經做過以下哪種調整來使你更容易使用你的裝置？";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_FEATURES_QUESTION" = "你在你的裝置上使用過哪種互動方式？";
+
 "GENDER_MALE" = "男性";
 "GENDER_FEMALE" = "女性";
 "GENDER_OTHER" = "其他";
@@ -91,6 +122,49 @@
 "SYMPTOM_DIFFICULTY_CONTROLLING_DISTANCE" = "難以控制距離";
 "SYMPTOM_NONE" = "無";
 "SYMPTOM_UNKNOWN" = "未知";
+
+"FREQUENCY_NEVER" = "從未";
+"FREQUENCY_SOME_DAYS" = "偶爾";
+"FREQUENCY_MOST_DAYS" = "經常";
+"FREQUENCY_EVERY_DAY" = "總是";
+"FREQUENCY_REFUSED" = "拒絕回答";
+"FREQUENCY_DONT_KNOW" = "不知道";
+
+"SKIP_TO_THE_NEXT_SECTION" = "(如果是的話跳過下一題)";
+
+"LEVEL_A_LITTLE" = "1";
+"LEVEL_A_LOT" = "2";
+"LEVEL_SOMEWHERE_IN_BETWEEN" = "3";
+"LEVEL_REFUSED" = "4";
+"LEVEL_DONT_KNOW" = "5";
+
+"NO_DIFFICULTY" = "沒有";
+"SOME_DIFFICULTY" = "有點困難";
+"ALOT_DIFFICULTY" = "非常困難";
+"UNABLE_TODO" = "幾乎無法";
+
+"ANSWER_YES" = "是";
+"ANSWER_NO" = "否";
+
+"CELLPHONE_OR_TABLET_DONT_USE" = "我沒有使用行動裝置";
+"CELLPHONE_OR_TABLET_BASICPHONE" = "普通手機";
+"CELLPHONE_OR_TABLET_SMARTPHONE" = "智慧型手機";
+"CELLPHONE_OR_TABLET_TABLET" = "平板電腦";
+"CELLPHONE_OR_TABLET_OTHER" = "其他(請詳細說明)";
+
+"SMARTPHONE_KIND_DONT_USE" = "我沒有使用智慧型手機";
+"SMARTPHONE_KIND_ANDROID" = "Android (如: Motorola Droid, Samsung Galaxy S)";
+"SMARTPHONE_KIND_APPLE" = "Apple iOS (如: Apple iPhone)";
+"SMARTPHONE_KIND_BLACKBERRY" = "BlackBerry (如: Classic, Q10, Bold, Curve)";
+"SMARTPHONE_KIND_WINDOWS" = "Windows-powered (如: Microsoft Lumia, HTC Tilt, LG Quantum, Samsung Focus)";
+"SMARTPHONE_KIND_OTHER" = "其他(請詳細說明)";
+
+"TABLET_KIND_DONT_USE"  = "我沒有使用平板電腦";
+"TABLET_KIND_ANDROID"  = "Android-powered (如: Samsung Galaxy Tab, Amazon Kindle Fire)";
+"TABLET_KIND_APPLE"  = "Apple iOS (如: Apple iPad)";
+"TABLET_KIND_BLACKBERRY"  = "Blackberry-powered (Blackberry Playbook)";
+"TABLET_KIND_WINDOWS"  = "Windows-powered (如: Microsoft Surface)";
+"TABLET_KIND_OTHER"  = "其他(請詳細說明)";
 
 "DEVICE_INFO_TITLE" = "裝置資訊";
 "DEVICE_INFO_DEVICE_NAME" = "裝置名稱";
