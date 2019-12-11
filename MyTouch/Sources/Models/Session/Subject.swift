@@ -51,8 +51,6 @@ struct Subject: Codable {
         case somedays
         case mostdays
         case everyday
-        case refused
-        case unknown
     }
 
     enum Difficulties: String, Codable {
@@ -71,8 +69,6 @@ struct Subject: Codable {
         case alittle
         case alot
         case somewhereInBetween
-        case refused
-        case unknown
     }
 
     enum CellPhone: String, Codable {
@@ -89,7 +85,6 @@ struct Subject: Codable {
         case apple
         case blackberry
         case windows
-        case unknown
         case other
     }
 
@@ -99,7 +94,19 @@ struct Subject: Codable {
         case apple
         case blackberry
         case windows
-        case unknown
+        case other
+    }
+
+    enum ReliablePrimaryDevice: String, Codable {
+        case none
+        case basicphone
+        case androidSmartphone
+        case appleSmartphone
+        case blackberrySmartphone
+        case windowsSmartphone
+        case androidTablet
+        case appleTablet
+        case windowsTablet
         case other
     }
 
@@ -117,7 +124,6 @@ struct Subject: Codable {
         case oneToTwoDaysAWeek
         case everyFewWeeks
         case lessOften
-        case unknown
     }
 
     enum PrimaryDeviceEasiness: String, Codable {
@@ -145,7 +151,6 @@ struct Subject: Codable {
         case textMagnification
         case screenMagnification
         case customColorContrastOrAdjustment
-        case reverseContrast
         case increaseDecreaseContrast
         case screenReader
         case speakAutoCorrectionOrCapitalizations
@@ -165,7 +170,8 @@ struct Subject: Codable {
     var gender: Gender = .other
     var dominantHand: DominantHand = .none
     var concentrationDifficulty: Difficulties = .none
-    var anxietyFrequency: Frequencies = .unknown
+    var anxietyFrequency: Frequencies = .never
+    var seeingDifficulty: Difficulties = .none
     var hearingDifficulty: Difficulties = .none
     var communicationDifficutly: Difficulties = .none
     var armsMovementsDifficutly: Difficulties = .none
@@ -175,9 +181,20 @@ struct Subject: Codable {
     var medication: MedicalResults = .no
     var pastThreeMonthsCondition: Frequencies = .never
     var lastTimeCondition: Frequencies = .never
-    var previousLevelOfTiredness: Level = .unknown
-    var currentLevelOfTiredness: Level = .unknown
+    var previousLevelOfTiredness: Level = .alittle
+    var currentLevelOfTiredness: Level = .alittle
     var mobileDeviceUsage: MedicalResults = .no
+
+    var cellphoneOrTablet: CellPhone = .none
+    var smartphone: Smartphone = .none
+    var tablet: Tablet = .none
+
+    var reliablePrimaryDevice: ReliablePrimaryDevice = .none
+    var primaryDeviceFunctionality: PrimaryDeviceFunction = .personal
+    var primaryDeviceFrequency: PrimaryDeviceUsageFrequency = .aboutOnceADay
+    var primaryDeviceEasiness: PrimaryDeviceEasiness = .veryEasy
+    var primaryDeviceEnhancement: PrimaryDeviceEnhancement = .noChanges
+    var primaryDeviceAccessibilityFeatures: PrimaryDeviceAccessibilityFeatures = .none
 
     var slowMovement = false
     var rapidFatigue = false
@@ -371,10 +388,6 @@ extension Subject.Frequencies {
             return NSLocalizedString("FREQUENCY_MOST_DAYS", comment: "")
         case .everyday:
             return NSLocalizedString("FREQUENCY_EVERY_DAY", comment: "")
-        case .refused:
-            return NSLocalizedString("FREQUENCY_REFUSED", comment: "")
-        case .unknown:
-            return NSLocalizedString("FREQUENCY_DONT_KNOW", comment: "")
         }
     }
 }
@@ -401,10 +414,6 @@ extension Subject.Level {
             return NSLocalizedString("LEVEL_A_LOT", comment: "")
         case .somewhereInBetween:
             return NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: "")
-        case .refused:
-            return NSLocalizedString("LEVEL_REFUSED", comment: "")
-        case .unknown:
-            return NSLocalizedString("LEVEL_DONT_KNOW", comment: "")
         }
     }
 }
@@ -441,10 +450,8 @@ extension Subject.Smartphone {
             return NSLocalizedString("SMARTPHONE_KIND_BLACKBERRY", comment: "")
         case .windows:
             return NSLocalizedString("SMARTPHONE_KIND_WINDOWS", comment: "")
-        case .unknown:
-            return NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: "")
         case .other:
-            return NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: "")
+            return NSLocalizedString("SMARTPHONE_KIND_OTHER", comment: "")
         }
     }
 }
@@ -463,61 +470,152 @@ extension Subject.Tablet {
             return NSLocalizedString("TABLET_KIND_BLACKBERRY", comment: "")
         case .windows:
             return NSLocalizedString("TABLET_KIND_WINDOWS", comment: "")
-        case .unknown:
-            return NSLocalizedString("TABLET_KIND_DONT_KNOW", comment: "")
         case .other:
             return NSLocalizedString("TABLET_KIND_OTHER", comment: "")
         }
     }
 }
 
-//extension Subject.PrimaryDeviceFunction {
-//
-//    var localizedString: String {
-//        switch self {
-//        case .professional:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .personal:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .both:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .emergencies:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        }
-//    }
-//}
-//
-//extension Subject.PrimaryDeviceUsageFrequency {
-//
-//    var localizedString: String {
-//        switch self {
-//        case .severalTimesADay:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .aboutOnceADay:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .threeToFiveDaysAWeek:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .oneToTwoDaysAWeek:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .everyFewWeeks:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .lessOften:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        case .unknown:
-//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
-//        }
-//    }
-//}
+extension Subject.ReliablePrimaryDevice {
 
-//extension Subject.PrimaryDeviceEasiness {
-//    var localizedString: String {
-//        switch self {
-//        case .veryEasy
-//        case .easyToUse
-//        case .somewhatHardToUse
-//        case .hardToUse
-//        case .cannotUseWithoutHelp
-//        }
-//    }
-//}
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("PRIMARY_DEVICE_DONT_USE", comment: "")
+        case .basicphone:
+            return NSLocalizedString("PRIMARY_DEVICE_BASICPHONE", comment: "")
+        case .androidSmartphone:
+            return NSLocalizedString("PRIMARY_DEVICE_ANDROID_SMARTPHONE", comment: "")
+        case .appleSmartphone:
+            return NSLocalizedString("PRIMARY_DEVICE_APPLE_SMARTPHONE", comment: "")
+        case .blackberrySmartphone:
+            return NSLocalizedString("PRIMARY_DEVICE_BLACKBERRY_SMARTPHONE", comment: "")
+        case .windowsSmartphone:
+            return NSLocalizedString("PRIMARY_DEVICE_WINDOWS_SMARTPHONE", comment: "")
+        case .androidTablet:
+            return NSLocalizedString("PRIMARY_DEVICE_ANDROID_TABLET", comment: "")
+        case .appleTablet:
+            return NSLocalizedString("PRIMARY_DEVICE_APPLE_TABLET", comment: "")
+        case .windowsTablet:
+            return NSLocalizedString("PRIMARY_DEVICE_WINDOWS_TABLET", comment: "")
+        case .other:
+            return NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: "")
+        }
+    }
+}
 
+extension Subject.PrimaryDeviceFunction {
+
+    var localizedString: String {
+        switch self {
+        case .professional:
+            return NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_PROFESSIONAL", comment: "")
+        case .personal:
+            return NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_PERSONAL", comment: "")
+        case .both:
+            return NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_BOTH", comment: "")
+        case .emergencies:
+            return NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_EMERGENCIES", comment: "")
+        }
+    }
+}
+
+extension Subject.PrimaryDeviceUsageFrequency {
+
+    var localizedString: String {
+        switch self {
+        case .severalTimesADay:
+            return NSLocalizedString("PRIMARY_DEVICE_SERVERAL", comment: "")
+        case .aboutOnceADay:
+            return NSLocalizedString("PRIMARY_DEVICE_ONCEADAY", comment: "")
+        case .threeToFiveDaysAWeek:
+            return NSLocalizedString("PRIMARY_DEVICE_3_TO_5", comment: "")
+        case .oneToTwoDaysAWeek:
+            return NSLocalizedString("PRIMARY_DEVICE_1_OR_2", comment: "")
+        case .everyFewWeeks:
+            return NSLocalizedString("PRIMARY_DEVICE_FEW_WEEKS", comment: "")
+        case .lessOften:
+            return NSLocalizedString("PRIMARY_DEVICE_LESS_OFTEN", comment: "")
+        }
+    }
+}
+
+extension Subject.PrimaryDeviceEasiness {
+    var localizedString: String {
+        switch self {
+        case .veryEasy:
+            return NSLocalizedString("PRIMARY_DEVICE_VERY_EASY", comment: "")
+        case .easyToUse:
+            return NSLocalizedString("PRIMARY_DEVICE_EASY", comment: "")
+        case .somewhatHardToUse:
+            return NSLocalizedString("PRIMARY_DEVICE_SOMEWHAT", comment: "")
+        case .hardToUse:
+            return NSLocalizedString("PRIMARY_DEVICE_HARD", comment: "")
+        case .cannotUseWithoutHelp:
+            return NSLocalizedString("PRIMARY_DEVICE_WITH_HELP", comment: "")
+        }
+    }
+}
+
+extension Subject.PrimaryDeviceEnhancement {
+    var localizedString: String {
+        switch self {
+        case .noChanges:
+            return NSLocalizedString("PRIMARY_DEVICE_NO_CHANGES", comment: "")
+        case .physicalAccessories:
+            return NSLocalizedString("PRIMARY_DEVICE_PHYSICAL_ACCESSORIES", comment: "")
+        case .assistiveDevices:
+            return NSLocalizedString("PRIMARY_DEVICE_ASSISTANT", comment: "")
+        case .software:
+            return NSLocalizedString("PRIMARY_DEVICE_SOFTWARE", comment: "")
+        case .improvisedSolutions:
+            return NSLocalizedString("PRIMARY_DEVICE_IMPROVISED", comment: "")
+        case .other:
+            return NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: "")
+        }
+    }
+}
+
+extension Subject.PrimaryDeviceAccessibilityFeatures {
+
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("PRIMARY_DEVICE_DONT_USE_ACCESSIBILITY", comment: "")
+        case .audioNavigation:
+            return NSLocalizedString("PRIMARY_DEVICE_AUDIO", comment: "")
+        case .gestureBasedControls:
+            return NSLocalizedString("PRIMARY_DEVICE_GESTURE", comment: "")
+        case .simpleDisplayOrLargeIcons:
+            return NSLocalizedString("PRIMARY_DEVICE_SIMPLE_DISPLAY", comment: "")
+        case .textMagnification:
+            return NSLocalizedString("PRIMARY_DEVICE_TEXT_MAGNIFICATION", comment: "")
+        case .screenMagnification:
+            return NSLocalizedString("PRIMARY_DEVICE_SCREEN_MAGNIFICATION", comment: "")
+        case .customColorContrastOrAdjustment:
+            return NSLocalizedString("PRIMARY_DEVICE_CUSTOM_COLOR", comment: "")
+        case .increaseDecreaseContrast:
+            return NSLocalizedString("PRIMARY_DEVICE_INCREASE_CONTRAST", comment: "")
+        case .screenReader:
+            return NSLocalizedString("PRIMARY_DEVICE_SCREEN_RADAR", comment: "")
+        case .speakAutoCorrectionOrCapitalizations:
+            return NSLocalizedString("PRIMARY_DEVICE_SPEAK_AUTO", comment: "")
+        case .subtitlesAndCaptioning:
+            return NSLocalizedString("PRIMARY_DEVICE_SUBSTITLES", comment: "")
+        case .visualAlerts:
+            return NSLocalizedString("PRIMARY_DEVICE_VISUAL_ALERTS", comment: "")
+        case .vibratingAlerts:
+            return NSLocalizedString("PRIMARY_DEVICE_VIBRATING_ALERTS", comment: "")
+        case .switchControlsAccess:
+            return NSLocalizedString("PRIMARY_DEVICE_SWITCH_CONTROL", comment: "")
+        case .menuShortcutsFavoriteApps:
+            return NSLocalizedString("PRIMARY_DEVICE_MENU_SHORTCUTS", comment: "")
+        case .incomingCallsToHeadsetOrSpeaker:
+            return NSLocalizedString("PRIMARY_DEVICE_HEADSET", comment: "")
+        case .intelligentPersonalAssistant:
+            return NSLocalizedString("PRIMARY_DEVICE_INTELLIGENT_ASSISTANT", comment: "")
+        case .other:
+            return NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: "")
+        }
+    }
+}

@@ -440,7 +440,13 @@ class HomeTabBarController: UITabBarController {
 
             if let anxietyResult = taskViewController.result.stepResult(forStepIdentifier: "anxiety")?.result(forIdentifier: "anxiety") as? ORKChoiceQuestionResult {
                 if let answer = anxietyResult.choiceAnswers?.first as? String {
-                    subject.anxietyFrequency = Subject.Frequencies(rawValue: answer) ?? .unknown
+                    subject.anxietyFrequency = Subject.Frequencies(rawValue: answer) ?? .never
+                }
+            }
+
+            if let seeingResult = taskViewController.result.stepResult(forStepIdentifier: "seeing")?.result(forIdentifier: "seeing") as? ORKChoiceQuestionResult {
+                if let answer = seeingResult.choiceAnswers?.first as? String {
+                    subject.seeingDifficulty = Subject.Difficulties(rawValue: answer) ?? .none
                 }
             }
 
@@ -500,13 +506,13 @@ class HomeTabBarController: UITabBarController {
 
             if let previousLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "previousLevelOfTiredness")?.result(forIdentifier: "previousLevelOfTiredness") as? ORKChoiceQuestionResult {
                 if let answer = previousLevelOfTirednessResult.choiceAnswers?.first as? String {
-                    subject.previousLevelOfTiredness = Subject.Level(rawValue: answer) ?? .unknown
+                    subject.previousLevelOfTiredness = Subject.Level(rawValue: answer) ?? .alittle
                 }
             }
 
             if let currentLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "currentLevelOfTiredness")?.result(forIdentifier: "currentLevelOfTiredness") as? ORKChoiceQuestionResult {
                 if let answer = currentLevelOfTirednessResult.choiceAnswers?.first as? String {
-                    subject.currentLevelOfTiredness = Subject.Level(rawValue: answer) ?? .unknown
+                    subject.currentLevelOfTiredness = Subject.Level(rawValue: answer) ?? .alittle
                 }
             }
 
@@ -516,6 +522,60 @@ class HomeTabBarController: UITabBarController {
                 }
             }
 
+
+            if let cellphoneOrTableResult = taskViewController.result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult {
+                if let answer = cellphoneOrTableResult.choiceAnswers?.first as? String {
+                    subject.cellphoneOrTablet = Subject.CellPhone(rawValue: answer) ?? .none
+                }
+            }
+
+            if let smartphoneResult = taskViewController.result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult {
+                if let answer = smartphoneResult.choiceAnswers?.first as? String {
+                    subject.smartphone = Subject.Smartphone(rawValue: answer) ?? .none
+                }
+            }
+
+            if let tableResult = taskViewController.result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult {
+                if let answer = tableResult.choiceAnswers?.first as? String {
+                    subject.tablet = Subject.Tablet(rawValue: answer) ?? .none
+                }
+            }
+
+            if let reliablePrimaryDeviceResult = taskViewController.result.stepResult(forStepIdentifier: "reliablePrimaryDevice")?.result(forIdentifier: "reliablePrimaryDevice") as? ORKChoiceQuestionResult {
+                if let answer = reliablePrimaryDeviceResult.choiceAnswers?.first as? String {
+                    subject.reliablePrimaryDevice = Subject.ReliablePrimaryDevice(rawValue: answer) ?? .none
+                }
+            }
+
+            if let primaryDeviceFunctionalityResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceFunctionality")?.result(forIdentifier: "primaryDeviceFunctionality") as? ORKChoiceQuestionResult {
+                if let answer = primaryDeviceFunctionalityResult.choiceAnswers?.first as? String {
+                    subject.primaryDeviceFunctionality = Subject.PrimaryDeviceFunction(rawValue: answer) ?? .personal
+                }
+            }
+
+            if let primaryDeviceFrequencyResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceFrequency")?.result(forIdentifier: "primaryDeviceFrequency") as? ORKChoiceQuestionResult {
+                if let answer = primaryDeviceFrequencyResult.choiceAnswers?.first as? String {
+                    subject.primaryDeviceFrequency = Subject.PrimaryDeviceUsageFrequency(rawValue: answer) ?? .aboutOnceADay
+                }
+            }
+
+            if let primaryDeviceEasinessResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceEasiness")?.result(forIdentifier: "primaryDeviceEasiness") as? ORKChoiceQuestionResult {
+                if let answer = primaryDeviceEasinessResult.choiceAnswers?.first as? String {
+                    subject.primaryDeviceEasiness = Subject.PrimaryDeviceEasiness(rawValue: answer) ?? .veryEasy
+                }
+            }
+
+            if let primaryDeviceEnhancementResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult {
+                if let answer = primaryDeviceEnhancementResult.choiceAnswers?.first as? String {
+                    subject.primaryDeviceEnhancement = Subject.PrimaryDeviceEnhancement(rawValue: answer) ?? .noChanges
+                }
+            }
+
+            if let primaryDeviceAccessibilityFeaturesResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKChoiceQuestionResult {
+                if let answer = primaryDeviceAccessibilityFeaturesResult.choiceAnswers?.first as? String {
+                    subject.primaryDeviceAccessibilityFeatures = Subject.PrimaryDeviceAccessibilityFeatures(rawValue: answer) ?? .none
+                }
+            }
 
             do {
                 let data = try APIClient.encoder.encode(subject)
@@ -947,9 +1007,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         ORKTextChoice(text: NSLocalizedString("FREQUENCY_NEVER", comment: ""), value: Subject.Frequencies.never.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("FREQUENCY_SOME_DAYS", comment: ""), value: Subject.Frequencies.somedays.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("FREQUENCY_MOST_DAYS", comment: ""), value: Subject.Frequencies.mostdays.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("FREQUENCY_EVERY_DAY", comment: ""), value: Subject.Frequencies.everyday.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("FREQUENCY_REFUSED", comment: ""), value: Subject.Frequencies.refused.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("FREQUENCY_DONT_KNOW", comment: ""), value: Subject.Frequencies.unknown.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_EVERY_DAY", comment: ""), value: Subject.Frequencies.everyday.rawValue as NSString)
     ])
 
     steps.append(ORKQuestionStep(identifier: "anxiety",
@@ -957,6 +1015,20 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
                                  question: NSLocalizedString("SURVEY_ANXIETY_QUESTION", comment: ""),
                                  answer: anxietyFrequencyFormat)
     )
+
+    // seeing difficulty
+    let seeingDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+          ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+          ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+          ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+          ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+       ])
+
+   steps.append(ORKQuestionStep(identifier: "seeing",
+                               title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                               question: NSLocalizedString("SURVEY_SEEING_DIFFICULTY_QUESTION", comment: ""),
+                               answer: seeingDifficultyFormat)
+   )
 
     // hearing difficulty
     let hearingDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
@@ -1030,7 +1102,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // medical diagnosis
     let medicalDiagnosisFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: NSLocalizedString("ANSWER_YES", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("ANSWER_YES_WITH_EXPLANATION", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
        ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
     ])
 
@@ -1052,7 +1124,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // medication
     let medicationFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: NSLocalizedString("ANSWER_YES", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("ANSWER_YES_WITH_EXPLANATION", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
        ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
     ])
 
@@ -1107,9 +1179,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     let lastTimeLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_REFUSED", comment: ""), value: Subject.Level.refused.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_DONT_KNOW", comment: ""), value: Subject.Level.unknown.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString)
     ])
 
     steps.append(ORKQuestionStep(identifier: "previousLevelOfTiredness",
@@ -1123,9 +1193,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     let currentLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_REFUSED", comment: ""), value: Subject.Level.refused.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_DONT_KNOW", comment: ""), value: Subject.Level.unknown.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString)
     ])
 
     steps.append(ORKQuestionStep(identifier: "currentLevelOfTiredness",
@@ -1191,7 +1259,6 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_BLACKBERRY", comment: ""), value: Subject.Smartphone.blackberry.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_WINDOWS", comment: ""), value: Subject.Smartphone.windows.rawValue as NSString),
-           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: ""), value: Subject.Smartphone.unknown.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_OTHER", comment: ""), value: Subject.Smartphone.other.rawValue as NSString)
        ])
 
@@ -1218,7 +1285,6 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_BLACKBERRY", comment: ""), value: Subject.Smartphone.blackberry.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_WINDOWS", comment: ""), value: Subject.Smartphone.windows.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_DONT_KNOW", comment: ""), value: Subject.Smartphone.unknown.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_OTHER", comment: ""), value: Subject.Smartphone.other.rawValue as NSString)
     ])
 
@@ -1237,6 +1303,150 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_MOBILE_DEVICE_TABLET_QUESTION", comment: ""),
         answer: tabletFreeTextFormat)
     )
+
+
+    // which primary device is the most reliable
+    let reliablePrimaryDeviceFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_DONT_USE", comment: ""), value: Subject.ReliablePrimaryDevice.none.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_BASICPHONE", comment: ""), value: Subject.ReliablePrimaryDevice.basicphone.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_ANDROID_SMARTPHONE", comment: ""), value: Subject.ReliablePrimaryDevice.androidSmartphone.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_APPLE_SMARTPHONE", comment: ""), value: Subject.ReliablePrimaryDevice.appleSmartphone.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_BLACKBERRY_SMARTPHONE", comment: ""), value: Subject.ReliablePrimaryDevice.blackberrySmartphone.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_WINDOWS_SMARTPHONE", comment: ""), value: Subject.ReliablePrimaryDevice.windowsSmartphone.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_ANDROID_TABLET", comment: ""), value: Subject.ReliablePrimaryDevice.androidTablet.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_APPLE_TABLET", comment: ""), value: Subject.ReliablePrimaryDevice.appleTablet.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_WINDOWS_TABLET", comment: ""), value: Subject.ReliablePrimaryDevice.windowsTablet.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: ""), value: Subject.ReliablePrimaryDevice.other.rawValue as NSString)
+       ])
+
+    steps.append(ORKQuestionStep(identifier: "reliablePrimaryDevice",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_QUESTION", comment: ""),
+                                answer: reliablePrimaryDeviceFormat)
+    )
+
+    // smartphone free text
+    let reliablePrimaryDeviceFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "reliablePrimaryDeviceFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_QUESTION", comment: ""),
+        answer: reliablePrimaryDeviceFreeTextFormat)
+    )
+
+    // primary device's functionality
+    let primaryDeviceFunctionalityFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_PROFESSIONAL", comment: ""), value: Subject.PrimaryDeviceFunction.professional.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_PERSONAL", comment: ""), value: Subject.PrimaryDeviceFunction.personal.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_BOTH", comment: ""), value: Subject.PrimaryDeviceFunction.both.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_FUNCTIONALITY_EMERGENCIES", comment: ""), value: Subject.PrimaryDeviceFunction.emergencies.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "primaryDeviceFunctionality",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_QUESTION", comment: ""),
+                                answer: primaryDeviceFunctionalityFormat)
+    )
+
+
+    // primary device's use frequency
+    let primaryDeviceFrequenciesFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SERVERAL", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.severalTimesADay.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_ONCEADAY", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.aboutOnceADay.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_3_TO_5", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.threeToFiveDaysAWeek.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_1_OR_2", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.oneToTwoDaysAWeek.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_FEW_WEEKS", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.everyFewWeeks.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_LESS_OFTEN", comment: ""), value: Subject.PrimaryDeviceUsageFrequency.lessOften.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "primaryDeviceFrequency",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_FREQUENCY_QUESTION", comment: ""),
+                                answer: primaryDeviceFrequenciesFormat)
+    )
+
+
+    // primary device's easiness
+    let primaryDeviceEasinessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_VERY_EASY", comment: ""), value: Subject.PrimaryDeviceEasiness.veryEasy.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_EASY", comment: ""), value: Subject.PrimaryDeviceEasiness.easyToUse.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SOMEWHAT", comment: ""), value: Subject.PrimaryDeviceEasiness.somewhatHardToUse.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_HARD", comment: ""), value: Subject.PrimaryDeviceEasiness.hardToUse.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_WITH_HELP", comment: ""), value: Subject.PrimaryDeviceEasiness.cannotUseWithoutHelp.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "primaryDeviceEasiness",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_EASINESS_QUESTION", comment: ""),
+                                answer: primaryDeviceEasinessFormat)
+    )
+
+
+    // primary device's enhancement
+    let primaryDeviceEnhancementFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_NO_CHANGES", comment: ""), value: Subject.PrimaryDeviceEnhancement.noChanges.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_PHYSICAL_ACCESSORIES", comment: ""), value: Subject.PrimaryDeviceEnhancement.physicalAccessories.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_ASSISTANT", comment: ""), value: Subject.PrimaryDeviceEnhancement.assistiveDevices.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SOFTWARE", comment: ""), value: Subject.PrimaryDeviceEnhancement.software.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_IMPROVISED", comment: ""), value: Subject.PrimaryDeviceEnhancement.improvisedSolutions.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: ""), value: Subject.PrimaryDeviceEnhancement.other.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "primaryDeviceEnhancement",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_ENHANCEMENT_QUESTION", comment: ""),
+                                answer: primaryDeviceEnhancementFormat)
+    )
+
+    // primary device's enhancement free text
+    let primaryDeviceEnhancementFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "primaryDeviceEnhancementFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_ENHANCEMENT_QUESTION", comment: ""),
+        answer: primaryDeviceEnhancementFreeTextFormat)
+    )
+
+    // primary device's accessibilty features
+    let primaryDeviceAccessibilityFeaturesFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_DONT_USE_ACCESSIBILITY", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.none.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_AUDIO", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.audioNavigation.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_GESTURE", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.gestureBasedControls.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SIMPLE_DISPLAY", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.simpleDisplayOrLargeIcons.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_TEXT_MAGNIFICATION", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.textMagnification.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SCREEN_MAGNIFICATION", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.screenMagnification.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_CUSTOM_COLOR", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.customColorContrastOrAdjustment.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_INCREASE_CONTRAST", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.increaseDecreaseContrast.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SCREEN_RADAR", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.screenReader.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SPEAK_AUTO", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.speakAutoCorrectionOrCapitalizations.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SUBSTITLES", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.subtitlesAndCaptioning.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_VISUAL_ALERTS", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.visualAlerts.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_VIBRATING_ALERTS", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.vibratingAlerts.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_SWITCH_CONTROL", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.switchControlsAccess.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_MENU_SHORTCUTS", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.menuShortcutsFavoriteApps.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_HEADSET", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.incomingCallsToHeadsetOrSpeaker.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_INTELLIGENT_ASSISTANT", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.intelligentPersonalAssistant.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_OTHER", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.other.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "primaryDeviceAccessibilityFeature",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_FEATURES_QUESTION", comment: ""),
+                                answer: primaryDeviceAccessibilityFeaturesFormat)
+    )
+
+    // primary device's accessibilty features free text
+    let primaryDeviceAccessibilityFeaturesFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "primaryDeviceAccessibilityFeatureFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_FEATURES_QUESTION", comment: ""),
+        answer: primaryDeviceAccessibilityFeaturesFreeTextFormat)
+    )
+
 
     let completionStep = ORKCompletionStep(identifier: "summary")
     completionStep.title = NSLocalizedString("THANK_YOU", comment: "")
@@ -1362,7 +1572,47 @@ private class OrderedTask: ORKOrderedTask {
             if answer == "other" {
                 return self.step(withIdentifier: "tabletFreeText")
             } else {
-                return self.step(withIdentifier: "primaryDeviceKind")
+                return self.step(withIdentifier: "reliablePrimaryDevice")
+            }
+        } else if step?.identifier == "reliablePrimaryDevice" {
+            guard let choice = result.stepResult(forStepIdentifier: "reliablePrimaryDevice")?.result(forIdentifier: "reliablePrimaryDevice") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "reliablePrimaryDeviceFreeText")
+            } else {
+                return self.step(withIdentifier: "primaryDeviceFunctionality")
+            }
+        } else if step?.identifier == "primaryDeviceEnhancement" {
+            guard let choice = result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "primaryDeviceEnhancementFreeText")
+            } else {
+                return self.step(withIdentifier: "primaryDeviceAccessibilityFeature")
+            }
+        } else if step?.identifier == "primaryDeviceAccessibilityFeature" {
+            guard let choice = result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "primaryDeviceAccessibilityFeatureFreeText")
             }
         } else if step?.identifier == "autoFill" {
 
@@ -1439,7 +1689,7 @@ private class OrderedTask: ORKOrderedTask {
             } else {
                 return self.step(withIdentifier: "mobileDeviceUsage")
             }
-        }else if step?.identifier == "smartphone" {
+        } else if step?.identifier == "smartphone" {
             guard let choice = result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult else {
                 return super.step(after: step, with: result)
             }
@@ -1467,7 +1717,7 @@ private class OrderedTask: ORKOrderedTask {
             } else {
                 return self.step(withIdentifier: "smartphone")
             }
-        } else if step?.identifier == "primaryDeviceKind" {
+        } else if step?.identifier == "reliablePrimaryDevice" {
             guard let choice = result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult else {
                 return super.step(after: step, with: result)
             }
@@ -1481,18 +1731,46 @@ private class OrderedTask: ORKOrderedTask {
             } else {
                 return self.step(withIdentifier: "tablet")
             }
+        } else if step?.identifier == "primaryDeviceFunctionality" {
+            guard let choice = result.stepResult(forStepIdentifier: "reliablePrimaryDevice")?.result(forIdentifier: "reliablePrimaryDevice") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "reliablePrimaryDeviceFreeText")
+            } else {
+                return self.step(withIdentifier: "reliablePrimaryDevice")
+            }
+        } else if step?.identifier == "primaryDeviceAccessibilityFeature" {
+            guard let choice = result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "primaryDeviceEnhancementFreeText")
+            } else {
+                return self.step(withIdentifier: "primaryDeviceEnhancement")
+            }
         } else if step?.identifier == "summary" {
 
-        guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
-            return super.step(before: step, with: result)
-        }
+            guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
+                return super.step(before: step, with: result)
+            }
 
-        if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
-            return self.step(withIdentifier: "autoFill")
-        } else {
-            return super.step(before: step, with: result)
+            if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
+                return self.step(withIdentifier: "autoFill")
+            } else {
+                return super.step(before: step, with: result)
+            }
         }
-    }
 
         return super.step(before: step, with: result)
     }

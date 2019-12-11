@@ -62,6 +62,7 @@
 "SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE" = "GENERAL FUNCTIONING AND HEALTH";
 "SURVEY_CONCENTRATION_DIFFICULTY_QUESTION" = "Do you have difficulty remembering or concentrating?";
 "SURVEY_ANXIETY_QUESTION" = "Do you experience frequent worry, nervousness, or anxiety?";
+"SURVEY_SEEING_DIFFICULTY_QUESTION" = "Do you have difficulty seeing, even when wearing your glasses?";
 "SURVEY_HEARING_DIFFICULTY_QUESTION" = "Do you have difficulty hearing, even when using a hearing aid(s)?";
 "SURVEY_COMMUNICATION_DIFFICULTY_QUESTION" = "Do you have difficulty communicating using your usual language, for example understanding or being understood?";
 "SURVEY_ARMS_MOVEMENTS_DIFFICULTY_QUESTION" = "Do you have difficulty using your arms for raising a 2 liter bottle of water or soda from waist to eye level?";
@@ -143,7 +144,8 @@
 "ALOT_DIFFICULTY" = "A lot of difficulty";
 "UNABLE_TODO" = "Cannot do at all / Unable to do";
 
-"ANSWER_YES" = "Yes, please specify";
+"ANSWER_YES_WITH_EXPLANATION" = "Yes, please specify";
+"ANSWER_YES" = "Yes";
 "ANSWER_NO" = "No";
 
 "CELLPHONE_OR_TABLET_DONT_USE" = "I do not own or use a cell phone or tablet";
@@ -211,7 +213,6 @@
 "PRIMARY_DEVICE_TEXT_MAGNIFICATION" = "Text magnification (Zoom text, font size settings)";
 "PRIMARY_DEVICE_SCREEN_MAGNIFICATION" = "Screen magnification (Magnifies the entire screen)";
 "PRIMARY_DEVICE_CUSTOM_COLOR" = "Custom color contrast or color adjustment";
-"PRIMARY_DEVICE_REVERSE_CONTRAST" = "Reverse contrast, negative contrast, invert colors";
 "PRIMARY_DEVICE_INCREASE_CONTRAST" = "Increase/decrease contrast";
 "PRIMARY_DEVICE_SCREEN_RADAR" = "Screen reader";
 "PRIMARY_DEVICE_SPEAK_AUTO" = "Speak auto corrections and auto capitalizations";

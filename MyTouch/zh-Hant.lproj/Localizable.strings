@@ -62,6 +62,7 @@
 "SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE" = "一般健康資訊調查";
 "SURVEY_CONCENTRATION_DIFFICULTY_QUESTION" = "你時常感到難以專心或記不住事情嗎？";
 "SURVEY_ANXIETY_QUESTION" = "你曾經感到焦慮或緊張嗎？";
+"SURVEY_SEEING_DIFFICULTY_QUESTION" = "你是否有難以看清楚的情況（即使戴眼鏡)？";
 "SURVEY_HEARING_DIFFICULTY_QUESTION" = "你是否有聽力上的困難(即使使用輔助聽力的工具)？";
 "SURVEY_COMMUNICATION_DIFFICULTY_QUESTION" = "與他人對話時，你有溝通理解上的問題嗎？";
 "SURVEY_ARMS_MOVEMENTS_DIFFICULTY_QUESTION" = "用手臂提起兩公升的水對你來說是有困難的嗎？";
@@ -143,6 +144,7 @@
 "ALOT_DIFFICULTY" = "非常困難";
 "UNABLE_TODO" = "幾乎無法";
 
+"ANSWER_YES_WITH_EXPLANATION" = "是，請明確說明";
 "ANSWER_YES" = "是";
 "ANSWER_NO" = "否";
 
