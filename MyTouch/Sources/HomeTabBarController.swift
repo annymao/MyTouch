@@ -408,6 +408,13 @@ class HomeTabBarController: UITabBarController {
             if let impairmentResult = taskViewController.result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult {
                 if let answer = impairmentResult.choiceAnswers?.first as? String {
                     subject.impairment = Subject.Impairment(rawValue: answer) ?? .none
+
+                    if Subject.Impairment(rawValue: answer) == .others {
+                        guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "impairmentFreeText")?.result(forIdentifier: "impairmentFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                        subject.note = string
+                    }
                 }
             }
             
@@ -483,12 +490,26 @@ class HomeTabBarController: UITabBarController {
             if let medicalDiagnosisResult = taskViewController.result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult {
                 if let answer = medicalDiagnosisResult.choiceAnswers?.first as? String {
                     subject.medicalDiagnosis = Subject.MedicalResults(rawValue: answer) ?? .no
+
+                    if Subject.MedicalResults(rawValue: answer) == .yes {
+                        guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "medicalDiagnosisFreeText")?.result(forIdentifier: "medicalDiagnosisFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                        subject.medicalDiagnosisNote = string
+                    }
                 }
             }
 
             if let medicationResult = taskViewController.result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult {
                 if let answer = medicationResult.choiceAnswers?.first as? String {
                     subject.medication = Subject.MedicalResults(rawValue: answer) ?? .no
+
+                    if Subject.MedicalResults(rawValue: answer) == .yes {
+                        guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "medicationFreeText")?.result(forIdentifier: "medicationFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                        subject.medicalDiagnosisNote = string
+                    }
                 }
             }
 
@@ -525,30 +546,53 @@ class HomeTabBarController: UITabBarController {
 
             if let cellphoneOrTableResult = taskViewController.result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult {
                 if let answer = cellphoneOrTableResult.choiceAnswers as? [String] {
-                    var tempArray: [Subject.CellPhone] = []
+                    var tempArray: [String] = []
                     for n in answer {
-                        tempArray.append(Subject.CellPhone(rawValue: n) ?? .none)
-                    }
+                        if Subject.Smartphone(rawValue: n) == .other {
 
+                            guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "otherCellPhoneOrTabletFreeText")?.result(forIdentifier: "otherCellPhoneOrTabletFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                            tempArray.append(string)
+                        } else {
+                            tempArray.append(n)
+                        }
+                    }
                     subject.cellphoneOrTablet = tempArray
                 }
             }
 
             if let smartphoneResult = taskViewController.result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult {
                 if let answer = smartphoneResult.choiceAnswers as? [String] {
-                    var tempArray: [Subject.Smartphone] = []
+                    var tempArray: [String] = []
                     for n in answer {
-                        tempArray.append(Subject.Smartphone(rawValue: n) ?? .none)
+                        if Subject.Smartphone(rawValue: n) == .other {
+
+                            guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "smartphoneFreeText")?.result(forIdentifier: "smartphoneFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                            tempArray.append(string)
+                        } else {
+                            tempArray.append(n)
+                        }
                     }
                     subject.smartphone = tempArray
                 }
             }
 
-            if let tableResult = taskViewController.result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult {
-                if let answer = tableResult.choiceAnswers as? [String] {
-                    var tempArray: [Subject.Tablet] = []
+            if let tabletResult = taskViewController.result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult {
+                if let answer = tabletResult.choiceAnswers as? [String] {
+                    var tempArray: [String] = []
                     for n in answer {
-                        tempArray.append(Subject.Tablet(rawValue: n) ?? .none)
+                        if Subject.Smartphone(rawValue: n) == .other {
+
+                            guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "tabletFreeText")?.result(forIdentifier: "tabletFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                            tempArray.append(string)
+                        } else {
+                            tempArray.append(n)
+                        }
                     }
                     subject.tablet = tempArray
                 }
@@ -557,6 +601,14 @@ class HomeTabBarController: UITabBarController {
             if let reliablePrimaryDeviceResult = taskViewController.result.stepResult(forStepIdentifier: "reliablePrimaryDevice")?.result(forIdentifier: "reliablePrimaryDevice") as? ORKChoiceQuestionResult {
                 if let answer = reliablePrimaryDeviceResult.choiceAnswers?.first as? String {
                     subject.reliablePrimaryDevice = Subject.ReliablePrimaryDevice(rawValue: answer) ?? .none
+
+                    if Subject.ReliablePrimaryDevice(rawValue: answer) == .other {
+
+                        guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "reliablePrimaryDeviceFreeText")?.result(forIdentifier: "reliablePrimaryDeviceFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                        subject.reliablePrimaryDeviceNote = string
+                    }
                 }
             }
 
@@ -578,12 +630,22 @@ class HomeTabBarController: UITabBarController {
                 }
             }
 
+
+
             if let primaryDeviceEnhancementResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult {
                 if let answer = primaryDeviceEnhancementResult.choiceAnswers as? [String] {
 
-                    var tempArray: [Subject.PrimaryDeviceEnhancement] = []
+                    var tempArray: [String] = []
                     for n in answer {
-                        tempArray.append(Subject.PrimaryDeviceEnhancement(rawValue: n) ?? .noChanges)
+                        if Subject.PrimaryDeviceEnhancement(rawValue: n) == .other {
+
+                            guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceEnhancementFreeText")?.result(forIdentifier: "primaryDeviceEnhancementFreeText") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                            tempArray.append(string)
+                        } else {
+                            tempArray.append(n)
+                        }
                     }
                     subject.primaryDeviceEnhancement = tempArray
                 }
@@ -591,10 +653,19 @@ class HomeTabBarController: UITabBarController {
 
             if let primaryDeviceAccessibilityFeaturesResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKChoiceQuestionResult {
                 if let answer = primaryDeviceAccessibilityFeaturesResult.choiceAnswers as? [String] {
-                    var tempArray: [Subject.PrimaryDeviceAccessibilityFeatures] = []
+                    var tempArray: [String] = []
                     for n in answer {
-                        tempArray.append(Subject.PrimaryDeviceAccessibilityFeatures(rawValue: n) ?? .none)
+                        if Subject.PrimaryDeviceAccessibilityFeatures(rawValue: n) == .other {
+
+                            guard let noteResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKTextQuestionResult,
+                            let string = noteResult.textAnswer else { return }
+
+                            tempArray.append(string)
+                        } else {
+                            tempArray.append(n)
+                        }
                     }
+
                     subject.primaryDeviceAccessibilityFeatures = tempArray
 
                 }
@@ -1126,7 +1197,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     // medical diagnosis
     let medicalDiagnosisFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("ANSWER_YES_WITH_EXPLANATION", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
-       ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
     ])
 
     steps.append(ORKQuestionStep(identifier: "medicalDiagnosis",
@@ -1137,7 +1208,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // medical diagnosis free text
     let medicalDiagnosisFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
-    impairmentFreeTextFormat.multipleLines = true
+    medicalDiagnosisFreeTextFormat.multipleLines = true
     steps.append(ORKQuestionStep(
         identifier: "medicalDiagnosisFreeText",
         title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
@@ -1148,7 +1219,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     // medication
     let medicationFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("ANSWER_YES_WITH_EXPLANATION", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
-       ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
     ])
 
     steps.append(ORKQuestionStep(identifier: "medication",
@@ -1159,7 +1230,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // medication free text
     let medicationFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
-    impairmentFreeTextFormat.multipleLines = true
+    medicationFreeTextFormat.multipleLines = true
     steps.append(ORKQuestionStep(
         identifier: "medicationFreeText",
         title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
@@ -1522,7 +1593,7 @@ private class OrderedTask: ORKOrderedTask {
             }
 
         } else if step?.identifier == "medication" {
-            
+
             guard let choice = result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult else {
                 return super.step(after: step, with: result)
             }

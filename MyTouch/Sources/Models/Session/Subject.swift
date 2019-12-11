@@ -179,24 +179,34 @@ struct Subject: Codable {
     var armsMovementsDifficutly: Difficulties = .none
     var handsMovementsDifficutly: Difficulties = .none
     var walkingDifficulty: Difficulties = .none
+
     var medicalDiagnosis: MedicalResults = .no
+    var medicalDiagnosisNote: String?
+
     var medication: MedicalResults = .no
+    var medicationDiagnosisNote: String?
+
     var pastThreeMonthsCondition: Frequencies = .never
     var lastTimeCondition: Frequencies = .never
     var previousLevelOfTiredness: Level = .one
     var currentLevelOfTiredness: Level = .one
     var mobileDeviceUsage: MedicalResults = .no
 
-    var cellphoneOrTablet: [CellPhone] = []
-    var smartphone: [Smartphone] = []
-    var tablet: [Tablet] = []
+    var cellphoneOrTablet: [String] = []
+
+    var smartphone: [String] = []
+
+    var tablet: [String] = []
 
     var reliablePrimaryDevice: ReliablePrimaryDevice = .none
+    var reliablePrimaryDeviceNote: String?
+
     var primaryDeviceFunctionality: PrimaryDeviceFunction = .personal
     var primaryDeviceFrequency: PrimaryDeviceUsageFrequency = .aboutOnceADay
     var primaryDeviceEasiness: PrimaryDeviceEasiness = .veryEasy
-    var primaryDeviceEnhancement: [PrimaryDeviceEnhancement] = []
-    var primaryDeviceAccessibilityFeatures: [PrimaryDeviceAccessibilityFeatures] =  []
+
+    var primaryDeviceEnhancement: [String] = []
+    var primaryDeviceAccessibilityFeatures: [String] =  []
 
     var slowMovement = false
     var rapidFatigue = false
