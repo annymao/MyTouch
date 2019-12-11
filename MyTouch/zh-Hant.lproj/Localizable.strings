@@ -157,6 +157,7 @@
 "SMARTPHONE_KIND_APPLE" = "Apple iOS (如: Apple iPhone)";
 "SMARTPHONE_KIND_BLACKBERRY" = "BlackBerry (如: Classic, Q10, Bold, Curve)";
 "SMARTPHONE_KIND_WINDOWS" = "Windows-powered (如: Microsoft Lumia, HTC Tilt, LG Quantum, Samsung Focus)";
+"SMARTPHONE_KIND_DONT_KNOW" = "Don't know";
 "SMARTPHONE_KIND_OTHER" = "其他(請詳細說明)";
 
 "TABLET_KIND_DONT_USE"  = "我沒有使用平板電腦";
@@ -164,7 +165,63 @@
 "TABLET_KIND_APPLE"  = "Apple iOS (如: Apple iPad)";
 "TABLET_KIND_BLACKBERRY"  = "Blackberry-powered (Blackberry Playbook)";
 "TABLET_KIND_WINDOWS"  = "Windows-powered (如: Microsoft Surface)";
+"TABLET_KIND_DONT_KNOW"  = "Don't know";
 "TABLET_KIND_OTHER"  = "其他(請詳細說明)";
+
+"PRIMARY_DEVICE_DONT_USE" = "我沒有使用行動裝置";
+"PRIMARY_DEVICE_BASICPHONE" = "普通手機";
+"PRIMARY_DEVICE_ANDROID_SMARTPHONE" = "Android 智慧型手機 (如: Motorola Droid, Samsung Galaxy S)";
+"PRIMARY_DEVICE_APPLE_SMARTPHONE" = "Apple iOS 智慧型手機 (如: Apple iPhone)";
+"PRIMARY_DEVICE_BLACKBERRY_SMARTPHONE" = "BlackBerry 智慧型手機 (如: Classic, Q10, Bold, Curve)";
+"PRIMARY_DEVICE_WINDOWS_SMARTPHONE" = "Windows-powered 智慧型手機 (如: Microsoft Lumia, HTC Tilt, LG Quantum, Samsung Focus)";
+"PRIMARY_DEVICE_ANDROID_TABLET"  = "Android-powered 平板電腦 (如: Samsung Galaxy Tab, Amazon Kindle Fire)";
+"PRIMARY_DEVICE_APPLE_TABLET" = "Apple iOS 平板電腦 (如: Apple iPad)";
+"PRIMARY_DEVICE_WINDOWS_TABLET"  = "Windows-powered 平板電腦 (如: Microsoft Surface Pro)";
+"PRIMARY_DEVICE_OTHER" = "Other (please specify)";
+
+"PRIMARY_DEVICE_FUNCTIONALITY_PROFESSIONAL" = "工作用途";
+"PRIMARY_DEVICE_FUNCTIONALITY_PERSONAL"  = "個人使用";
+"PRIMARY_DEVICE_FUNCTIONALITY_BOTH" = "以上皆是";
+"PRIMARY_DEVICE_FUNCTIONALITY_EMERGENCIES"  = "僅緊急狀況使用";
+
+"PRIMARY_DEVICE_SERVERAL" = "一天很多次";
+"PRIMARY_DEVICE_ONCEADAY" = "一天一次";
+"PRIMARY_DEVICE_3_TO_5" = "一週三到五天";
+"PRIMARY_DEVICE_1_OR_2" = "一週一到兩天";
+"PRIMARY_DEVICE_FEW_WEEKS" = "偶爾使用";
+"PRIMARY_DEVICE_LESS_OFTEN" = "極少使用";
+
+"PRIMARY_DEVICE_VERY_EASY" = "非常簡單";
+"PRIMARY_DEVICE_EASY" = "簡單";
+"PRIMARY_DEVICE_SOMEWHAT" = "普通";
+"PRIMARY_DEVICE_HARD" = "困難";
+"PRIMARY_DEVICE_WITH_HELP" = "非常困難（需在幫助下使用）";
+
+"PRIMARY_DEVICE_NO_CHANGES" = "無";
+"PRIMARY_DEVICE_PHYSICAL_ACCESSORIES" = "外接裝置（如：保護殼，手寫筆等）";
+"PRIMARY_DEVICE_ASSISTANT" = "輔助裝置 – (如：肌電訊號輸入,AAC 裝置等)";
+"PRIMARY_DEVICE_SOFTWARE" = "軟體 (文字轉語音程式, 螢幕閱讀器, 螢幕放大等)";
+"PRIMARY_DEVICE_IMPROVISED" = "暫時性的解決方式（如：使用魔鬼氈）";
+"PRIMARY_DEVICE_OTHER" = "其他 (請詳細描述)";
+
+"PRIMARY_DEVICE_DONT_USE_ACCESSIBILITY" = "從未使用";
+"PRIMARY_DEVICE_AUDIO" = "聲音辨識";
+"PRIMARY_DEVICE_GESTURE" = "手勢辨識";
+"PRIMARY_DEVICE_SIMPLE_DISPLAY" = "圖標放大";
+"PRIMARY_DEVICE_TEXT_MAGNIFICATION" = "文字放大";
+"PRIMARY_DEVICE_SCREEN_MAGNIFICATION" = "螢幕放大";
+"PRIMARY_DEVICE_CUSTOM_COLOR" = "調整螢幕顏色/色溫";
+"PRIMARY_DEVICE_REVERSE_CONTRAST" = "調整螢幕對比";
+"PRIMARY_DEVICE_INCREASE_CONTRAST" = "調整螢幕對比";
+"PRIMARY_DEVICE_SCREEN_RADAR" = "螢幕閱讀器";
+"PRIMARY_DEVICE_SPEAK_AUTO" = "自動語音/文字修正";
+"PRIMARY_DEVICE_SUBSTITLES" = "字幕顯示";
+"PRIMARY_DEVICE_VISUAL_ALERTS" = "視覺通知";
+"PRIMARY_DEVICE_VIBRATING_ALERTS" = "震動通知";
+"PRIMARY_DEVICE_SWITCH_CONTROL" = "開關控制";
+"PRIMARY_DEVICE_MENU_SHORTCUTS" = "快捷鍵設定)";
+"PRIMARY_DEVICE_HEADSET" = "將通話轉接到耳機或麥克風";
+"PRIMARY_DEVICE_INTELLIGENT_ASSISTANT" = "智慧型管家";
 
 "DEVICE_INFO_TITLE" = "裝置資訊";
 "DEVICE_INFO_DEVICE_NAME" = "裝置名稱";
