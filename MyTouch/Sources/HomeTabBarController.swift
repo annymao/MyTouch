@@ -506,13 +506,13 @@ class HomeTabBarController: UITabBarController {
 
             if let previousLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "previousLevelOfTiredness")?.result(forIdentifier: "previousLevelOfTiredness") as? ORKChoiceQuestionResult {
                 if let answer = previousLevelOfTirednessResult.choiceAnswers?.first as? String {
-                    subject.previousLevelOfTiredness = Subject.Level(rawValue: answer) ?? .alittle
+                    subject.previousLevelOfTiredness = Subject.Level(rawValue: answer) ?? .one
                 }
             }
 
             if let currentLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "currentLevelOfTiredness")?.result(forIdentifier: "currentLevelOfTiredness") as? ORKChoiceQuestionResult {
                 if let answer = currentLevelOfTirednessResult.choiceAnswers?.first as? String {
-                    subject.currentLevelOfTiredness = Subject.Level(rawValue: answer) ?? .alittle
+                    subject.currentLevelOfTiredness = Subject.Level(rawValue: answer) ?? .one
                 }
             }
 
@@ -1177,9 +1177,11 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // last time level of tiredness
     let lastTimeLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("LEVEL_ONE", comment: ""), value: Subject.Level.one.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_TWO", comment: ""), value: Subject.Level.two.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_THREE", comment: ""), value: Subject.Level.three.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_FOUR", comment: ""), value: Subject.Level.four.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_FIVE", comment: ""), value: Subject.Level.five.rawValue as NSString)
     ])
 
     steps.append(ORKQuestionStep(identifier: "previousLevelOfTiredness",
@@ -1191,9 +1193,11 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
     // current level of tiredness
     let currentLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
-        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("LEVEL_ONE", comment: ""), value: Subject.Level.one.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_TWO", comment: ""), value: Subject.Level.two.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_THREE", comment: ""), value: Subject.Level.three.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_FOUR", comment: ""), value: Subject.Level.four.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_FIVE", comment: ""), value: Subject.Level.five.rawValue as NSString)
     ])
 
     steps.append(ORKQuestionStep(identifier: "currentLevelOfTiredness",

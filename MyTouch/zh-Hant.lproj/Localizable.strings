@@ -133,11 +133,11 @@
 
 "SKIP_TO_THE_NEXT_SECTION" = "(如果是的話跳過下一題)";
 
-"LEVEL_A_LITTLE" = "1";
-"LEVEL_A_LOT" = "2";
-"LEVEL_SOMEWHERE_IN_BETWEEN" = "3";
-"LEVEL_REFUSED" = "4";
-"LEVEL_DONT_KNOW" = "5";
+"LEVEL_ONE" = "1";
+"LEVEL_TWO" = "2";
+"LEVEL_THREE" = "3";
+"LEVEL_FOUR" = "4";
+"LEVEL_FIVE" = "5";
 
 "NO_DIFFICULTY" = "沒有";
 "SOME_DIFFICULTY" = "有點困難";

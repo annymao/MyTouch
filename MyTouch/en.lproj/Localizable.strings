@@ -133,11 +133,11 @@
 
 "SKIP_TO_THE_NEXT_SECTION" = "(If yes, skip to the next section.)";
 
-"LEVEL_A_LITTLE" = "A little";
-"LEVEL_A_LOT" = "A lot";
-"LEVEL_SOMEWHERE_IN_BETWEEN" = "Somewhere in between a little and a lot";
-"LEVEL_REFUSED" = "Refused";
-"LEVEL_DONT_KNOW" = "Don't know";
+"LEVEL_ONE" = "1";
+"LEVEL_TWO" = "2";
+"LEVEL_THREE" = "3";
+"LEVEL_FOUR" = "4";
+"LEVEL_FIVE" = "5";
 
 "NO_DIFFICULTY" = "No difficulty";
 "SOME_DIFFICULTY" = "Some difficulty";

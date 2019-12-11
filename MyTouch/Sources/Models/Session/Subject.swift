@@ -66,10 +66,18 @@ struct Subject: Codable {
     }
 
     enum Level: String, Codable {
-        case alittle
-        case alot
-        case somewhereInBetween
+        case one
+        case two
+        case three
+        case four
+        case five
     }
+
+//    enum Level: String, Codable {
+//        case alittle
+//        case alot
+//        case somewhereInBetween
+//    }
 
     enum CellPhone: String, Codable {
         case none
@@ -181,8 +189,8 @@ struct Subject: Codable {
     var medication: MedicalResults = .no
     var pastThreeMonthsCondition: Frequencies = .never
     var lastTimeCondition: Frequencies = .never
-    var previousLevelOfTiredness: Level = .alittle
-    var currentLevelOfTiredness: Level = .alittle
+    var previousLevelOfTiredness: Level = .one
+    var currentLevelOfTiredness: Level = .one
     var mobileDeviceUsage: MedicalResults = .no
 
     var cellphoneOrTablet: CellPhone = .none
@@ -408,12 +416,16 @@ extension Subject.Level {
 
     var localizedString: String {
         switch self {
-        case .alittle:
-            return NSLocalizedString("LEVEL_A_LITTLE", comment: "")
-        case .alot:
-            return NSLocalizedString("LEVEL_A_LOT", comment: "")
-        case .somewhereInBetween:
-            return NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: "")
+        case .one:
+            return NSLocalizedString("LEVEL_ONE", comment: "")
+        case .two:
+            return NSLocalizedString("LEVEL_TWO", comment: "")
+        case .three:
+            return NSLocalizedString("LEVEL_THREE", comment: "")
+        case .four:
+            return NSLocalizedString("LEVEL_FOUR", comment: "")
+        case .five:
+            return NSLocalizedString("LEVEL_FIVE", comment: "")
         }
     }
 }
