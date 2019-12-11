@@ -168,6 +168,61 @@
 "TABLET_KIND_DONT_KNOW"  = "Don't know";
 "TABLET_KIND_OTHER"  = "Other (please specify)";
 
+"PRIMARY_DEVICE_DONT_USE" = "I do not have a primary wireless device";
+"PRIMARY_DEVICE_BASICPHONE" = "Basic phone (Examples: Motorola Razr, Pantech Breeze, Nokia 6350, Owasys)";
+"PRIMARY_DEVICE_ANDROID_SMARTPHONE" = "Android-powered SMARTPHONE (Examples: Motorola Droid, Samsung Galaxy S)";
+"PRIMARY_DEVICE_APPLE_SMARTPHONE" = "Apple iOS SMARTPHONE (Example: Apple iPhone)";
+"PRIMARY_DEVICE_BLACKBERRY_SMARTPHONE" = "BlackBerry SMARTPHONE (Examples: Classic, Q10, Bold, Curve)";
+"PRIMARY_DEVICE_WINDOWS_SMARTPHONE" = "Windows-powered SMARTPHONE (Examples: Microsoft Lumia, HTC Tilt, LG Quantum, Samsung Focus)";
+"PRIMARY_DEVICE_ANDROID_TABLET"  = "Android-powered TABLET (Examples: Samsung Galaxy Tab, Amazon Kindle Fire)";
+"PRIMARY_DEVICE_APPLE_TABLET" = "Apple iOS TABLET (Example: Apple iPad)";
+"PRIMARY_DEVICE_WINDOWS_TABLET"  = "Windows-powered TABLET (Examples: Microsoft Surface Pro)";
+"PRIMARY_DEVICE_OTHER" = "Other (please specify)";
+
+"PRIMARY_DEVICE_FUNCTIONALITY_PROFESSIONAL" = "Professional use (work or school)";
+"PRIMARY_DEVICE_FUNCTIONALITY_PERSONAL"  = "Personal use";
+"PRIMARY_DEVICE_FUNCTIONALITY_BOTH" = "Both professional and personal use";
+"PRIMARY_DEVICE_FUNCTIONALITY_EMERGENCIES"  = "Emergencies only";
+
+"PRIMARY_DEVICE_SERVERAL" = "Several times a day";
+"PRIMARY_DEVICE_ONCEADAY" = "About once a day";
+"PRIMARY_DEVICE_3_TO_5" = "3 to 5 days a week";
+"PRIMARY_DEVICE_1_OR_2" = "1 or 2 days a week";
+"PRIMARY_DEVICE_FEW_WEEKS" = "Every few weeks";
+"PRIMARY_DEVICE_LESS_OFTEN" = "Less often";
+
+"PRIMARY_DEVICE_VERY_EASY" = "Very easy to use";
+"PRIMARY_DEVICE_EASY" = "Easy to use";
+"PRIMARY_DEVICE_SOMEWHAT" = "Somewhat hard to use";
+"PRIMARY_DEVICE_HARD" = "Hard to use";
+"PRIMARY_DEVICE_WITH_HELP" = "Can't use it without help";
+
+"PRIMARY_DEVICE_NO_CHANGES" = "No changes or additions";
+"PRIMARY_DEVICE_PHYSICAL_ACCESSORIES" = "Physical accessories – (protective skin or case, headset, other Bluetooth device, screen overlay, lanyard, stylus, etc.)";
+"PRIMARY_DEVICE_ASSISTANT" = "Assistive Devices – (headswitch, EMG switch, AAC device, neck loop, TTY, etc.)";
+"PRIMARY_DEVICE_SOFTWARE" = "Software (3rd-party text-to-speech software, screen reader, screen magnifier, app store downloads, etc.)";
+"PRIMARY_DEVICE_IMPROVISED" = "Improvised solutions (handstrap, velcro, wheelchair mount, etc.)";
+"PRIMARY_DEVICE_OTHER" = "Other (please specify)";
+
+"PRIMARY_DEVICE_DONT_USE_ACCESSIBILITY" = "I do not use any accessibility features";
+"PRIMARY_DEVICE_AUDIO" = "Audio navigation (VoiceOver, Talkback)";
+"PRIMARY_DEVICE_GESTURE" = "Gesture-based controls (tilting device, waving your hand in front of device, etc.)";
+"PRIMARY_DEVICE_SIMPLE_DISPLAY" = "Simple display or large icons";
+"PRIMARY_DEVICE_TEXT_MAGNIFICATION" = "Text magnification (Zoom text, font size settings)";
+"PRIMARY_DEVICE_SCREEN_MAGNIFICATION" = "Screen magnification (Magnifies the entire screen)";
+"PRIMARY_DEVICE_CUSTOM_COLOR" = "Custom color contrast or color adjustment";
+"PRIMARY_DEVICE_REVERSE_CONTRAST" = "Reverse contrast, negative contrast, invert colors";
+"PRIMARY_DEVICE_INCREASE_CONTRAST" = "Increase/decrease contrast";
+"PRIMARY_DEVICE_SCREEN_RADAR" = "Screen reader";
+"PRIMARY_DEVICE_SPEAK_AUTO" = "Speak auto corrections and auto capitalizations";
+"PRIMARY_DEVICE_SUBSTITLES" = "Subtitles & captioning";
+"PRIMARY_DEVICE_VISUAL_ALERTS" = "Visual alerts";
+"PRIMARY_DEVICE_VIBRATING_ALERTS" = "Vibrating alerts";
+"PRIMARY_DEVICE_SWITCH_CONTROL" = "Switch control or Switch access";
+"PRIMARY_DEVICE_MENU_SHORTCUTS" = "Menu of shortcuts to favorite apps or settings (Assistive Touch, Assistant Menu, etc)";
+"PRIMARY_DEVICE_HEADSET" = "Incoming calls to headset or speaker";
+"PRIMARY_DEVICE_INTELLIGENT_ASSISTANT" = "Intelligent personal assistant (e.g., Cortana, Google Now, Siri, Blackberry Assistant)";
+
 "DEVICE_INFO_TITLE" = "Device Info";
 "DEVICE_INFO_DEVICE_NAME" = "Device Name";
 "DEVICE_INFO_MODEL_NAME" = "Model Name";
