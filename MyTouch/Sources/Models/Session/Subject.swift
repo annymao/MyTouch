@@ -73,12 +73,6 @@ struct Subject: Codable {
         case five
     }
 
-//    enum Level: String, Codable {
-//        case alittle
-//        case alot
-//        case somewhereInBetween
-//    }
-
     enum CellPhone: String, Codable {
         case none
         case basicphone
@@ -193,16 +187,16 @@ struct Subject: Codable {
     var currentLevelOfTiredness: Level = .one
     var mobileDeviceUsage: MedicalResults = .no
 
-    var cellphoneOrTablet: CellPhone = .none
-    var smartphone: Smartphone = .none
-    var tablet: Tablet = .none
+    var cellphoneOrTablet: [CellPhone] = []
+    var smartphone: [Smartphone] = []
+    var tablet: [Tablet] = []
 
     var reliablePrimaryDevice: ReliablePrimaryDevice = .none
     var primaryDeviceFunctionality: PrimaryDeviceFunction = .personal
     var primaryDeviceFrequency: PrimaryDeviceUsageFrequency = .aboutOnceADay
     var primaryDeviceEasiness: PrimaryDeviceEasiness = .veryEasy
-    var primaryDeviceEnhancement: PrimaryDeviceEnhancement = .noChanges
-    var primaryDeviceAccessibilityFeatures: PrimaryDeviceAccessibilityFeatures = .none
+    var primaryDeviceEnhancement: [PrimaryDeviceEnhancement] = []
+    var primaryDeviceAccessibilityFeatures: [PrimaryDeviceAccessibilityFeatures] =  []
 
     var slowMovement = false
     var rapidFatigue = false

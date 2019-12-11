@@ -524,20 +524,33 @@ class HomeTabBarController: UITabBarController {
 
 
             if let cellphoneOrTableResult = taskViewController.result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult {
-                if let answer = cellphoneOrTableResult.choiceAnswers?.first as? String {
-                    subject.cellphoneOrTablet = Subject.CellPhone(rawValue: answer) ?? .none
+                if let answer = cellphoneOrTableResult.choiceAnswers as? [String] {
+                    var tempArray: [Subject.CellPhone] = []
+                    for n in answer {
+                        tempArray.append(Subject.CellPhone(rawValue: n) ?? .none)
+                    }
+
+                    subject.cellphoneOrTablet = tempArray
                 }
             }
 
             if let smartphoneResult = taskViewController.result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult {
-                if let answer = smartphoneResult.choiceAnswers?.first as? String {
-                    subject.smartphone = Subject.Smartphone(rawValue: answer) ?? .none
+                if let answer = smartphoneResult.choiceAnswers as? [String] {
+                    var tempArray: [Subject.Smartphone] = []
+                    for n in answer {
+                        tempArray.append(Subject.Smartphone(rawValue: n) ?? .none)
+                    }
+                    subject.smartphone = tempArray
                 }
             }
 
             if let tableResult = taskViewController.result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult {
-                if let answer = tableResult.choiceAnswers?.first as? String {
-                    subject.tablet = Subject.Tablet(rawValue: answer) ?? .none
+                if let answer = tableResult.choiceAnswers as? [String] {
+                    var tempArray: [Subject.Tablet] = []
+                    for n in answer {
+                        tempArray.append(Subject.Tablet(rawValue: n) ?? .none)
+                    }
+                    subject.tablet = tempArray
                 }
             }
 
@@ -566,14 +579,24 @@ class HomeTabBarController: UITabBarController {
             }
 
             if let primaryDeviceEnhancementResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult {
-                if let answer = primaryDeviceEnhancementResult.choiceAnswers?.first as? String {
-                    subject.primaryDeviceEnhancement = Subject.PrimaryDeviceEnhancement(rawValue: answer) ?? .noChanges
+                if let answer = primaryDeviceEnhancementResult.choiceAnswers as? [String] {
+
+                    var tempArray: [Subject.PrimaryDeviceEnhancement] = []
+                    for n in answer {
+                        tempArray.append(Subject.PrimaryDeviceEnhancement(rawValue: n) ?? .noChanges)
+                    }
+                    subject.primaryDeviceEnhancement = tempArray
                 }
             }
 
             if let primaryDeviceAccessibilityFeaturesResult = taskViewController.result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKChoiceQuestionResult {
-                if let answer = primaryDeviceAccessibilityFeaturesResult.choiceAnswers?.first as? String {
-                    subject.primaryDeviceAccessibilityFeatures = Subject.PrimaryDeviceAccessibilityFeatures(rawValue: answer) ?? .none
+                if let answer = primaryDeviceAccessibilityFeaturesResult.choiceAnswers as? [String] {
+                    var tempArray: [Subject.PrimaryDeviceAccessibilityFeatures] = []
+                    for n in answer {
+                        tempArray.append(Subject.PrimaryDeviceAccessibilityFeatures(rawValue: n) ?? .none)
+                    }
+                    subject.primaryDeviceAccessibilityFeatures = tempArray
+
                 }
             }
 
@@ -1219,19 +1242,8 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
                                 answer: mobileDeviceUsageFormat)
     )
 
-    // mobile device usage free text
-    let mobileDeviceUsageFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
-    mobileDeviceUsageFreeTextFormat.multipleLines = true
-    steps.append(ORKQuestionStep(
-        identifier: "mobileDeviceUsageFreeText",
-        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
-        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_QUESTION", comment: ""),
-        answer: mobileDeviceUsageFreeTextFormat)
-    )
-
-
     // what kind of cellphone or tablet?
-    let cellphoneOrTabletFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+    let cellphoneOrTabletFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_DONT_USE", comment: ""), value: Subject.CellPhone.none.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_BASICPHONE", comment: ""), value: Subject.CellPhone.basicphone.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_SMARTPHONE", comment: ""), value: Subject.CellPhone.smartphone.rawValue as NSString),
@@ -1257,7 +1269,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     )
 
     // kind of smartphone
-       let smartphoneFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       let smartphoneFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_DONT_USE", comment: ""), value: Subject.Smartphone.none.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_ANDROID", comment: ""), value: Subject.Smartphone.android.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
@@ -1283,7 +1295,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
        )
 
     // kind of tablet
-    let tabletFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+    let tabletFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_DONT_USE", comment: ""), value: Subject.Smartphone.none.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_ANDROID", comment: ""), value: Subject.Smartphone.android.rawValue as NSString),
         ORKTextChoice(text: NSLocalizedString("TABLET_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
@@ -1388,7 +1400,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 
 
     // primary device's enhancement
-    let primaryDeviceEnhancementFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+    let primaryDeviceEnhancementFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_NO_CHANGES", comment: ""), value: Subject.PrimaryDeviceEnhancement.noChanges.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_PHYSICAL_ACCESSORIES", comment: ""), value: Subject.PrimaryDeviceEnhancement.physicalAccessories.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_ASSISTANT", comment: ""), value: Subject.PrimaryDeviceEnhancement.assistiveDevices.rawValue as NSString),
@@ -1414,7 +1426,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     )
 
     // primary device's accessibilty features
-    let primaryDeviceAccessibilityFeaturesFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+    let primaryDeviceAccessibilityFeaturesFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_DONT_USE_ACCESSIBILITY", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.none.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_AUDIO", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.audioNavigation.rawValue as NSString),
            ORKTextChoice(text: NSLocalizedString("PRIMARY_DEVICE_GESTURE", comment: ""), value: Subject.PrimaryDeviceAccessibilityFeatures.gestureBasedControls.rawValue as NSString),
@@ -1494,6 +1506,7 @@ private class OrderedTask: ORKOrderedTask {
                 return self.step(withIdentifier: "symptom")
             }
         } else if step?.identifier == "medicalDiagnosis" {
+
             guard let choice = result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult else {
                 return super.step(after: step, with: result)
             }
@@ -1509,6 +1522,7 @@ private class OrderedTask: ORKOrderedTask {
             }
 
         } else if step?.identifier == "medication" {
+            
             guard let choice = result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult else {
                 return super.step(after: step, with: result)
             }
@@ -1521,20 +1535,6 @@ private class OrderedTask: ORKOrderedTask {
                 return self.step(withIdentifier: "medicationFreeText")
             } else {
                 return self.step(withIdentifier: "pastThreeMonthsCondition")
-            }
-        } else if step?.identifier == "mobileDeviceUsage" {
-            guard let choice = result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
-            }
-
-            guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
-            }
-
-            if answer == "other" {
-                return self.step(withIdentifier: "mobileDeviceUsageFreeText")
-            } else {
-                return self.step(withIdentifier: "cellphoneOrTablet")
             }
         } else if step?.identifier == "cellphoneOrTablet" {
             guard let choice = result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult else {
@@ -1617,6 +1617,8 @@ private class OrderedTask: ORKOrderedTask {
 
             if answer == "other" {
                 return self.step(withIdentifier: "primaryDeviceAccessibilityFeatureFreeText")
+            } else {
+                return self.step(withIdentifier: "summary")
             }
         } else if step?.identifier == "autoFill" {
 
@@ -1678,20 +1680,6 @@ private class OrderedTask: ORKOrderedTask {
                 return self.step(withIdentifier: "medicationFreeText")
             } else {
                 return self.step(withIdentifier: "medication")
-            }
-        } else if step?.identifier == "cellphoneOrTablet" {
-            guard let choice = result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult else {
-                return super.step(before: step, with: result)
-            }
-
-            guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(before: step, with: result)
-            }
-
-            if answer == "other" {
-                return self.step(withIdentifier: "mobileDeviceUsageFreeText")
-            } else {
-                return self.step(withIdentifier: "mobileDeviceUsage")
             }
         } else if step?.identifier == "smartphone" {
             guard let choice = result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult else {
