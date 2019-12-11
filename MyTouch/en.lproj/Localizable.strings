@@ -59,6 +59,36 @@
 "SURVEY_ID_TITLE" = "User ID";
 "SURVEY_SITUATION_TITLE" = "Situation";
 
+"SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE" = "GENERAL FUNCTIONING AND HEALTH";
+"SURVEY_CONCENTRATION_DIFFICULTY_QUESTION" = "Do you have difficulty remembering or concentrating?";
+"SURVEY_ANXIETY_QUESTION" = "Do you experience frequent worry, nervousness, or anxiety?";
+"SURVEY_HEARING_DIFFICULTY_QUESTION" = "Do you have difficulty hearing, even when using a hearing aid(s)?";
+"SURVEY_COMMUNICATION_DIFFICULTY_QUESTION" = "Do you have difficulty communicating using your usual language, for example understanding or being understood?";
+"SURVEY_ARMS_MOVEMENTS_DIFFICULTY_QUESTION" = "Do you have difficulty using your arms for raising a 2 liter bottle of water or soda from waist to eye level?";
+"SURVEY_HANDS_MOVEMENTS_DIFFICULTY_QUESTION" = "Do you have difficulty using your hands and fingers, such as picking up small objects, for example, a button or a pencil, or opening or closing containers or bottles?";
+"SURVEY_WALKING_DIFFICULTY_QUESTION" = "Do you have difficulty walking or climbing stairs?";
+"SURVEY_MEDICAL_DIAGNOSIS_QUESTION" = "Do you have any diagnosed medical conditions?";
+"SURVEY_MEDICAL_DIAGNOSIS_YES_QUESTION" = "Please specify your diagnosed medical conditions";
+"SURVEY_MEDICATION_QUESTION" = "Are you on any medication right now?";
+"SURVEY_MEDICATION_YES_QUESTION" = "Please specify your medication";
+
+"SURVEY_FATIGUE_TITLE" = "Fatigue";
+"SURVEY_PAST_THREE_MONTHS_CONDITION_QUESTION" = "In the past 3 months, how often did you feel very tired or exhausted?";
+"SURVEY_LAST_TIME_FEEL_TIRED_QUESTION" = "Thinking about the last time you felt very tired or exhausted, how long did it last?";
+"SURVEY_LAST_TIME_LEVEL_OF_TIREDNESS_QUESTION" = "Thinking about the last time you felt this way, how would you describe the level of tiredness?";
+"SURVEY_RIGHT_NOW_LEVEL_OF_TIREDNESS_QUESTION" = "How would you describe the level of tiredness right now?";
+
+"SURVEY_MOBILE_DEVICE_USE_TITLE" = "MOBILE DEVICE USE";
+"SURVEY_MOBILE_DEVICE_USE_QUESTION" = "Do you own or use a mobile device such as a cell phone or tablet?";
+"SURVEY_MOBILE_DEVICE_USE_TYPE_QUESTION" = "If you own or use a cell phone or tablet, what kind do you use? (Check all that apply)";
+"SURVEY_MOBILE_DEVICE_BRAND_QUESTION" = "If you own or use a SMARTPHONE, what kind do you have? (Check all that apply)";
+"SURVEY_MOBILE_DEVICE_TABLET_QUESTION" = "If you own or use a TABLET, what kind do you have? (Check all that apply)";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_QUESTION" = "Which of your devices is your PRIMARY DEVICE (the device you use or rely on the most)?";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_QUESTION" = "What do you use your PRIMARY DEVICE for?";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_USAGE_FREQUENCY_QUESTION" = "How often do you use your PRIMARY DEVICE?";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_EASINESS_QUESTION" = "How easy is your PRIMARY DEVICE to use?";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_ENHANCEMENT_QUESTION" = "Have you added or changed anything to your PRIMARY DEVICE to make it easier to use? If so, what kind of things have you added? (Check all that apply)";
+"SURVEY_MOBILE_DEVICE_PRIMARY_DEVICE_FEATURES_QUESTION" = "Which accessibility features do you use on your PRIMARY DEVICE? (Check all that apply)";
 
 "GENDER_MALE" = "Male";
 "GENDER_FEMALE" = "Female";
@@ -92,6 +122,51 @@
 "SYMPTOM_DIFFICULTY_CONTROLLING_DISTANCE" = "Difficaulty Controlling Distance";
 "SYMPTOM_NONE" = "None";
 "SYMPTOM_UNKNOWN" = "Unknown";
+
+"FREQUENCY_NEVER" = "Never";
+"FREQUENCY_SOME_DAYS" = "Some days";
+"FREQUENCY_MOST_DAYS" = "Most days";
+"FREQUENCY_EVERY_DAY" = "Every day";
+"FREQUENCY_REFUSED" = "Refused";
+"FREQUENCY_DONT_KNOW" = "Don’t know";
+
+"SKIP_TO_THE_NEXT_SECTION" = "(If yes, skip to the next section.)";
+
+"LEVEL_A_LITTLE" = "A little";
+"LEVEL_A_LOT" = "A lot";
+"LEVEL_SOMEWHERE_IN_BETWEEN" = "Somewhere in between a little and a lot";
+"LEVEL_REFUSED" = "Refused";
+"LEVEL_DONT_KNOW" = "Don't know";
+
+"NO_DIFFICULTY" = "No difficulty";
+"SOME_DIFFICULTY" = "Some difficulty";
+"ALOT_DIFFICULTY" = "A lot of difficulty";
+"UNABLE_TODO" = "Cannot do at all / Unable to do";
+
+"ANSWER_YES" = "Yes, please specify";
+"ANSWER_NO" = "No";
+
+"CELLPHONE_OR_TABLET_DONT_USE" = "I do not own or use a cell phone or tablet";
+"CELLPHONE_OR_TABLET_BASICPHONE" = "Basic phone (Examples: Motorola Razr, Pantech Breeze, Nokia 6350, Owasys)";
+"CELLPHONE_OR_TABLET_SMARTPHONE" = "Smartphone (Examples: iPhone, Android phone, BlackBerry, Windows phone)";
+"CELLPHONE_OR_TABLET_TABLET" = "Tablet (Examples: iPad, Kindle Fire, Galaxy Tab, Microsoft Surface)";
+"CELLPHONE_OR_TABLET_OTHER" = "Other (please specify)";
+
+"SMARTPHONE_KIND_DONT_USE" = "I do not own or use a smartphone";
+"SMARTPHONE_KIND_ANDROID" = "Android-powered smartphone (Examples: Motorola Droid, Samsung Galaxy S)";
+"SMARTPHONE_KIND_APPLE" = "Apple iOS smartphone (Example: Apple iPhone)";
+"SMARTPHONE_KIND_BLACKBERRY" = "BlackBerry smartphone (Examples: Classic, Q10, Bold, Curve)";
+"SMARTPHONE_KIND_WINDOWS" = "Windows-powered smartphone (Examples: Microsoft Lumia, HTC Tilt, LG Quantum, Samsung Focus)";
+"SMARTPHONE_KIND_DONT_KNOW" = "Don't know";
+"SMARTPHONE_KIND_OTHER" = "Other (please specify)";
+
+"TABLET_KIND_DONT_USE"  = "I do not own or use a tablet";
+"TABLET_KIND_ANDROID"  = "Android-powered tablet (Examples: Samsung Galaxy Tab, Amazon Kindle Fire)";
+"TABLET_KIND_APPLE"  = "Apple iOS tablet (Example: Apple iPad)";
+"TABLET_KIND_BLACKBERRY"  = "Blackberry-powered tablet (Blackberry Playbook)";
+"TABLET_KIND_WINDOWS"  = "Windows-powered tablet (Examples: Microsoft Surface)";
+"TABLET_KIND_DONT_KNOW"  = "Don't know";
+"TABLET_KIND_OTHER"  = "Other (please specify)";
 
 "DEVICE_INFO_TITLE" = "Device Info";
 "DEVICE_INFO_DEVICE_NAME" = "Device Name";

@@ -431,7 +431,92 @@ class HomeTabBarController: UITabBarController {
                     }
                 }
             }
-            
+
+            if let concentrationResult = taskViewController.result.stepResult(forStepIdentifier: "concentration")?.result(forIdentifier: "concentration") as? ORKChoiceQuestionResult {
+                if let answer = concentrationResult.choiceAnswers?.first as? String {
+                    subject.concentrationDifficulty = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let anxietyResult = taskViewController.result.stepResult(forStepIdentifier: "anxiety")?.result(forIdentifier: "anxiety") as? ORKChoiceQuestionResult {
+                if let answer = anxietyResult.choiceAnswers?.first as? String {
+                    subject.anxietyFrequency = Subject.Frequencies(rawValue: answer) ?? .unknown
+                }
+            }
+
+            if let hearingResult = taskViewController.result.stepResult(forStepIdentifier: "hearing")?.result(forIdentifier: "hearing") as? ORKChoiceQuestionResult {
+                if let answer = hearingResult.choiceAnswers?.first as? String {
+                    subject.hearingDifficulty = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let communicationResult = taskViewController.result.stepResult(forStepIdentifier: "communication")?.result(forIdentifier: "communication") as? ORKChoiceQuestionResult {
+                if let answer = communicationResult.choiceAnswers?.first as? String {
+                    subject.communicationDifficutly = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let armsMovementsResult = taskViewController.result.stepResult(forStepIdentifier: "armsMovements")?.result(forIdentifier: "armsMovements") as? ORKChoiceQuestionResult {
+                if let answer = armsMovementsResult.choiceAnswers?.first as? String {
+                    subject.armsMovementsDifficutly = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let handsMovementsResult = taskViewController.result.stepResult(forStepIdentifier: "handsMovements")?.result(forIdentifier: "handsMovements") as? ORKChoiceQuestionResult {
+                if let answer = handsMovementsResult.choiceAnswers?.first as? String {
+                    subject.handsMovementsDifficutly = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let walkingResult = taskViewController.result.stepResult(forStepIdentifier: "walking")?.result(forIdentifier: "walking") as? ORKChoiceQuestionResult {
+                if let answer = walkingResult.choiceAnswers?.first as? String {
+                    subject.walkingDifficulty = Subject.Difficulties(rawValue: answer) ?? .none
+                }
+            }
+
+            if let medicalDiagnosisResult = taskViewController.result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult {
+                if let answer = medicalDiagnosisResult.choiceAnswers?.first as? String {
+                    subject.medicalDiagnosis = Subject.MedicalResults(rawValue: answer) ?? .no
+                }
+            }
+
+            if let medicationResult = taskViewController.result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult {
+                if let answer = medicationResult.choiceAnswers?.first as? String {
+                    subject.medication = Subject.MedicalResults(rawValue: answer) ?? .no
+                }
+            }
+
+            if let pastThreeMonthsConditionResult = taskViewController.result.stepResult(forStepIdentifier: "pastThreeMonthsCondition")?.result(forIdentifier: "pastThreeMonthsCondition") as? ORKChoiceQuestionResult {
+                if let answer = pastThreeMonthsConditionResult.choiceAnswers?.first as? String {
+                    subject.pastThreeMonthsCondition = Subject.Frequencies(rawValue: answer) ?? .never
+                }
+            }
+
+            if let lastTimeConditionResult = taskViewController.result.stepResult(forStepIdentifier: "lastTimeCondition")?.result(forIdentifier: "lastTimeCondition") as? ORKChoiceQuestionResult {
+                if let answer = lastTimeConditionResult.choiceAnswers?.first as? String {
+                    subject.lastTimeCondition = Subject.Frequencies(rawValue: answer) ?? .never
+                }
+            }
+
+            if let previousLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "previousLevelOfTiredness")?.result(forIdentifier: "previousLevelOfTiredness") as? ORKChoiceQuestionResult {
+                if let answer = previousLevelOfTirednessResult.choiceAnswers?.first as? String {
+                    subject.previousLevelOfTiredness = Subject.Level(rawValue: answer) ?? .unknown
+                }
+            }
+
+            if let currentLevelOfTirednessResult = taskViewController.result.stepResult(forStepIdentifier: "currentLevelOfTiredness")?.result(forIdentifier: "currentLevelOfTiredness") as? ORKChoiceQuestionResult {
+                if let answer = currentLevelOfTirednessResult.choiceAnswers?.first as? String {
+                    subject.currentLevelOfTiredness = Subject.Level(rawValue: answer) ?? .unknown
+                }
+            }
+
+            if let mobileDeviceUsageResult = taskViewController.result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult {
+                if let answer = mobileDeviceUsageResult.choiceAnswers?.first as? String {
+                    subject.mobileDeviceUsage = Subject.MedicalResults(rawValue: answer) ?? .no
+                }
+            }
+
+
             do {
                 let data = try APIClient.encoder.encode(subject)
                 UserDefaults.standard.set(data, forKey: UserDefaults.Key.latestSubject)
@@ -668,63 +753,63 @@ private func consentTask() -> ORKOrderedTask {
         .studySurvey,
         .withdrawing
     ]
-    
+
     let consentSections: [ORKConsentSection] = sectionTypes.map { contentSectionType in
         let consentSection = ORKConsentSection(type: contentSectionType)
         switch contentSectionType {
         case .overview:
             consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_OVERVIEW_SUMMARY", comment: "")
             // consentSection.content = ""
-            
+
         case .dataGathering:
             consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY", comment: "")
-            
+
         case .privacy:
             consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_PRIVACY_SUMMARY", comment: "")
-            
+
         case .studySurvey:
             consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY", comment: "")
-            
+
         case .withdrawing:
             consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_WITHDRAWING_SUMMARY", comment: "")
-            
+
         default:
             break
         }
         return consentSection
     }
-    
+
     document.sections = consentSections
     document.addSignature(ORKConsentSignature(forPersonWithTitle: NSLocalizedString("MYOTUCH_USER_TITLE", comment: ""), dateFormatString: nil, identifier: "signature"))
-    
+
     var steps = [ORKStep]()
-    
+
     let visualConsentStep = ORKVisualConsentStep(identifier: "visualConsent", document: document)
     steps.append(visualConsentStep)
-    
+
 //    let signature = document.signatures?.first
 //    let reviewStep = ORKConsentReviewStep(identifier: "review", signature: signature, in: document)
 //    reviewStep.text = "檢閱同意書" // "Review the consent"
 //    reviewStep.reasonForConsent = "MyTouch 使用同意書"// "Consent to join the Research Study."
 //    steps.append(reviewStep)
-    
+
     let completionStep = ORKCompletionStep(identifier: "completion")
     completionStep.title = NSLocalizedString("WELCOME", comment: "")
     completionStep.text = NSLocalizedString("THANK_YOU", comment: "")
     steps.append(completionStep)
-    
+
     return ORKOrderedTask(identifier: "consentTask", steps: steps)
 }
 
 private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
-    
+
     var steps = [ORKStep]()
-    
+
     let instructionStep = ORKInstructionStep(identifier: "intro")
     instructionStep.title = NSLocalizedString("SURVEY_INSTRUCTION_TITLE", comment: "")
     instructionStep.text = NSLocalizedString("SURVEY_INSTRUCTION_TEXT", comment: "")
     steps += [instructionStep]
-    
+
     // ANNY-NOTE: ID
     let idFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
     idFormat.minimum = NSNumber(value: 0)
@@ -735,7 +820,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_ID_TITLE", comment: ""),
         answer: idFormat)
     )
-    
+
     // name -> situation
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
@@ -746,8 +831,8 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         answer: nameAnswerFormat)
     )
 
-    
-    
+
+
     // birth year
     let birthYearFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
     birthYearFormat.minimum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date.distantPast))
@@ -758,8 +843,8 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_BIRTH_YEAR_QUESTION", comment: ""),
         answer: birthYearFormat)
     )
-    
-    
+
+
     // gender
     let genderFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("GENDER_FEMALE", comment: ""), value: Subject.Gender.female.rawValue as NSString),
@@ -772,8 +857,8 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_GENDER_QUESTION", comment: ""),
         answer: genderFormat)
     )
-    
-    
+
+
     // dominant hand
     let dominantHandFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("DOMINANT_HAND_LEFT", comment: ""), value: Subject.DominantHand.left.rawValue as NSString),
@@ -787,8 +872,8 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_DOMINANT_HAND_QUESTION", comment: ""),
         answer: dominantHandFormat)
     )
-    
-    
+
+
     // health impairment
     let impairmentFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_NONE", comment: ""), value: Subject.Impairment.none.rawValue as NSString),
@@ -807,7 +892,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_IMPAIRMENT_QUESTION", comment: ""),
         answer: impairmentFormat)
     )
-    
+
     // health impairment free text
     let impairmentFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
     impairmentFreeTextFormat.multipleLines = true
@@ -817,7 +902,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_IMPAIRMENT_QUESTION", comment: ""),
         answer: impairmentFreeTextFormat)
     )
-    
+
     // symptom
     let symptomFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
         ORKTextChoice(text: NSLocalizedString("SYMPTOM_NONE", comment: ""), value: 0 as NSNumber),
@@ -839,8 +924,320 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_SYMPTOMS_QUESTION", comment: ""),
         answer: symptomFormat)
     )
-    
-    
+
+
+    // SYENNY: Add new survey (12/8)
+    // concetration difficulty
+    let concentrationDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "concentration",
+                                 title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_CONCENTRATION_DIFFICULTY_QUESTION", comment: ""),
+                                 answer: concentrationDifficultyFormat)
+    )
+
+
+    // Anxiety frequency
+    let anxietyFrequencyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_NEVER", comment: ""), value: Subject.Frequencies.never.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_SOME_DAYS", comment: ""), value: Subject.Frequencies.somedays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_MOST_DAYS", comment: ""), value: Subject.Frequencies.mostdays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_EVERY_DAY", comment: ""), value: Subject.Frequencies.everyday.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_REFUSED", comment: ""), value: Subject.Frequencies.refused.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_DONT_KNOW", comment: ""), value: Subject.Frequencies.unknown.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "anxiety",
+                                 title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_ANXIETY_QUESTION", comment: ""),
+                                 answer: anxietyFrequencyFormat)
+    )
+
+    // hearing difficulty
+    let hearingDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "hearing",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_HEARING_DIFFICULTY_QUESTION", comment: ""),
+                                answer: hearingDifficultyFormat)
+    )
+
+    // communication difficulty
+    let communicationDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "communication",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_COMMUNICATION_DIFFICULTY_QUESTION", comment: ""),
+                                answer: communicationDifficultyFormat)
+    )
+
+    // Arms movements difficulty
+    let armsMovementsDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "armsMovements",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_ARMS_MOVEMENTS_DIFFICULTY_QUESTION", comment: ""),
+                                answer: armsMovementsDifficultyFormat)
+    )
+
+    // hands movements difficulty
+    let handsMovementsDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "handsMovements",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_HANDS_MOVEMENTS_DIFFICULTY_QUESTION", comment: ""),
+                                answer: handsMovementsDifficultyFormat)
+    )
+
+    // walking difficulty
+    let walkingDifficultyFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+       ORKTextChoice(text: NSLocalizedString("NO_DIFFICULTY", comment: ""), value: Subject.Difficulties.none.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("SOME_DIFFICULTY", comment: ""), value: Subject.Difficulties.some.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ALOT_DIFFICULTY", comment: ""), value: Subject.Difficulties.alot.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("UNABLE_TODO", comment: ""), value: Subject.Difficulties.unable.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "walking",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_WALKING_DIFFICULTY_QUESTION", comment: ""),
+                                answer: walkingDifficultyFormat)
+    )
+
+    // medical diagnosis
+    let medicalDiagnosisFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("ANSWER_YES", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "medicalDiagnosis",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MEDICAL_DIAGNOSIS_QUESTION", comment: ""),
+                                answer: medicalDiagnosisFormat)
+    )
+
+    // medical diagnosis free text
+    let medicalDiagnosisFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    impairmentFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "medicalDiagnosisFreeText",
+        title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MEDICAL_DIAGNOSIS_YES_QUESTION", comment: ""),
+        answer: medicalDiagnosisFreeTextFormat)
+    )
+
+    // medication
+    let medicationFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("ANSWER_YES", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "medication",
+                                title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MEDICATION_QUESTION", comment: ""),
+                                answer: medicationFormat)
+    )
+
+    // medication free text
+    let medicationFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    impairmentFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "medicationFreeText",
+        title: NSLocalizedString("SURVEY_GENERAL_FUNCTIONING_AND_HEALTH_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MEDICATION_YES_QUESTION", comment: ""),
+        answer: medicationFreeTextFormat)
+    )
+
+    // past 3 months condition
+    let neverText = NSLocalizedString("FREQUENCY_NEVER", comment: "")
+    let skipText = NSLocalizedString("SKIP_TO_THE_NEXT_SECTION", comment: "")
+    let pastThreeMonthsConditionFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: neverText + skipText, value: Subject.Frequencies.never.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_SOME_DAYS", comment: ""), value: Subject.Frequencies.somedays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_MOST_DAYS", comment: ""), value: Subject.Frequencies.mostdays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_EVERY_DAY", comment: ""), value: Subject.Frequencies.everyday.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "pastThreeMonthsCondition",
+                                 title: NSLocalizedString("SURVEY_FATIGUE_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_PAST_THREE_MONTHS_CONDITION_QUESTION", comment: ""),
+                                 answer: pastThreeMonthsConditionFormat)
+    )
+
+    // last time condition
+    let lastTimeConditionFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_NEVER", comment: ""), value: Subject.Frequencies.never.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_SOME_DAYS", comment: ""), value: Subject.Frequencies.somedays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_MOST_DAYS", comment: ""), value: Subject.Frequencies.mostdays.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("FREQUENCY_EVERY_DAY", comment: ""), value: Subject.Frequencies.everyday.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "lastTimeCondition",
+                                 title: NSLocalizedString("SURVEY_FATIGUE_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_LAST_TIME_FEEL_TIRED_QUESTION", comment: ""),
+                                 answer: lastTimeConditionFormat)
+    )
+
+
+    // last time level of tiredness
+    let lastTimeLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_REFUSED", comment: ""), value: Subject.Level.refused.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_DONT_KNOW", comment: ""), value: Subject.Level.unknown.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "previousLevelOfTiredness",
+                                 title: NSLocalizedString("SURVEY_FATIGUE_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_LAST_TIME_LEVEL_OF_TIREDNESS_QUESTION", comment: ""),
+                                 answer: lastTimeLevelOfTirednessFormat)
+    )
+
+
+    // current level of tiredness
+    let currentLevelOfTirednessFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LITTLE", comment: ""), value: Subject.Level.alittle.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_A_LOT", comment: ""), value: Subject.Level.alot.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: ""), value: Subject.Level.somewhereInBetween.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_REFUSED", comment: ""), value: Subject.Level.refused.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("LEVEL_DONT_KNOW", comment: ""), value: Subject.Level.unknown.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "currentLevelOfTiredness",
+                                 title: NSLocalizedString("SURVEY_FATIGUE_TITLE", comment: ""),
+                                 question: NSLocalizedString("SURVEY_RIGHT_NOW_LEVEL_OF_TIREDNESS_QUESTION", comment: ""),
+                                 answer: currentLevelOfTirednessFormat)
+    )
+
+
+    // mobile device usage
+    let mobileDeviceUsageFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("ANSWER_YES", comment: ""), value: Subject.MedicalResults.yes.rawValue as NSString),
+       ORKTextChoice(text: NSLocalizedString("ANSWER_NO", comment: ""), value: Subject.MedicalResults.no.rawValue as NSString),
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "mobileDeviceUsage",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_QUESTION", comment: ""),
+                                answer: mobileDeviceUsageFormat)
+    )
+
+    // mobile device usage free text
+    let mobileDeviceUsageFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    mobileDeviceUsageFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "mobileDeviceUsageFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_QUESTION", comment: ""),
+        answer: mobileDeviceUsageFreeTextFormat)
+    )
+
+
+    // what kind of cellphone or tablet?
+    let cellphoneOrTabletFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_DONT_USE", comment: ""), value: Subject.CellPhone.none.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_BASICPHONE", comment: ""), value: Subject.CellPhone.basicphone.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_SMARTPHONE", comment: ""), value: Subject.CellPhone.smartphone.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_TABLET", comment: ""), value: Subject.CellPhone.tablet.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("CELLPHONE_OR_TABLET_OTHER", comment: ""), value: Subject.CellPhone.other.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "cellphoneOrTablet",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TYPE_QUESTION", comment: ""),
+                                answer: cellphoneOrTabletFormat)
+    )
+
+
+    // cellphone or tablet free text
+    let otherCellPhoneOrTabletFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "otherCellPhoneOrTabletFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TYPE_QUESTION", comment: ""),
+        answer: otherCellPhoneOrTabletFreeTextFormat)
+    )
+
+    // kind of smartphone
+       let smartphoneFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_DONT_USE", comment: ""), value: Subject.Smartphone.none.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_ANDROID", comment: ""), value: Subject.Smartphone.android.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_BLACKBERRY", comment: ""), value: Subject.Smartphone.blackberry.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_WINDOWS", comment: ""), value: Subject.Smartphone.windows.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: ""), value: Subject.Smartphone.unknown.rawValue as NSString),
+           ORKTextChoice(text: NSLocalizedString("SMARTPHONE_KIND_OTHER", comment: ""), value: Subject.Smartphone.other.rawValue as NSString)
+       ])
+
+       steps.append(ORKQuestionStep(identifier: "smartphone",
+                                   title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                   question: NSLocalizedString("SURVEY_MOBILE_DEVICE_BRAND_QUESTION", comment: ""),
+                                   answer: smartphoneFormat)
+       )
+
+       // smartphone free text
+       let smartphoneFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+       otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+       steps.append(ORKQuestionStep(
+           identifier: "smartphoneFreeText",
+           title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+           question: NSLocalizedString("SURVEY_MOBILE_DEVICE_BRAND_QUESTION", comment: ""),
+           answer: smartphoneFreeTextFormat)
+       )
+
+    // kind of tablet
+    let tabletFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_DONT_USE", comment: ""), value: Subject.Smartphone.none.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_ANDROID", comment: ""), value: Subject.Smartphone.android.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_APPLE", comment: ""), value: Subject.Smartphone.apple.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_BLACKBERRY", comment: ""), value: Subject.Smartphone.blackberry.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_WINDOWS", comment: ""), value: Subject.Smartphone.windows.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_DONT_KNOW", comment: ""), value: Subject.Smartphone.unknown.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("TABLET_KIND_OTHER", comment: ""), value: Subject.Smartphone.other.rawValue as NSString)
+    ])
+
+    steps.append(ORKQuestionStep(identifier: "tablet",
+                                title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+                                question: NSLocalizedString("SURVEY_MOBILE_DEVICE_TABLET_QUESTION", comment: ""),
+                                answer: tabletFormat)
+    )
+
+    // smartphone free text
+    let tabletFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    otherCellPhoneOrTabletFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(
+        identifier: "tabletFreeText",
+        title: NSLocalizedString("SURVEY_MOBILE_DEVICE_USE_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_MOBILE_DEVICE_TABLET_QUESTION", comment: ""),
+        answer: tabletFreeTextFormat)
+    )
+
     let completionStep = ORKCompletionStep(identifier: "summary")
     completionStep.title = NSLocalizedString("THANK_YOU", comment: "")
     completionStep.text = NSLocalizedString("SURVEY_COMPLETION_TEXT", comment: "")
@@ -882,54 +1279,221 @@ private class OrderedTask: ORKOrderedTask {
             } else {
                 return self.step(withIdentifier: "symptom")
             }
-        }
-        else if step?.identifier == "autoFill" {
-            
+        } else if step?.identifier == "medicalDiagnosis" {
+            guard let choice = result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "yes" {
+                return self.step(withIdentifier: "medicalDiagnosisFreeText")
+            } else {
+                return self.step(withIdentifier: "medication")
+            }
+
+        } else if step?.identifier == "medication" {
+            guard let choice = result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "yes" {
+                return self.step(withIdentifier: "medicationFreeText")
+            } else {
+                return self.step(withIdentifier: "pastThreeMonthsCondition")
+            }
+        } else if step?.identifier == "mobileDeviceUsage" {
+            guard let choice = result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "mobileDeviceUsageFreeText")
+            } else {
+                return self.step(withIdentifier: "cellphoneOrTablet")
+            }
+        } else if step?.identifier == "cellphoneOrTablet" {
+            guard let choice = result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "cellphoneOrTabletFreeText")
+            } else {
+                return self.step(withIdentifier: "smartphone")
+            }
+        } else if step?.identifier == "smartphone" {
+            guard let choice = result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "smartphoneFreeText")
+            } else {
+                return self.step(withIdentifier: "tablet")
+            }
+        } else if step?.identifier == "tablet" {
+            guard let choice = result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "tabletFreeText")
+            } else {
+                return self.step(withIdentifier: "primaryDeviceKind")
+            }
+        } else if step?.identifier == "autoFill" {
+
             guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
                 return super.step(after: step, with: result)
             }
-            
+
             if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
                 return self.step(withIdentifier: "summary")
             } else {
                 return super.step(after: step, with: result)
             }
         }
-        
+
         return super.step(after: step, with: result)
     }
-    
+
     override func step(before step: ORKStep?, with result: ORKTaskResult) -> ORKStep? {
-        
+
         if step?.identifier == "symptom" {
-            
+
             guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
                 return super.step(before: step, with: result)
             }
-            
+
             guard let answer = choice.choiceAnswers?.first as? String else {
                 return super.step(before: step, with: result)
             }
-            
+
             if answer == "others" {
                 return self.step(withIdentifier: "impairmentFreeText")
             } else {
                 return self.step(withIdentifier: "impairment")
             }
-        }
-        else if step?.identifier == "summary" {
-            
-            guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
-                return super.step(before: step, with: result)
+        } else if step?.identifier == "medication" {
+            guard let choice = result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
             }
-            
-            if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
-                return self.step(withIdentifier: "autoFill")
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "yes" {
+                return self.step(withIdentifier: "medicalDiagnosisFreeText")
             } else {
-                return super.step(before: step, with: result)
+                return self.step(withIdentifier: "medicalDiagnosis")
             }
+        } else if step?.identifier == "pastThreeMonthsCondition" {
+            guard let choice = result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "yes" {
+                return self.step(withIdentifier: "medicationFreeText")
+            } else {
+                return self.step(withIdentifier: "medication")
+            }
+        } else if step?.identifier == "cellphoneOrTablet" {
+            guard let choice = result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "mobileDeviceUsageFreeText")
+            } else {
+                return self.step(withIdentifier: "mobileDeviceUsage")
+            }
+        }else if step?.identifier == "smartphone" {
+            guard let choice = result.stepResult(forStepIdentifier: "cellphoneOrTablet")?.result(forIdentifier: "cellphoneOrTablet") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "cellphoneOrTabletFreeText")
+            } else {
+                return self.step(withIdentifier: "cellphoneOrTablet")
+            }
+        } else if step?.identifier == "tablet" {
+            guard let choice = result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "smartphoneFreeText")
+            } else {
+                return self.step(withIdentifier: "smartphone")
+            }
+        } else if step?.identifier == "primaryDeviceKind" {
+            guard let choice = result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "tabletFreeText")
+            } else {
+                return self.step(withIdentifier: "tablet")
+            }
+        } else if step?.identifier == "summary" {
+
+        guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
+            return super.step(before: step, with: result)
         }
-        
+
+        if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
+            return self.step(withIdentifier: "autoFill")
+        } else {
+            return super.step(before: step, with: result)
+        }
+    }
+
         return super.step(before: step, with: result)
     }
 }

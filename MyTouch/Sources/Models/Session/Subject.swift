@@ -9,7 +9,7 @@
 import Foundation
 
 struct Subject: Codable {
-    
+
     enum Gender: String, Codable {
         case female, male, other
     }
@@ -17,10 +17,10 @@ struct Subject: Codable {
     enum DominantHand: String, Codable {
         case left, right, both, none
     }
-    
+
     struct Symptom: OptionSet {
         let rawValue: UInt
-        
+
         static let slowMovement                   = Symptom(rawValue: 1 << 0)
         static let rapidFatigue                   = Symptom(rawValue: 1 << 1)
         static let poorCoordination               = Symptom(rawValue: 1 << 2)
@@ -33,7 +33,7 @@ struct Subject: Codable {
         static let difficultyControllingDirection = Symptom(rawValue: 1 << 9)
         static let difficultyControllingDistance  = Symptom(rawValue: 1 << 10)
     }
-    
+
     enum Impairment: String, Codable {
         case parkinsons
         case cerebralPalsy
@@ -45,13 +45,140 @@ struct Subject: Codable {
         case others
         case none
     }
-    
+
+    enum Frequencies: String, Codable {
+        case never
+        case somedays
+        case mostdays
+        case everyday
+        case refused
+        case unknown
+    }
+
+    enum Difficulties: String, Codable {
+        case none
+        case some
+        case alot
+        case unable
+    }
+
+    enum MedicalResults: String, Codable {
+        case yes
+        case no
+    }
+
+    enum Level: String, Codable {
+        case alittle
+        case alot
+        case somewhereInBetween
+        case refused
+        case unknown
+    }
+
+    enum CellPhone: String, Codable {
+        case none
+        case basicphone
+        case smartphone
+        case tablet
+        case other
+    }
+
+    enum Smartphone: String, Codable {
+        case none
+        case android
+        case apple
+        case blackberry
+        case windows
+        case unknown
+        case other
+    }
+
+    enum Tablet: String, Codable {
+        case none
+        case android
+        case apple
+        case blackberry
+        case windows
+        case unknown
+        case other
+    }
+
+    enum PrimaryDeviceFunction: String, Codable {
+        case professional
+        case personal
+        case both
+        case emergencies
+    }
+
+    enum PrimaryDeviceUsageFrequency: String, Codable {
+        case severalTimesADay
+        case aboutOnceADay
+        case threeToFiveDaysAWeek
+        case oneToTwoDaysAWeek
+        case everyFewWeeks
+        case lessOften
+        case unknown
+    }
+
+    enum PrimaryDeviceEasiness: String, Codable {
+        case veryEasy
+        case easyToUse
+        case somewhatHardToUse
+        case hardToUse
+        case cannotUseWithoutHelp
+    }
+
+    enum PrimaryDeviceEnhancement: String, Codable {
+        case noChanges
+        case physicalAccessories
+        case assistiveDevices
+        case software
+        case improvisedSolutions
+        case other
+    }
+
+    enum PrimaryDeviceAccessibilityFeatures: String, Codable {
+        case none
+        case audioNavigation
+        case gestureBasedControls
+        case simpleDisplayOrLargeIcons
+        case textMagnification
+        case screenMagnification
+        case customColorContrastOrAdjustment
+        case reverseContrast
+        case increaseDecreaseContrast
+        case screenReader
+        case speakAutoCorrectionOrCapitalizations
+        case subtitlesAndCaptioning
+        case visualAlerts
+        case vibratingAlerts
+        case switchControlsAccess
+        case menuShortcutsFavoriteApps
+        case incomingCallsToHeadsetOrSpeaker
+        case intelligentPersonalAssistant
+        case other
+    }
+
     var id: Int = 1111//String = UUID().uuidString
     var situation: String = "John Doe"
     var birthYear: Int = 1991
     var gender: Gender = .other
     var dominantHand: DominantHand = .none
-    
+    var concentrationDifficulty: Difficulties = .none
+    var anxietyFrequency: Frequencies = .unknown
+    var hearingDifficulty: Difficulties = .none
+    var communicationDifficutly: Difficulties = .none
+    var armsMovementsDifficutly: Difficulties = .none
+    var handsMovementsDifficutly: Difficulties = .none
+    var walkingDifficulty: Difficulties = .none
+    var medicalDiagnosis: MedicalResults = .no
+    var medication: MedicalResults = .no
+    var pastThreeMonthsCondition: Frequencies = .never
+    var lastTimeCondition: Frequencies = .never
+    var previousLevelOfTiredness: Level = .unknown
+    var currentLevelOfTiredness: Level = .unknown
+    var mobileDeviceUsage: MedicalResults = .no
+
     var slowMovement = false
     var rapidFatigue = false
     var poorCoordination = false
@@ -63,11 +190,11 @@ struct Subject: Codable {
     var lackOfSensation = false
     var difficultyControllingDirection = false
     var difficultyControllingDistance = false
-    
+
     var impairment: Impairment = .none
-    
+
     var note: String?
-    
+
     var symptomStrings: [String] {
         var texts = [String]()
         if slowMovement {
@@ -109,7 +236,7 @@ struct Subject: Codable {
 
 
 extension Subject.Gender {
-    
+
     var localizedString: String {
         switch self {
         case .female:
@@ -123,7 +250,7 @@ extension Subject.Gender {
 }
 
 extension Subject.DominantHand {
-    
+
     var localizedString: String {
         switch self {
         case .left:
@@ -139,33 +266,33 @@ extension Subject.DominantHand {
 }
 
 extension Subject.Impairment {
-    
+
     var localizedString: String {
         switch self {
         case .parkinsons:
             return NSLocalizedString("IMPAIRMENT_PARKINSONS", comment: "")
-        
+
         case .cerebralPalsy:
             return NSLocalizedString("IMPAIRMENT_CEREBRAL_PALSY", comment: "")
-            
+
         case .muscularDystrophy:
             return NSLocalizedString("IMPAIRMENT_MUSCULAR_DYSTROPHY", comment: "")
-            
+
         case .spinalCordInjury:
             return NSLocalizedString("IMPAIRMENT_SPINAL_CORD_INJURY", comment: "")
-            
+
         case .tetraplegia:
             return NSLocalizedString("IMPAIRMENT_TETRAPLEGIA", comment: "")
-            
+
         case .friedreichsAtaxia:
             return NSLocalizedString("IMPAIRMENT_FRIEDREICHS_ATAXIA", comment: "")
-            
+
         case .multipleSclerosis:
             return NSLocalizedString("IMPAIRMENT_MULTIPLE_SCLEROSIS", comment: "")
-            
+
         case .others:
             return NSLocalizedString("IMPAIRMENT_OTHERS", comment: "")
-            
+
         case .none:
             return NSLocalizedString("IMPAIRMENT_NONE", comment: "")
         }
@@ -173,45 +300,224 @@ extension Subject.Impairment {
 }
 
 extension Subject.Symptom {
-    
+
     var localizedString: String {
         switch self {
-            
+
         case .slowMovement:
             return NSLocalizedString("SYMPTOM_SLOW_MOVEMENT", comment: "")
-            
+
         case .rapidFatigue:
             return NSLocalizedString("SYMPTOM_RAPID_FATIGUE", comment: "")
-            
+
         case .poorCoordination:
             return NSLocalizedString("SYMPTOM_POOR_COORDINATION", comment: "")
-            
+
         case .lowStrength:
             return NSLocalizedString("SYMPTOM_LOW_STRENGTH", comment: "")
-            
+
         case .difficultyGripping:
             return NSLocalizedString("SYMPTOM_DIFFICULTY_GRIPPING", comment: "")
-            
+
         case .difficultyHolding:
             return NSLocalizedString("SYMPTOM_DIFFICULTY_HOLDING", comment: "")
-            
+
         case .tremor:
             return NSLocalizedString("SYMPTOM_TREMOR", comment: "")
-            
+
         case .spasm:
             return NSLocalizedString("SYMPTOM_SPASM", comment: "")
-            
+
         case .lackOfSensation:
             return NSLocalizedString("SYMPTOM_LACK_OF_SENSATION", comment: "")
-            
+
         case .difficultyControllingDirection:
             return NSLocalizedString("SYMPTOM_DIFFICULTY_CONTROLLING_DIRECTION", comment: "")
-            
+
         case .difficultyControllingDistance:
             return NSLocalizedString("SYMPTOM_DIFFICULTY_CONTROLLING_DISTANCE", comment: "")
-            
+
         default:
             return NSLocalizedString("SYMPTOM_UNKNOWN", comment: "")
         }
     }
 }
+
+extension Subject.Difficulties {
+
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("NO_DIFFICULTY", comment: "")
+        case .some:
+            return NSLocalizedString("SOME_DIFFICULTY", comment: "")
+        case .alot:
+            return NSLocalizedString("A_LOT_DIFFICULTY", comment: "")
+        case .unable:
+            return NSLocalizedString("UNABLE_TO_DO", comment: "")
+        }
+    }
+}
+
+extension Subject.Frequencies {
+
+    var localizedString: String {
+        switch self {
+        case .never:
+            return NSLocalizedString("FREQUENCY_NEVER", comment: "")
+        case .somedays:
+            return NSLocalizedString("FREQUENCY_SOME_DAYS", comment: "")
+        case .mostdays:
+            return NSLocalizedString("FREQUENCY_MOST_DAYS", comment: "")
+        case .everyday:
+            return NSLocalizedString("FREQUENCY_EVERY_DAY", comment: "")
+        case .refused:
+            return NSLocalizedString("FREQUENCY_REFUSED", comment: "")
+        case .unknown:
+            return NSLocalizedString("FREQUENCY_DONT_KNOW", comment: "")
+        }
+    }
+}
+
+extension Subject.MedicalResults {
+
+    var localizedString: String {
+        switch self {
+        case .yes:
+            return NSLocalizedString("ANSWER_YES", comment: "")
+        case .no:
+            return NSLocalizedString("ANSWER_NO", comment: "")
+        }
+    }
+}
+
+extension Subject.Level {
+
+    var localizedString: String {
+        switch self {
+        case .alittle:
+            return NSLocalizedString("LEVEL_A_LITTLE", comment: "")
+        case .alot:
+            return NSLocalizedString("LEVEL_A_LOT", comment: "")
+        case .somewhereInBetween:
+            return NSLocalizedString("LEVEL_SOMEWHERE_IN_BETWEEN", comment: "")
+        case .refused:
+            return NSLocalizedString("LEVEL_REFUSED", comment: "")
+        case .unknown:
+            return NSLocalizedString("LEVEL_DONT_KNOW", comment: "")
+        }
+    }
+}
+
+extension Subject.CellPhone {
+
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("CELLPHONE_OR_TABLET_DONT_USE", comment: "")
+        case .basicphone:
+            return NSLocalizedString("CELLPHONE_OR_TABLET_BASICPHONE", comment: "")
+        case .smartphone:
+            return NSLocalizedString("CELLPHONE_OR_TABLET_SMARTPHONE", comment: "")
+        case .tablet:
+            return NSLocalizedString("CELLPHONE_OR_TABLET_TABLET", comment: "")
+        case .other:
+            return NSLocalizedString("CELLPHONE_OR_TABLET_OTHER", comment: "")
+        }
+    }
+}
+
+extension Subject.Smartphone {
+
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("SMARTPHONE_KIND_DONT_USE", comment: "")
+        case .android:
+            return NSLocalizedString("SMARTPHONE_KIND_ANDROID", comment: "")
+        case .apple:
+            return NSLocalizedString("SMARTPHONE_KIND_APPLE", comment: "")
+        case .blackberry:
+            return NSLocalizedString("SMARTPHONE_KIND_BLACKBERRY", comment: "")
+        case .windows:
+            return NSLocalizedString("SMARTPHONE_KIND_WINDOWS", comment: "")
+        case .unknown:
+            return NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: "")
+        case .other:
+            return NSLocalizedString("SMARTPHONE_KIND_DONT_KNOW", comment: "")
+        }
+    }
+}
+
+extension Subject.Tablet {
+
+    var localizedString: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("TABLET_KIND_DONT_USE", comment: "")
+        case .android:
+            return NSLocalizedString("TABLET_KIND_ANDROID", comment: "")
+        case .apple:
+            return NSLocalizedString("TABLET_KIND_APPLE", comment: "")
+        case .blackberry:
+            return NSLocalizedString("TABLET_KIND_BLACKBERRY", comment: "")
+        case .windows:
+            return NSLocalizedString("TABLET_KIND_WINDOWS", comment: "")
+        case .unknown:
+            return NSLocalizedString("TABLET_KIND_DONT_KNOW", comment: "")
+        case .other:
+            return NSLocalizedString("TABLET_KIND_OTHER", comment: "")
+        }
+    }
+}
+
+//extension Subject.PrimaryDeviceFunction {
+//
+//    var localizedString: String {
+//        switch self {
+//        case .professional:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .personal:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .both:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .emergencies:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        }
+//    }
+//}
+//
+//extension Subject.PrimaryDeviceUsageFrequency {
+//
+//    var localizedString: String {
+//        switch self {
+//        case .severalTimesADay:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .aboutOnceADay:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .threeToFiveDaysAWeek:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .oneToTwoDaysAWeek:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .everyFewWeeks:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .lessOften:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        case .unknown:
+//            return NSLocalizedString(<#T##key: String##String#>, comment: "")
+//        }
+//    }
+//}
+
+//extension Subject.PrimaryDeviceEasiness {
+//    var localizedString: String {
+//        switch self {
+//        case .veryEasy
+//        case .easyToUse
+//        case .somewhatHardToUse
+//        case .hardToUse
+//        case .cannotUseWithoutHelp
+//        }
+//    }
+//}
+
