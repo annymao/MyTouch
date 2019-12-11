@@ -1653,11 +1653,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "medication" {
             guard let choice = result.stepResult(forStepIdentifier: "medicalDiagnosis")?.result(forIdentifier: "medicalDiagnosis") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "yes" {
@@ -1667,11 +1667,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "pastThreeMonthsCondition" {
             guard let choice = result.stepResult(forStepIdentifier: "medication")?.result(forIdentifier: "medication") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "yes" {
@@ -1681,11 +1681,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "cellphoneOrTablet" {
             guard let choice = result.stepResult(forStepIdentifier: "mobileDeviceUsage")?.result(forIdentifier: "mobileDeviceUsage") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
@@ -1699,7 +1699,7 @@ private class OrderedTask: ORKOrderedTask {
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
@@ -1709,11 +1709,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "tablet" {
             guard let choice = result.stepResult(forStepIdentifier: "smartphone")?.result(forIdentifier: "smartphone") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
@@ -1723,11 +1723,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "reliablePrimaryDevice" {
             guard let choice = result.stepResult(forStepIdentifier: "tablet")?.result(forIdentifier: "tablet") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
@@ -1737,11 +1737,11 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "primaryDeviceFunctionality" {
             guard let choice = result.stepResult(forStepIdentifier: "reliablePrimaryDevice")?.result(forIdentifier: "reliablePrimaryDevice") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
@@ -1751,17 +1751,31 @@ private class OrderedTask: ORKOrderedTask {
             }
         } else if step?.identifier == "primaryDeviceAccessibilityFeature" {
             guard let choice = result.stepResult(forStepIdentifier: "primaryDeviceEnhancement")?.result(forIdentifier: "primaryDeviceEnhancement") as? ORKChoiceQuestionResult else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             guard let answer = choice.choiceAnswers?.first as? String else {
-                return super.step(after: step, with: result)
+                return super.step(before: step, with: result)
             }
 
             if answer == "other" {
                 return self.step(withIdentifier: "primaryDeviceEnhancementFreeText")
             } else {
                 return self.step(withIdentifier: "primaryDeviceEnhancement")
+            }
+        } else if step?.identifier == "primaryDeviceEnhancement" {
+            guard let choice = result.stepResult(forStepIdentifier: "primaryDeviceAccessibilityFeature")?.result(forIdentifier: "primaryDeviceAccessibilityFeature") as? ORKChoiceQuestionResult else {
+                return super.step(before: step, with: result)
+            }
+
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(before: step, with: result)
+            }
+
+            if answer == "other" {
+                return self.step(withIdentifier: "primaryDeviceAccessibilityFeatureFreeText")
+            } else {
+                return super.step(withIdentifier: "primaryDeviceAccessibilityFeature")
             }
         } else if step?.identifier == "summary" {
 
